@@ -1,0 +1,184 @@
+
+library (mbff) {
+  delay_model : "table_lookup";
+  simulation : false;
+  capacitive_load_unit (1,pF);
+  leakage_power_unit : "1pW";
+  current_unit : "1A";
+  pulling_resistance_unit : "1kohm";
+  time_unit : "1ns";
+  voltage_unit : "1v";
+  library_features : "report_delay_calculation";
+  input_threshold_pct_rise : 50;
+  input_threshold_pct_fall : 50;
+  output_threshold_pct_rise : 50;
+  output_threshold_pct_fall : 50;
+  slew_lower_threshold_pct_rise : 30;
+  slew_lower_threshold_pct_fall : 30;
+  slew_upper_threshold_pct_rise : 70;
+  slew_upper_threshold_pct_fall : 70;
+  slew_derate_from_library : 1.0;
+  nom_process : 1.0;
+  nom_temperature : 85.0;
+  nom_voltage : 0.75;
+  
+  cell (MBFF_simple) {
+    ff_bank (IQ,IQN,4) {
+      clocked_on : "clk";
+      next_state : "(d)";
+    }
+    bundle (q) {
+      members (q0, q1, q2, q3);
+      direction : output;
+      internal_node : "IQ";
+      pin (q0) {
+        direction : output;
+      }
+      pin (q1) {
+        direction : output;
+      }
+      pin (q2) {
+        direction : output;
+      }
+      pin (q3) {
+        direction : output;
+      }
+    }
+    bundle (d) {
+      members (d0, d1, d2, d3);
+      direction : input;
+      pin (d0) {
+        direction : input;
+      }
+      pin (d1) {
+        direction : input;
+      }
+      pin (d2) {
+        direction : input;
+      }
+      pin (d3) {
+        direction : input;
+      }
+      timing () {
+        related_pin : "clk";
+        timing_type : "setup_rising";
+        rise_constraint (scalar) {
+          values ("1");
+        }
+        fall_constraint (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin (clk) {
+      clock : true;
+      direction : input;
+    }
+  }
+
+  cell (MBFF) {
+    statetable (" d    scan_d scan_en  clk ", "IQ") {
+      table : "   -       L/H       H    R  :  -  : L/H ,\
+                L/H        -        L    R  :  -  : L/H ,\
+                  -        -        -   ~R  :  -  :  N  ";
+    }
+    bundle (q) {
+      members (q0, q1, q2, q3);
+      direction : output;
+      internal_node : "IQ";
+      pin (q0) {
+        direction : output;
+      }
+      pin (q1) {
+        direction : output;
+      }
+      pin (q2) {
+        direction : output;
+      }
+      pin (q3) {
+        direction : output;
+      }
+      timing () {
+        related_pin : "clk";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
+    }
+    bundle (d) {
+      members (d0, d1, d2, d3);
+      direction : input;
+      pin (d0) {
+        direction : input;
+      }
+      pin (d1) {
+        direction : input;
+      }
+      pin (d2) {
+        direction : input;
+      }
+      pin (d3) {
+        direction : input;
+      }
+      timing () {
+        related_pin : "clk";
+        timing_type : "setup_rising";
+        rise_constraint (scalar) {
+          values ("1");
+        }
+        fall_constraint (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin (clk) {
+      clock : true;
+      direction : input;
+    }
+    pin (scan_en) {
+      direction : input;
+    }
+    pin (scan_d) {
+      direction : input;
+    }
+    test_cell () {
+      bundle (q) {
+        members (q0, q1, q2, q3);
+        direction : output;
+        function : "IQ";
+        pin (q3) {
+          signal_type : test_scan_out;
+        }
+      }
+      bundle (d) {
+        members (d0, d1, d2, d3);
+        direction : input;
+      }
+      pin (clk) {
+        direction : input;
+      }
+      pin (scan_en) {
+        direction : input;
+        signal_type : "test_scan_enable";
+      }
+      pin (scan_d) {
+        direction : input;
+        signal_type : test_scan_in;
+      }
+      ff_bank (IQ,IQN,4) {
+        clocked_on : "clk";
+        next_state : "(d)";
+      }
+    }
+  }
+}
