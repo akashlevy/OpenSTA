@@ -43,6 +43,22 @@ library (mbff) {
       pin (q3) {
         direction : output;
       }
+      timing () {
+        related_pin : "clk";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
     }
     bundle (d) {
       members (d0, d1, d2, d3);
@@ -179,6 +195,186 @@ library (mbff) {
         clocked_on : "clk";
         next_state : "(d)";
       }
+    }
+  }
+
+  cell(shift_reg_ff) {
+    pin(D) {
+      direction : input;
+      capacitance : 1;
+      timing () {
+        related_pin : "CP";
+        timing_type : "setup_rising";
+        rise_constraint (scalar) {
+          values ("1");
+        }
+        fall_constraint (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin(CP) {
+      direction : input;
+      capacitance : 2;
+    }
+    pin (Q0) {
+      direction : output;
+      internal_node : "Q";
+      input_map : "D CP";
+      timing () {
+        related_pin : "CP";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin (Q1) {
+      direction : output;
+      internal_node : "Q";
+      input_map : "Q0 CP";
+      timing () {
+        related_pin : "CP";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin (Q2) {
+      direction : output;
+      internal_node : "Q";
+      input_map : "Q1 CP";
+      timing () {
+        related_pin : "CP";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin (Q3) {
+      direction : output;
+      internal_node : "Q";
+      input_map : "Q2 CP";
+      timing () {
+        related_pin : "CP";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
+    }
+    statetable( "D CP", "Q QN" ) {
+      table : "-  ~R : - - : N   N,\
+               H/L R : - - : H/L L/H";
+    }
+  }
+
+  cell(counter_ff) {
+    pin(reset) {
+      direction : input;
+      capacitance : 1;
+      timing () {
+        related_pin : "CP";
+        timing_type : "setup_rising";
+        rise_constraint (scalar) {
+          values ("1");
+        }
+        fall_constraint (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin(CP) {
+      direction : input;
+      capacitance : 2;
+    }
+    pin (Q0) {
+      direction : output;
+      internal_node : "Q0";
+      input_map : "CP reset Q0 Q1";
+      timing () {
+        related_pin : "CP";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
+    }
+    pin (Q1) {
+      direction : output;
+      internal_node : "Q1";
+      input_map : "CP reset Q0 Q1";
+      timing () {
+        related_pin : "CP";
+        timing_type : "rising_edge";
+        cell_rise (scalar) {
+          values ("1");
+        }
+        cell_fall (scalar) {
+          values ("1");
+        }
+        rise_transition (scalar) {
+          values ("1");
+        }
+        fall_transition (scalar) {
+          values ("1");
+        }
+      }
+    }
+    statetable( "CP reset", "Q0 Q1" ) {
+      table : "- L : - - : L H,\
+              ~R H : - - : N N,\
+               R H : L L : H L,\
+               R H : H L : L H,\
+               R H : L H : H H,\
+               R H : H H : L L";
     }
   }
 }
