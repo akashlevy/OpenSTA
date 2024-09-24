@@ -21,6 +21,7 @@
 #include <string>
 #include <mutex>
 
+#include "LineFile.hh"
 #include "Machine.hh" // __attribute__
 
 struct Tcl_Interp;
@@ -56,6 +57,10 @@ public:
                      va_list args);
   // Report warning in a file.
   virtual void fileWarn(int id,
+			LineFile linefile,
+                        const char *fmt, ...)
+    __attribute__((format (printf, 4, 5)));
+  virtual void fileWarn(int id,
                         const char *filename,
                         int line,
                         const char *fmt, ...)
@@ -73,6 +78,10 @@ public:
                       const char *fmt,
                       va_list args);
   // Report error in a file.
+  virtual void fileError(int id,
+			LineFile linefile,
+			const char *fmt, ...)
+    __attribute__((format (printf, 4, 5)));
   virtual void fileError(int id,
                          const char *filename,
                          int line,

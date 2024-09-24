@@ -72,21 +72,18 @@ class VerilogError
 {
 public:
   VerilogError(int id,
-               const char *filename,
-	       int line,
+               LineFile linefile,
 	       const char *msg,
 	       bool warn);
   ~VerilogError();
   const char *msg() const { return msg_; }
-  const char *filename() const { return filename_; }
   int id() const { return id_; }
-  int line() const { return line_; }
+  LineFile linefile() const { return linefile_; }
   bool warn() const { return warn_; }
 
 private:
   int id_;
-  const char *filename_;
-  int line_;
+  LineFile linefile_;
   const char *msg_;
   bool warn_;
 
@@ -94,13 +91,11 @@ private:
 };
 
 VerilogError::VerilogError(int id,
-                           const char *filename,
-			   int line,
+			   LineFile linefile,
 			   const char *msg,
 			   bool warn) :
   id_(id),
-  filename_(filename),
-  line_(line),
+  linefile_(linefile),
   msg_(msg),
   warn_(warn)
 {
@@ -118,12 +113,17 @@ public:
   bool operator()(const VerilogError *error1,
 		  const VerilogError *error2) const
   {
-    int file_cmp = strcmp(error1->filename_, error2->filename_);
+    const char *filename1 = error1->linefile().filename().c_str();
+    const char *filename2 = error2->linefile().filename().c_str();
+    int line1 = error1->linefile().startline();
+    int line2 = error2->linefile().startline();
+
+    int file_cmp = strcmp(filename1, filename2);
     if (file_cmp == 0) {
-      if (error1->line_ == error2->line_)
+      if (line1 == line2)
 	return strcmp(error1->msg_, error2->msg_) < 0;
       else
-	return error1->line_ < error2->line_;
+	return line1 < line2;
     }
     else
       return file_cmp < 0;
@@ -156,12 +156,8 @@ VerilogReader::~VerilogReader()
 void
 VerilogReader::deleteModules()
 {
-  StringSet filenames;
-  for (const auto [name, module] : module_map_) {
-    filenames.insert(module->filename());
+  for (const auto [name, module] : module_map_)
     delete module;
-  }
-  deleteContents(&filenames);
   module_map_.clear();
 }
 
@@ -187,8 +183,7 @@ void
 VerilogReader::init(const char *filename)
 {
   // Statements point to verilog_filename, so copy it.
-  filename_ = stringCopy(filename);
-  line_ = 1;
+  linefile_ = LineFile(filename);
 
   library_ = network_->findLibrary("verilog");
   if (library_ == nullptr)
@@ -254,7 +249,7 @@ VerilogReader::makeModule(const char *module_vname,
 			  VerilogNetSeq *ports,
 			  VerilogStmtSeq *stmts,
                           VerilogAttributeStmtSeq *attribute_stmts,
-			  int line)
+			  LineFile linefile)
 {
   string module_name = moduleVerilogToSta(module_vname);
   Cell *cell = network_->findCell(library_, module_name.c_str());
@@ -266,8 +261,9 @@ VerilogReader::makeModule(const char *module_vname,
   }
 
   VerilogModule *module = new VerilogModule(module_name.c_str(), ports, stmts,
-					    attribute_stmts, filename_, line, this);
-  cell = network_->makeCell(library_, module_name.c_str(), false, filename_);
+					    attribute_stmts, linefile_, this);
+  cell = network_->makeCell(library_, module_name.c_str(), false,
+			    linefile_.filename().c_str());
 
   for (VerilogAttributeStmt *stmt : *attribute_stmts) {
     for (VerilogAttributeEntry *entry : *stmt->attribute_sequence()) {
@@ -286,7 +282,7 @@ VerilogReader::makeModule(const char *module_name,
 			  VerilogStmtSeq *port_dcls,
 			  VerilogStmtSeq *stmts,
                           VerilogAttributeStmtSeq *attribute_stmts,
-			  int line)
+			  LineFile linefile)
 {
   VerilogNetSeq *ports = new VerilogNetSeq;
   // Pull the port names out of the port declarations.
@@ -302,7 +298,7 @@ VerilogReader::makeModule(const char *module_name,
     }
   }
   delete port_dcls;
-  makeModule(module_name, ports, stmts, attribute_stmts, line);
+  makeModule(module_name, ports, stmts, attribute_stmts, linefile);
 }
 
 void
@@ -323,7 +319,7 @@ VerilogReader::makeCellPorts(Cell *cell,
       }
     }
     else
-      warn(165, module->filename(), module->line(),
+      warn(165, module->linefile(),
 	   "module %s repeated port name %s.",
 	   module->name(),
 	   port_name.c_str());
@@ -348,7 +344,7 @@ VerilogReader::makeCellPort(Cell *cell,
     return port;
   }
   else {
-    warn(166, module->filename(), module->line(),
+    warn(166, module->linefile(),
 	 "module %s missing declaration for port %s.",
 	 module->name(),
 	 port_name);
@@ -390,7 +386,7 @@ VerilogReader::checkModuleDcls(VerilogModule *module,
 	|| dir->isOutput()
 	|| dir->isBidirect()) {
       if (port_names.find(port_name) == port_names.end())
-	linkWarn(197, module->filename(), module->line(),
+	linkWarn(197, module->linefile(),
 		 "module %s declared signal %s is not in the port list.",
 		 module->name(),
 		 port_name);
@@ -402,7 +398,7 @@ VerilogDcl *
 VerilogReader::makeDcl(PortDirection *dir,
 		       VerilogDclArgSeq *args,
                        VerilogAttributeStmtSeq* attribute_stmts,
-		       int line)
+		       LineFile linefile)
 {
   if (dir->isInternal()) {
     // Prune wire declarations without assigns because they just eat memory.
@@ -421,7 +417,7 @@ VerilogReader::makeDcl(PortDirection *dir,
     delete args;
     if (assign_args) {
       dcl_count_++;
-      return new VerilogDcl(dir, assign_args, attribute_stmts, line);
+      return new VerilogDcl(dir, assign_args, attribute_stmts, linefile);
     }
     else {
       attribute_stmts->deleteContents();
@@ -431,7 +427,7 @@ VerilogReader::makeDcl(PortDirection *dir,
   }
   else {
     dcl_count_++;
-    return new VerilogDcl(dir, args, attribute_stmts, line);
+    return new VerilogDcl(dir, args, attribute_stmts, linefile);
   }
 }
 
@@ -439,10 +435,10 @@ VerilogDcl *
 VerilogReader::makeDcl(PortDirection *dir,
 		       VerilogDclArg *arg,
                        VerilogAttributeStmtSeq* attribute_stmts,
-		       int line)
+		       LineFile linefile)
 {
   dcl_count_++;
-  return new VerilogDcl(dir, arg, attribute_stmts, line);
+  return new VerilogDcl(dir, arg, attribute_stmts, linefile);
 }
 
 VerilogDclBus *
@@ -451,11 +447,11 @@ VerilogReader::makeDclBus(PortDirection *dir,
 			  int to_index,
 			  VerilogDclArg *arg,
                           VerilogAttributeStmtSeq* attribute_stmts,
-			  int line)
+			  LineFile linefile)
 {
   dcl_bus_count_++;
   return new VerilogDclBus(dir, from_index, to_index, arg, attribute_stmts,
-                           line);
+                           linefile);
 }
 
 VerilogDclBus *
@@ -464,11 +460,11 @@ VerilogReader::makeDclBus(PortDirection *dir,
 			  int to_index,
 			  VerilogDclArgSeq *args,
                           VerilogAttributeStmtSeq* attribute_stmts,
-			  int line)
+			  LineFile linefile)
 {
   dcl_bus_count_++;
   return new VerilogDclBus(dir, from_index, to_index, args, attribute_stmts,
-                           line);
+                           linefile);
 }
 
 VerilogDclArg *
@@ -539,10 +535,10 @@ VerilogReader::makeNetBitSelect(const char *net_vname,
 VerilogAssign *
 VerilogReader::makeAssign(VerilogNet *lhs,
 			  VerilogNet *rhs,
-			  int line)
+			  LineFile linefile)
 {
   assign_count_++;
-  return new VerilogAssign(lhs, rhs, line);
+  return new VerilogAssign(lhs, rhs, linefile);
 }
 
 VerilogInst *
@@ -550,7 +546,7 @@ VerilogReader::makeModuleInst(const char *module_vname,
                               const char *inst_vname,
                               VerilogNetSeq *pins,
                               VerilogAttributeStmtSeq* attribute_stmts,
-                              const int line)
+                              const LineFile linefile)
 {
   string module_name = moduleVerilogToSta(module_vname);
   string inst_name = instanceVerilogToSta(inst_vname);
@@ -590,7 +586,7 @@ VerilogReader::makeModuleInst(const char *module_vname,
       net_port_ref_scalar_net_count_--;
     }
     VerilogInst *inst = new VerilogLibertyInst(liberty_cell, inst_name.c_str(),
-					       net_names, attribute_stmts, line);
+					       net_names, attribute_stmts, linefile);
     delete pins;
     if (report_stmt_stats_) {
       inst_names_ += inst_name.size() + 1;
@@ -606,7 +602,7 @@ VerilogReader::makeModuleInst(const char *module_vname,
                                               inst_name.c_str(),
                                               pins,
                                               attribute_stmts,
-                                              line);
+                                              linefile);
     if (report_stmt_stats_) {
       inst_module_names_ += module_name.size() + 1;
       inst_names_ += inst_name.size() + 1;
@@ -742,9 +738,9 @@ VerilogReader::makeNetConcat(VerilogNetSeq *nets)
 }
 
 void
-VerilogReader::incrLine()
+VerilogReader::incrFromText(const char *lextext)
 {
-  line_++;
+  linefile_.incrFromText(lextext);
 }
 
 #define printClassMemory(name, class_name, count) \
@@ -794,25 +790,26 @@ VerilogReader::reportStmtCounts()
 
 void
 VerilogReader::error(int id,
-                     const char *filename,
-		     int line,
+		     LineFile linefile,
 		     const char *fmt, ...)
 {
   va_list args;
   va_start(args, fmt);
-  report()->vfileError(id, filename, line, fmt, args);
+  report()->vfileError(id, linefile.filename().c_str(),
+		       linefile.startline(), fmt, args);
   va_end(args);
 }
 
 void
 VerilogReader::warn(int id,
-                    const char *filename,
-		    int line,
+                    LineFile linefile,
 		    const char *fmt, ...)
 {
   va_list args;
   va_start(args, fmt);
-  report()->vfileWarn(id, filename, line, fmt, args);
+  report()->vfileWarn(id, linefile.filename().c_str(),
+		      linefile.startline(),
+		      fmt, args);
   va_end(args);
 }
 
@@ -841,12 +838,11 @@ VerilogModule::VerilogModule(const char *name,
                              VerilogNetSeq *ports,
                              VerilogStmtSeq *stmts,
                              VerilogAttributeStmtSeq *attribute_stmts,
-                             const char *filename,
-                             int line,
+                             LineFile linefile,
                              VerilogReader *reader) :
-  VerilogStmt(line),
+  VerilogStmt(linefile),
   name_(stringCopy(name)),
-  filename_(filename),
+  linefile_(linefile),
   ports_(ports),
   stmts_(stmts),
   attribute_stmts_(attribute_stmts)
@@ -908,10 +904,10 @@ VerilogModule::parseDcl(VerilogDcl *dcl,
           dcl_map_[net_name] = dcl;
         else if (!dcl->direction()->isInternal()) {
           string net_vname = reader->netVerilogName(net_name);
-          reader->warn(1395, filename_, dcl->line(),
+          reader->warn(1395, dcl->linefile(),
                        "signal %s previously declared on line %d.",
                        net_vname.c_str(),
-                       existing_dcl->line());
+                       existing_dcl->linefile().startline());
         }
       }
       else
@@ -937,7 +933,7 @@ VerilogModule::checkInstanceName(VerilogInst *inst,
       replacement_name = stringPrint("%s_%d", inst_name, i++);
     } while (inst_names.findKey(replacement_name));
     string inst_vname = reader->instanceVerilogName(inst_name);
-    reader->warn(1396, filename_, inst->line(),
+    reader->warn(1396, inst->linefile(),
 		 "instance name %s duplicated - renamed to %s.",
 		 inst_vname.c_str(),
 		 replacement_name);
@@ -955,15 +951,15 @@ VerilogModule::declaration(const char *net_name)
 
 ////////////////////////////////////////////////////////////////
 
-VerilogStmt::VerilogStmt(int line) :
-  line_(line)
+VerilogStmt::VerilogStmt(LineFile linefile) :
+  linefile_(linefile)
 {
 }
 
 VerilogInst::VerilogInst(const char *inst_name,
                          VerilogAttributeStmtSeq* attribute_stmts,
-                         const int line) :
-  VerilogStmt(line),
+                         const LineFile linefile) :
+  VerilogStmt(linefile),
   inst_name_(stringCopy(inst_name)),
   attribute_stmts_(attribute_stmts)
 {
@@ -987,8 +983,8 @@ VerilogModuleInst::VerilogModuleInst(const char *module_name,
                                      const char *inst_name,
                                      VerilogNetSeq *pins,
                                      VerilogAttributeStmtSeq* attribute_stmts,
-                                     int line) :
-  VerilogInst(inst_name, attribute_stmts, line),
+                                     LineFile linefile) :
+  VerilogInst(inst_name, attribute_stmts, linefile),
   module_name_(stringCopy(module_name)),
   pins_(pins)
 {
@@ -1023,8 +1019,8 @@ VerilogLibertyInst::VerilogLibertyInst(LibertyCell *cell,
                                        const char *inst_name,
                                        const char **net_names,
                                        VerilogAttributeStmtSeq* attribute_stmts,
-                                       const int line) :
-  VerilogInst(inst_name, attribute_stmts, line),
+                                       const LineFile linefile) :
+  VerilogInst(inst_name, attribute_stmts, linefile),
   cell_(cell),
   net_names_(net_names)
 {
@@ -1045,8 +1041,8 @@ VerilogLibertyInst::~VerilogLibertyInst()
 VerilogDcl::VerilogDcl(PortDirection *dir,
                        VerilogDclArgSeq *args,
                        VerilogAttributeStmtSeq* attribute_stmts,
-                       int line) :
-  VerilogStmt(line),
+                       LineFile linefile) :
+  VerilogStmt(linefile),
   dir_(dir),
   args_(args),
   attribute_stmts_(attribute_stmts)
@@ -1056,8 +1052,8 @@ VerilogDcl::VerilogDcl(PortDirection *dir,
 VerilogDcl::VerilogDcl(PortDirection *dir,
                        VerilogDclArg *arg,
                        VerilogAttributeStmtSeq* attribute_stmts,
-                       int line) :
-  VerilogStmt(line),
+                       LineFile linefile) :
+  VerilogStmt(linefile),
   dir_(dir)
 {
   args_ = new VerilogDclArgSeq;
@@ -1090,8 +1086,8 @@ VerilogDclBus::VerilogDclBus(PortDirection *dir,
                              int to_index,
                              VerilogDclArgSeq *args,
                              VerilogAttributeStmtSeq* attribute_stmts,
-                             int line) :
-  VerilogDcl(dir, args, attribute_stmts, line),
+                             LineFile linefile) :
+  VerilogDcl(dir, args, attribute_stmts, linefile),
   from_index_(from_index),
   to_index_(to_index)
 {
@@ -1102,8 +1098,8 @@ VerilogDclBus::VerilogDclBus(PortDirection *dir,
                              int to_index,
                              VerilogDclArg *arg,
                              VerilogAttributeStmtSeq* attribute_stmts,
-                             int line) :
-  VerilogDcl(dir, arg, attribute_stmts, line),
+                             LineFile linefile) :
+  VerilogDcl(dir, arg, attribute_stmts, linefile),
   from_index_(from_index),
   to_index_(to_index)
 {
@@ -1146,8 +1142,8 @@ VerilogDclArg::netName()
 
 VerilogAssign::VerilogAssign(VerilogNet *lhs,
 			     VerilogNet *rhs,
-			     int line) :
-  VerilogStmt(line),
+			     LineFile linefile) :
+  VerilogStmt(linefile),
   lhs_(lhs),
   rhs_(rhs)
 {
@@ -1577,7 +1573,7 @@ VerilogNetConstant::parseConstant10(const char *constant_str,
   if (length > max_length
       || (length == max_length
 	  && strcmp(tmp, reader->constant10Max()) > 0))
-    reader->warn(1397, reader->filename(), reader->line(),
+    reader->warn(1397, reader->linefile(),
 		 "base 10 constant greater than %s not supported.",
 		 reader->constant10Max());
   else {
@@ -1920,13 +1916,13 @@ VerilogReader::makeModuleInstNetwork(VerilogModuleInst *mod_inst,
     string inst_vname = verilogName(mod_inst);
     if (make_black_boxes) {
       cell = makeBlackBox(mod_inst, parent_module);
-      linkWarn(198, parent_module->filename(), mod_inst->line(),
+      linkWarn(198, mod_inst->linefile(),
 	       "module %s not found. Creating black box for %s.",
 	       mod_inst->moduleName(),
 	       inst_vname.c_str());
     }
     else
-      linkError(199, parent_module->filename(), mod_inst->line(),
+      linkError(199, mod_inst->linefile(),
 		"module %s not found for instance %s.",
 		mod_inst->moduleName(),
 		inst_vname.c_str());
@@ -1989,7 +1985,7 @@ VerilogReader::makeNamedInstPins(Cell *cell,
     if (port) {
       if (vpin->hasNet()
 	  && network_->size(port) != vpin->size(parent_module)) {
-	linkWarn(200, parent_module->filename(), mod_inst->line(),
+	linkWarn(200, mod_inst->linefile(),
 		 "instance %s port %s size %d does not match net size %d.",
 		 inst_vname.c_str(),
 		 network_->name(port),
@@ -2022,7 +2018,7 @@ VerilogReader::makeNamedInstPins(Cell *cell,
         pg_port = lib_cell->findPgPort(port_name);
       // Do not warn about connections to pg ports (which are ignored).
       if (pg_port == nullptr) {
-        linkWarn(201, parent_module->filename(), mod_inst->line(),
+        linkWarn(201, mod_inst->linefile(),
                  "instance %s port %s not found.",
                  inst_vname.c_str(),
                  port_name);
@@ -2048,7 +2044,7 @@ VerilogReader::makeOrderedInstPins(Cell *cell,
     Port *port = port_iter->next();
     if (network_->size(port) != net->size(parent_module)) {
       string inst_vname = verilogName(mod_inst);
-      linkWarn(202, parent_module->filename(), mod_inst->line(),
+      linkWarn(202, mod_inst->linefile(),
 	       "instance %s port %s size %d does not match net size %d.",
 	       inst_vname.c_str(),
 	       network_->name(port),
@@ -2171,8 +2167,8 @@ VerilogReader::makeBlackBox(VerilogModuleInst *mod_inst,
 			    VerilogModule *parent_module)
 {
   const char *module_name = mod_inst->moduleName();
-  Cell *cell = network_->makeCell(library_, module_name, true,
-				  parent_module->filename());
+  const char *filename = parent_module->linefile().filename().c_str();
+  Cell *cell = network_->makeCell(library_, module_name, true, filename);
   if (mod_inst->namedPins())
     makeBlackBoxNamedPorts(cell, mod_inst, parent_module);
   else
@@ -2255,7 +2251,7 @@ VerilogReader::mergeAssignNet(VerilogAssign *assign,
     delete rhs_iter;
   }
   else
-    linkWarn(203, module->filename(), assign->line(),
+    linkWarn(203, assign->linefile(),
 	     "assign left hand side size %d not equal right hand size %d.",
 	     lhs->size(module),
 	     rhs->size(module));
@@ -2323,28 +2319,26 @@ VerilogBindingTbl::ensureNetBinding(const char *net_name,
 
 void
 VerilogReader::linkWarn(int id,
-                        const char *filename,
-			int line,
+			LineFile linefile,
 			const char *msg, ...)
 {
   va_list args;
   va_start(args, msg);
   char *msg_str = stringPrintArgs(msg, args);
-  VerilogError *error = new VerilogError(id, filename, line, msg_str, true);
+  VerilogError *error = new VerilogError(id, linefile, msg_str, true);
   link_errors_.push_back(error);
   va_end(args);
 }
 
 void
 VerilogReader::linkError(int id,
-                         const char *filename,
-			 int line,
+			 LineFile linefile,
 			 const char *msg, ...)
 {
   va_list args;
   va_start(args, msg);
   char *msg_str = stringPrintArgs(msg, args);
-  VerilogError *error = new VerilogError(id, filename, line, msg_str, false);
+  VerilogError *error = new VerilogError(id, linefile, msg_str, false);
   link_errors_.push_back(error);
   va_end(args);
 }
@@ -2360,7 +2354,7 @@ VerilogReader::reportLinkErrors(Report *report)
   while (error_iter.hasNext()) {
     VerilogError *error = error_iter.next();
     // Report as warnings to avoid throwing.
-    report->fileWarn(error->id(), error->filename(), error->line(), "%s", error->msg());
+    report->fileWarn(error->id(), error->linefile(), "%s", error->msg());
     errors |= !error->warn();
     delete error;
   }
@@ -2379,7 +2373,8 @@ int
 VerilogParse_error(const char *msg)
 {
   verilogFlushBuffer();
-  sta::verilog_reader->report()->fileError(164, sta::verilog_reader->filename(),
-					   sta::verilog_reader->line(), "%s", msg);
+  auto linefile = sta::verilog_reader->linefile();
+  sta::verilog_reader->report()->fileError(164, linefile.filename().c_str(),
+					   linefile.startline(), "%s", msg);
   return 0;
 }

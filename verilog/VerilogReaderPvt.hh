@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "LineFile.hh"
 #include "Zlib.hh"
 #include "Vector.hh"
 #include "Map.hh"
@@ -94,20 +95,20 @@ public:
                   VerilogNetSeq *ports,
                   VerilogStmtSeq *stmts,
                   VerilogAttributeStmtSeq *attribute_stmts,
-                  int line);
+                  LineFile linefile);
   void makeModule(const char *module_name,
                   VerilogStmtSeq *port_dcls,
                   VerilogStmtSeq *stmts,
                   VerilogAttributeStmtSeq *attribute_stmts,
-                  int line);
+                  LineFile linefile);
   VerilogDcl *makeDcl(PortDirection *dir,
                       VerilogDclArgSeq *args,
                       VerilogAttributeStmtSeq* attribute_stmts,
-                      int line);
+                      LineFile linefile);
   VerilogDcl *makeDcl(PortDirection *dir,
                       VerilogDclArg *arg,
                       VerilogAttributeStmtSeq* attribute_stmts,
-                      int line);
+                      LineFile linefile);
   VerilogDclArg *makeDclArg(const char *net_name);
   VerilogDclArg*makeDclArg(VerilogAssign *assign);
   VerilogDclBus *makeDclBus(PortDirection *dir,
@@ -115,21 +116,21 @@ public:
                             int to_index,
                             VerilogDclArg *arg,
                             VerilogAttributeStmtSeq* attribute_stmts,
-                            int line);
+                            LineFile linefile);
   VerilogDclBus *makeDclBus(PortDirection *dir,
                             int from_index,
                             int to_index,
                             VerilogDclArgSeq *args,
                             VerilogAttributeStmtSeq* attribute_stmts,
-                            int line);
+                            LineFile linefile);
   VerilogInst *makeModuleInst(const char *module_name,
                               const char *inst_name,
                               VerilogNetSeq *pins,
                               VerilogAttributeStmtSeq* attribute_stmts,
-                              const int line);
+                              const LineFile linefile);
   VerilogAssign *makeAssign(VerilogNet *lhs,
 			    VerilogNet *rhs,
-			    int line);
+			    LineFile linefile);
   VerilogNetScalar *makeNetScalar(const char *name);
   VerilogNetPortRef *makeNetNamedPortRefScalarNet(const char *port_vname);
   VerilogNetPortRef *makeNetNamedPortRefScalarNet(const char *port_name,
@@ -157,17 +158,14 @@ public:
   Instance *linkNetwork(const char *top_cell_name,
 			bool make_black_boxes,
 			Report *report);
-  int line() const { return line_; }
-  const char *filename() const { return filename_; }
-  void incrLine();
+  LineFile linefile() const { return linefile_; }
+  void incrFromText(const char *lextext);
   Report *report() const { return report_; }
   void error(int id,
-             const char *filename,
-	     int line,
+	     LineFile linefile,
 	     const char *fmt, ...);
   void warn(int id,
-            const char *filename,
-	    int line,
+	    LineFile linefile,
 	    const char *fmt, ...);
   const char *zeroNetName() const { return zero_net_name_; }
   const char *oneNetName() const { return one_net_name_; }
@@ -252,15 +250,13 @@ protected:
 		   VerilogBindingTbl *parent_bindings,
 		   bool is_leaf);
   void linkWarn(int id,
-                const char *filename,
-		int line,
+		LineFile linefile,
 		const char *msg, ...)
-    __attribute__((format (printf, 5, 6)));
+    __attribute__((format (printf, 4, 5)));
   void linkError(int id,
-                 const char *filename,
-		 int line,
+		 LineFile linefile,
 		 const char *msg, ...)
-    __attribute__((format (printf, 5, 6)));
+    __attribute__((format (printf, 4, 5)));
   bool reportLinkErrors(Report *report);
   bool haveLinkErrors();
   Cell *makeBlackBox(VerilogModuleInst *mod_inst,
@@ -279,8 +275,7 @@ protected:
   Debug *debug_;
   NetworkReader *network_;
 
-  const char *filename_;
-  int line_;
+  LineFile linefile_;
   gzFile stream_;
 
   Library *library_;
@@ -320,17 +315,17 @@ protected:
 class VerilogStmt
 {
 public:
-  explicit VerilogStmt(int line);
+  explicit VerilogStmt(LineFile linefile_);
   virtual ~VerilogStmt() {}
   virtual bool isInstance() const { return false; }
   virtual bool isModuleInst() const { return false; }
   virtual bool isLibertyInst() const { return false; }
   virtual bool isAssign() const { return false; }
   virtual bool isDeclaration() const { return false; }
-  int line() const { return line_; }
+  LineFile linefile() const { return linefile_; }
 
 private:
-  int line_;
+  LineFile linefile_;
 };
 
 class VerilogModule : public VerilogStmt
@@ -340,12 +335,11 @@ public:
                 VerilogNetSeq *ports,
                 VerilogStmtSeq *stmts,
                 VerilogAttributeStmtSeq *attribute_stmts,
-                const char *filename,
-                int line,
+                LineFile linefile,
                 VerilogReader *reader);
   virtual ~VerilogModule();
   const char *name() { return name_; }
-  const char *filename() { return filename_; }
+  LineFile linefile() { return linefile_; }
   VerilogAttributeStmtSeq *attribute_stmts() { return attribute_stmts_; }
   VerilogNetSeq *ports() { return ports_; }
   VerilogDcl *declaration(const char *net_name);
@@ -361,7 +355,7 @@ private:
 			 VerilogReader *reader);
 
   const char *name_;
-  const char *filename_;
+  LineFile linefile_;
   VerilogNetSeq *ports_;
   VerilogStmtSeq *stmts_;
   VerilogDclMap dcl_map_;
@@ -374,11 +368,11 @@ public:
   VerilogDcl(PortDirection *dir,
              VerilogDclArgSeq *args,
              VerilogAttributeStmtSeq *attribute_stmts,
-             int line);
+             LineFile linefile);
   VerilogDcl(PortDirection *dir,
              VerilogDclArg *arg,
              VerilogAttributeStmtSeq *attribute_stmts,
-             int line);
+             LineFile linefile);
   virtual ~VerilogDcl();
   const char *portName();
   virtual bool isBus() const { return false; }
@@ -403,13 +397,13 @@ public:
                 int to_index,
                 VerilogDclArgSeq *args,
                 VerilogAttributeStmtSeq* attribute_stmts,
-                int line);
+                LineFile linefile);
   VerilogDclBus(PortDirection *dir,
                 int from_index,
                 int to_index,
                 VerilogDclArg *arg,
                 VerilogAttributeStmtSeq* attribute_stmts,
-                int line);
+                LineFile linefile);
   virtual bool isBus() const { return true; }
   int fromIndex() const { return from_index_; }
   int toIndex() const { return to_index_; }
@@ -441,7 +435,7 @@ class VerilogAssign : public VerilogStmt
 public:
   VerilogAssign(VerilogNet *lhs,
 		VerilogNet *rhs,
-		int line);
+		LineFile linefile);
   virtual ~VerilogAssign();
   virtual bool isAssign() const { return true; }
   VerilogNet *lhs() const { return lhs_; }
@@ -457,7 +451,7 @@ class VerilogInst : public VerilogStmt
 public:
   VerilogInst(const char *inst_name,
               VerilogAttributeStmtSeq* attribute_stmts,
-              const int line);
+              const LineFile linefile);
   virtual ~VerilogInst();
   virtual bool isInstance() const { return true; }
   const char *instanceName() const { return inst_name_; }
@@ -476,7 +470,7 @@ public:
                     const char *inst_name,
                     VerilogNetSeq *pins,
                     VerilogAttributeStmtSeq* attribute_stmts,
-                    const int line);
+                    const LineFile linefile);
   virtual ~VerilogModuleInst();
   virtual bool isModuleInst() const { return true; }
   const char *moduleName() const { return module_name_; }
@@ -499,7 +493,7 @@ public:
                      const char *inst_name,
                      const char **net_names,
                      VerilogAttributeStmtSeq* attribute_stmts,
-                     const int line);
+                     const LineFile linefile);
   virtual ~VerilogLibertyInst();
   virtual bool isLibertyInst() const { return true; }
   LibertyCell *cell() const { return cell_; }

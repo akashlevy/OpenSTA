@@ -193,6 +193,20 @@ Report::vwarn(int /* id */,
 
 void
 Report::fileWarn(int /* id */,
+                 LineFile linefile,
+                 const char *fmt,
+                 ...)
+{
+  va_list args;
+  va_start(args, fmt);
+  printToBuffer("Warning: %s, ", linefile.c_str());
+  printToBufferAppend(fmt, args);
+  printBufferLine();
+  va_end(args);
+}
+
+void
+Report::fileWarn(int /* id */,
                  const char *filename,
                  int line,
                  const char *fmt,
@@ -239,6 +253,21 @@ Report::verror(int /* id */,
 {
   // No prefix msg, no \n.
   printToBuffer(fmt, args);
+  throw ExceptionMsg(buffer_);
+}
+
+void
+Report::fileError(int /* id */,
+		  LineFile linefile,
+                  const char *fmt,
+                  ...)
+{
+  va_list args;
+  va_start(args, fmt);
+  // No prefix msg, no \n.
+  printToBuffer("%s, ", linefile.c_str());
+  printToBufferAppend(fmt, args);
+  va_end(args);
   throw ExceptionMsg(buffer_);
 }
 
