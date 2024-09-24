@@ -128,6 +128,7 @@ record_sta_tests {
   liberty_arcs_one2one_2
   get_filter
   get_noargs_objrefs
+  report_checks_fields
 }
 
 define_test_group fast [group_tests all]
