@@ -130,6 +130,7 @@ record_sta_tests {
   get_noargs
   get_objrefs
   get_lib_pins_of_objects
+  get_property_multiobj
   report_checks_src_attr
 }
 

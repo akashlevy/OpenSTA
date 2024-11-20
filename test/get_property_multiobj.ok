@@ -1,0 +1,2 @@
+[get_property [get_lib_cells *] name]
+AND2x2_ASAP7_75t_R BUFx2_ASAP7_75t_R DFFHQx4_ASAP7_75t_R
