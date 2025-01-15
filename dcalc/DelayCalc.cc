@@ -19,6 +19,7 @@
 #include "Map.hh"
 #include "StringUtil.hh"
 #include "UnitDelayCalc.hh"
+#include "UnitDelayNoInvBufCalc.hh"
 #include "LumpedCapDelayCalc.hh"
 #include "DmpDelayCalc.hh"
 #include "ArnoldiDelayCalc.hh"
@@ -35,6 +36,7 @@ void
 registerDelayCalcs()
 {
   registerDelayCalc("unit", makeUnitDelayCalc);
+  registerDelayCalc("unit_noinvbuf", makeUnitDelayNoInvBufCalc);
   registerDelayCalc("lumped_cap", makeLumpedCapDelayCalc);
   registerDelayCalc("dmp_ceff_elmore", makeDmpCeffElmoreDelayCalc);
   registerDelayCalc("dmp_ceff_two_pole", makeDmpCeffTwoPoleDelayCalc);

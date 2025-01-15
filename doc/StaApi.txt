@@ -365,6 +365,9 @@ are defined in the dcalc directory:
 
  UnitDelayCalc - All gate delays are 1. Wire delays are zero.
 
+ UnitDelayNoInvBufCalc - All gate delays are 1, except inverters, which are 0.
+ Wire delays are zero.
+
  LumpedCapArcDelayCalc - Liberty table models using lumped capacitive
  load (RSPF pi model total capacitance). Wire delays are zero.
 

@@ -140,6 +140,7 @@ typedef vector<ArcDcalcResult> ArcDcalcResultSeq;
 // Delay calculator class hierarchy.
 //  ArcDelayCalc
 //   UnitDelayCalc
+//   UnitDelayNoInvBufCalc
 //   DelayCalcBase
 //    ParallelDelayCalc
 //     LumpedCapDelayCalc

@@ -80,6 +80,7 @@ set(STA_SOURCE
   dcalc/ParallelDelayCalc.cc
   dcalc/PrimaDelayCalc.cc
   dcalc/UnitDelayCalc.cc
+  dcalc/UnitDelayNoInvBufCalc.cc
   
   graph/DelayFloat.cc
   graph/DelayNormal1.cc
