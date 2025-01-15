@@ -120,7 +120,8 @@ protected:
 		      // Return values.
 		      float &axis_value1,
 		      float &axis_value2,
-		      float &axis_value3) const;
+		      float &axis_value3,
+		      float &axis_value4) const;
   static bool checkAxis(const TableAxis *axis);
 
   TableModel *delay_model_;
@@ -169,7 +170,8 @@ protected:
 		      // Return values.
 		      float &axis_value1,
 		      float &axis_value2,
-		      float &axis_value3) const;
+		      float &axis_value3,
+		      float &axis_value4) const;
   float axisValue(const TableAxis *axis,
 		  float load_cap,
 		  float in_slew,
@@ -202,20 +204,24 @@ public:
   const TableAxis *axis1() const;
   const TableAxis *axis2() const;
   const TableAxis *axis3() const;
+  const TableAxis *axis4() const;
   void setIsScaled(bool is_scaled);
   float value(size_t index1,
               size_t index2,
-              size_t index3) const;
+              size_t index3,
+	      size_t index4) const;
   // Table interpolated lookup.
   float findValue(float value1,
 		  float value2,
-		  float value3) const;
+		  float value3,
+		  float value4) const;
   // Table interpolated lookup with scale factor.
   float findValue(const LibertyCell *cell,
 		  const Pvt *pvt,
 		  float value1,
 		  float value2,
-		  float value3) const;
+		  float value3,
+		  float value4) const;
   string reportValue(const char *result_name,
                      const LibertyCell *cell,
                      const Pvt *pvt,
@@ -223,6 +229,7 @@ public:
                      const char *comment1,
                      float value2,
                      float value3,
+		     float value4,
                      const Unit *table_unit,
                      int digits) const;
   string report(const Units *units,
@@ -243,7 +250,7 @@ protected:
   bool is_scaled_:1;
 };
 
-// Abstract base class for 0, 1, 2, or 3 dimesnion float tables.
+// Abstract base class for 0, 1, 2, 3, or 4 dimension float tables.
 class Table
 {
 public:
@@ -254,21 +261,25 @@ public:
   virtual const TableAxis *axis1() const { return nullptr; }
   virtual const TableAxis *axis2() const { return nullptr; }
   virtual const TableAxis *axis3() const { return nullptr; }
+  virtual const TableAxis *axis4() const { return nullptr; }
   void setIsScaled(bool is_scaled);
   virtual float value(size_t axis_idx1,
                       size_t axis_idx2,
-                      size_t axis_idx3) const = 0;
+                      size_t axis_idx3,
+		      size_t axis_idx4) const = 0;
   // Table interpolated lookup.
   virtual float findValue(float axis_value1,
 			  float axis_value2,
-			  float axis_value3) const = 0;
+			  float axis_value3,
+			  float axis_value4) const = 0;
   // Table interpolated lookup with scale factor.
   float findValue(const LibertyLibrary *library,
 		  const LibertyCell *cell,
 		  const Pvt *pvt,
 		  float axis_value1,
 		  float axis_value2,
-		  float axis_value3) const;
+		  float axis_value3,
+		  float axis_value4) const;
   virtual string reportValue(const char *result_name,
                              const LibertyCell *cell,
                              const Pvt *pvt,
@@ -276,6 +287,7 @@ public:
                              const char *comment1,
                              float value2,
                              float value3,
+			     float value4,
                              const Unit *table_unit,
                              int digits) const = 0;
   virtual void report(const Units *units,
@@ -290,10 +302,12 @@ public:
   int order() const override { return 0; }
   float value(size_t axis_index1,
               size_t axis_index2,
-              size_t axis_index3) const override;
+              size_t axis_index3,
+	      size_t axis_index4) const override;
   float findValue(float axis_value1,
                   float axis_value2,
-                  float axis_value3) const override;
+                  float axis_value3,
+		  float axis_value4) const override;
   string reportValue(const char *result_name,
                      const LibertyCell *cell,
                      const Pvt *pvt,
@@ -301,6 +315,7 @@ public:
                      const char *comment1,
                      float value2,
                      float value3,
+		     float value4,
                      const Unit *table_unit,
                      int digits) const override;
   void report(const Units *units,
@@ -327,10 +342,12 @@ public:
   const TableAxisPtr axis1ptr() const { return axis1_; }
   float value(size_t axis_index1,
               size_t axis_index2,
-              size_t axis_index3) const override;
+              size_t axis_index3,
+	      size_t axis_index4) const override;
   float findValue(float value1,
                   float value2,
-                  float value3) const override;
+                  float value3,
+		  float value4) const override;
   string reportValue(const char *result_name,
                      const LibertyCell *cell,
                      const Pvt *pvt,
@@ -338,6 +355,7 @@ public:
                      const char *comment1,
                      float value2,
                      float value3,
+		     float value4,
                      const Unit *table_unit,
                      int digits) const override;
   void report(const Units *units,
@@ -372,10 +390,12 @@ public:
   const TableAxis *axis2() const override { return axis2_.get(); }
   float value(size_t axis_index1,
               size_t axis_index2,
-              size_t axis_index3) const override;
+              size_t axis_index3,
+	      size_t axis_index4) const override;
   float findValue(float value1,
                   float value2,
-                  float value3) const override;
+                  float value3,
+		  float value4) const override;
   string reportValue(const char *result_name,
                      const LibertyCell *cell,
                      const Pvt *pvt,
@@ -383,6 +403,7 @@ public:
                      const char *comment1,
                      float value2,
                      float value3,
+		     float value4,
                      const Unit *table_unit,
                      int digits) const override;
   void report(const Units *units,
@@ -418,10 +439,12 @@ public:
   const TableAxis *axis3() const override { return axis3_.get(); }
   float value(size_t axis_index1,
               size_t axis_index2,
-              size_t axis_index3) const override;
+              size_t axis_index3,
+	      size_t axis_index4) const override;
   float findValue(float value1,
                   float value2,
-                  float value3) const override;
+                  float value3,
+		  float value4) const override;
   string reportValue(const char *result_name,
                      const LibertyCell *cell,
                      const Pvt *pvt,
@@ -429,14 +452,56 @@ public:
                      const char *comment1,
                      float value2,
                      float value3,
+		     float value4,
                      const Unit *table_unit,
                      int digits) const override;
   void report(const Units *units,
               Report *report) const override;
   using Table::findValue;
 
-private:
+protected:
   TableAxisPtr axis3_;
+};
+
+// Four dimensional table.
+class Table4 : public Table3
+{
+public:
+  Table4(FloatTable *values,
+	 TableAxisPtr axis1,
+	 TableAxisPtr axis2,
+	 TableAxisPtr axis3,
+	 TableAxisPtr axis4);
+  virtual ~Table4() {}
+  int order() const override { return 3; }
+  const TableAxis *axis1() const override { return axis1_.get(); }
+  const TableAxis *axis2() const override { return axis2_.get(); }
+  const TableAxis *axis3() const override { return axis3_.get(); }
+  const TableAxis *axis4() const override { return axis4_.get(); }
+  float value(size_t axis_index1,
+              size_t axis_index2,
+              size_t axis_index3,
+	      size_t axis_index4) const override;
+  float findValue(float value1,
+                  float value2,
+                  float value3,
+		  float value4) const override;
+  string reportValue(const char *result_name,
+                     const LibertyCell *cell,
+                     const Pvt *pvt,
+                     float value1,
+                     const char *comment1,
+                     float value2,
+                     float value3,
+		     float value4,
+                     const Unit *table_unit,
+                     int digits) const override;
+  void report(const Units *units,
+              Report *report) const override;
+  using Table::findValue;
+
+protected:
+  TableAxisPtr axis4_;
 };
 
 class TableAxis

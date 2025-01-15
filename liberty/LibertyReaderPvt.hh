@@ -154,9 +154,11 @@ public:
   virtual void visitVariable1(LibertyAttr *attr);
   virtual void visitVariable2(LibertyAttr *attr);
   virtual void visitVariable3(LibertyAttr *attr);
+  virtual void visitVariable4(LibertyAttr *attr);
   virtual void visitIndex1(LibertyAttr *attr);
   virtual void visitIndex2(LibertyAttr *attr);
   virtual void visitIndex3(LibertyAttr *attr);
+  virtual void visitIndex4(LibertyAttr *attr);
 
   virtual void beginType(LibertyGroup *group);
   virtual void endType(LibertyGroup *group);
@@ -627,8 +629,8 @@ protected:
   StringSeq bus_names_;
   bool in_bus_;
   bool in_bundle_;
-  TableAxisVariable axis_var_[3];
-  FloatSeq *axis_values_[3];
+  TableAxisVariable axis_var_[4];
+  FloatSeq *axis_values_[4];
   int type_bit_from_;
   bool type_bit_from_exists_;
   int type_bit_to_;
@@ -649,7 +651,7 @@ protected:
   PathType path_type_;
   LibertyPgPort *pg_port_;
   ScaleFactorType scale_factor_type_;
-  TableAxisPtr axis_[3];
+  TableAxisPtr axis_[4];
   TablePtr table_;
   float table_model_scale_;
   ModeDef *mode_def_;

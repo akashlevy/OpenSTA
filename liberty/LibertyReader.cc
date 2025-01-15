@@ -256,9 +256,11 @@ LibertyReader::defineVisitors()
   defineAttrVisitor("variable_1", &LibertyReader::visitVariable1);
   defineAttrVisitor("variable_2", &LibertyReader::visitVariable2);
   defineAttrVisitor("variable_3", &LibertyReader::visitVariable3);
+  defineAttrVisitor("variable_4", &LibertyReader::visitVariable4);
   defineAttrVisitor("index_1", &LibertyReader::visitIndex1);
   defineAttrVisitor("index_2", &LibertyReader::visitIndex2);
   defineAttrVisitor("index_3", &LibertyReader::visitIndex3);
+  defineAttrVisitor("index_4", &LibertyReader::visitIndex4);
 
   defineGroupVisitor("technology",
                      &LibertyReader::beginTechnology,
@@ -1401,8 +1403,12 @@ LibertyReader::endTableTemplate(LibertyGroup *group)
     TableAxisPtr axis3 = makeAxis(2, group);
     if (axis3)
       tbl_template_->setAxis3(axis3);
+    TableAxisPtr axis4 = makeAxis(3, group);
+    if (axis4)
+      tbl_template_->setAxis4(axis4);
     tbl_template_ = nullptr;
-    axis_var_[0] = axis_var_[1] = axis_var_[2] = TableAxisVariable::unknown;
+    axis_var_[0] = axis_var_[1] = TableAxisVariable::unknown;
+    axis_var_[2] = axis_var_[3] = TableAxisVariable::unknown;
   }
 }
 
@@ -1456,6 +1462,12 @@ LibertyReader::visitVariable3(LibertyAttr *attr)
 }
 
 void
+LibertyReader::visitVariable4(LibertyAttr *attr)
+{
+  visitVariable(3, attr);
+}
+
+void
 LibertyReader::visitVariable(int index,
 			     LibertyAttr *attr)
 {
@@ -1485,6 +1497,12 @@ void
 LibertyReader::visitIndex3(LibertyAttr *attr)
 {
   visitIndex(2, attr);
+}
+
+void
+LibertyReader::visitIndex4(LibertyAttr *attr)
+{
+  visitIndex(3, attr);
 }
 
 void
@@ -4590,12 +4608,14 @@ LibertyReader::beginTable(LibertyGroup *group,
       axis_[0] = tbl_template_->axis1ptr();
       axis_[1] = tbl_template_->axis2ptr();
       axis_[2] = tbl_template_->axis3ptr();
+      axis_[3] = tbl_template_->axis4ptr();
     }
     else {
       libWarn(1256, group, "table template %s not found.", template_name);
       axis_[0] = nullptr;
       axis_[1] = nullptr;
       axis_[2] = nullptr;
+      axis_[3] = nullptr;
     }
     clearAxisValues();
     table_ = nullptr;
@@ -4611,6 +4631,7 @@ LibertyReader::endTable()
   axis_[0] = nullptr;
   axis_[1] = nullptr;
   axis_[2] = nullptr;
+  axis_[3] = nullptr;
 }
 
 void
@@ -4642,6 +4663,17 @@ LibertyReader::makeTable(LibertyAttr *attr,
     makeTableAxis(0);
     makeTableAxis(1);
     makeTableAxis(2);
+    makeTableAxis(3);
+    if (axis_[0] && axis_[1] && axis_[2] && axis_[3]) {
+      // 4D table
+      // Row    index1*size(index2)*size(index3) + index2*size(index3) + index3
+      // Column index4
+      FloatTable *table = makeFloatTable(attr,
+					 axis_[0]->size()*axis_[1]->size()*axis_[2]->size(),
+					 axis_[3]->size(), scale);
+      table_ = make_shared<Table4>(table, axis_[0], axis_[1], axis_[2], axis_[3]);
+    }
+    else
     if (axis_[0] && axis_[1] && axis_[2]) {
       // 3D table
       // Column index1*size(index2) + index2

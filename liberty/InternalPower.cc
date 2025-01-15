@@ -128,10 +128,11 @@ InternalPowerModel::power(const LibertyCell *cell,
 			  float load_cap) const
 {
   if (model_) {
-    float axis_value1, axis_value2, axis_value3;
+    float axis_value1, axis_value2, axis_value3, axis_value4;
     findAxisValues(in_slew, load_cap,
-		   axis_value1, axis_value2, axis_value3);
-    return model_->findValue(cell, pvt, axis_value1, axis_value2, axis_value3);
+		   axis_value1, axis_value2, axis_value3, axis_value4);
+    return model_->findValue(cell, pvt, axis_value1, axis_value2, axis_value3,
+                             axis_value4);
   }
   else
     return 0.0;
@@ -145,12 +146,12 @@ InternalPowerModel::reportPower(const LibertyCell *cell,
 				int digits) const
 {
   if (model_) {
-    float axis_value1, axis_value2, axis_value3;
+    float axis_value1, axis_value2, axis_value3, axis_value4;
     findAxisValues(in_slew, load_cap,
-		   axis_value1, axis_value2, axis_value3);
+		   axis_value1, axis_value2, axis_value3, axis_value4);
     const LibertyLibrary *library = cell->libertyLibrary();
     return model_->reportValue("Power", cell, pvt, axis_value1, nullptr,
-                               axis_value2, axis_value3,
+                               axis_value2, axis_value3, axis_value4,
                                library->units()->powerUnit(), digits);
   }
   return "";
@@ -162,33 +163,45 @@ InternalPowerModel::findAxisValues(float in_slew,
 				   // Return values.
 				   float &axis_value1,
 				   float &axis_value2,
-				   float &axis_value3) const
+				   float &axis_value3,
+				   float &axis_value4) const
 {
   switch (model_->order()) {
   case 0:
     axis_value1 = 0.0;
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 1:
     axis_value1 = axisValue(model_->axis1(), in_slew, load_cap);
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 2:
     axis_value1 = axisValue(model_->axis1(), in_slew, load_cap);
     axis_value2 = axisValue(model_->axis2(), in_slew, load_cap);
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 3:
     axis_value1 = axisValue(model_->axis1(), in_slew, load_cap);
     axis_value2 = axisValue(model_->axis2(), in_slew, load_cap);
     axis_value3 = axisValue(model_->axis3(), in_slew, load_cap);
+    axis_value4 = 0.0;
+    break;
+  case 4:
+    axis_value1 = axisValue(model_->axis1(), in_slew, load_cap);
+    axis_value2 = axisValue(model_->axis2(), in_slew, load_cap);
+    axis_value3 = axisValue(model_->axis3(), in_slew, load_cap);
+    axis_value4 = axisValue(model_->axis4(), in_slew, load_cap);
     break;
   default:
     axis_value1 = 0.0;
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     criticalError(225, "unsupported table order");
   }
 }
@@ -215,12 +228,16 @@ InternalPowerModel::checkAxes(const TableModel *model)
   const TableAxis *axis1 = model->axis1();
   const TableAxis *axis2 = model->axis2();
   const TableAxis *axis3 = model->axis3();
+  const TableAxis *axis4 = model->axis4();
   bool axis_ok = true;
   if (axis1)
     axis_ok &= checkAxis(model->axis1());
   if (axis2)
     axis_ok &= checkAxis(model->axis2());
-  axis_ok &= (axis3 == nullptr);
+  if (axis3)
+    axis_ok &= checkAxis(model->axis3());
+  if (axis4)
+    axis_ok &= checkAxis(model->axis4());
   return axis_ok;
 }
 

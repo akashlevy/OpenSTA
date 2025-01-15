@@ -91,7 +91,8 @@ protected:
 		      // Return values.
 		      float &axis_value1,
 		      float &axis_value2,
-		      float &axis_value3) const;
+		      float &axis_value3,
+		      float &axis_value4) const;
   float axisValue(const TableAxis *axis,
 		  float in_slew,
 		  float load_cap) const;

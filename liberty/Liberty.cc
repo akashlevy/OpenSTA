@@ -91,7 +91,8 @@ LibertyLibrary::LibertyLibrary(const char *name,
   for (int i = 0; i != table_template_type_count; i++) {
     TableTemplateType type = static_cast<TableTemplateType>(i);
     TableTemplate *scalar_template = new TableTemplate("scalar", nullptr,
-						       nullptr, nullptr);
+						       nullptr, nullptr,
+						       nullptr);
     addTableTemplate(scalar_template, type);
   }
 
@@ -350,14 +351,14 @@ LibertyLibrary::degradeWireSlew(const TableModel *model,
 {
   switch (model->order()) {
   case 0:
-    return model->findValue(0.0, 0.0, 0.0);
+    return model->findValue(0.0, 0.0, 0.0, 0.0);
   case 1: {
     const TableAxis *axis1 = model->axis1();
     TableAxisVariable var1 = axis1->variable();
     if (var1 == TableAxisVariable::output_pin_transition)
-      return model->findValue(in_slew, 0.0, 0.0);
+      return model->findValue(in_slew, 0.0, 0.0, 0.0);
     else if (var1 == TableAxisVariable::connect_delay)
-      return model->findValue(wire_delay, 0.0, 0.0);
+      return model->findValue(wire_delay, 0.0, 0.0, 0.0);
     else {
       criticalError(1116, "unsupported slew degradation table axes");
       return 0.0;
@@ -370,10 +371,10 @@ LibertyLibrary::degradeWireSlew(const TableModel *model,
     TableAxisVariable var2 = axis2->variable();
     if (var1 == TableAxisVariable::output_pin_transition
 	&& var2 == TableAxisVariable::connect_delay)
-      return model->findValue(in_slew, wire_delay, 0.0);
+      return model->findValue(in_slew, wire_delay, 0.0, 0.0);
     else if (var1 == TableAxisVariable::connect_delay
 	     && var2 == TableAxisVariable::output_pin_transition)
-      return model->findValue(wire_delay, in_slew, 0.0);
+      return model->findValue(wire_delay, in_slew, 0.0, 0.0);
     else {
       criticalError(1117, "unsupported slew degradation table axes");
       return 0.0;
@@ -2735,7 +2736,7 @@ LibertyPort::clkTreeDelays1() const
         const TableModel *model =
           clk_tree_delay_[from_rf->index()][to_rf->index()][min_max->index()];
         if (model) {
-          float delay = model->findValue(0.0, 0.0, 0.0);
+          float delay = model->findValue(0.0, 0.0, 0.0, 0.0);
           delays.setValue(from_rf, min_max, delay);
         }
       }
@@ -2751,7 +2752,7 @@ LibertyPort::clkTreeDelay(float in_slew,
 {
   const TableModel *model = clk_tree_delay_[rf->index()][rf->index()][min_max->index()];
   if (model)
-    return model->findValue(in_slew, 0.0, 0.0);
+    return model->findValue(in_slew, 0.0, 0.0, 0.0);
   else
     return 0.0;
 }
@@ -2765,7 +2766,7 @@ LibertyPort::clkTreeDelay(float in_slew,
   const TableModel *model =
     clk_tree_delay_[from_rf->index()][to_rf->index()][min_max->index()];
   if (model)
-    return model->findValue(in_slew, 0.0, 0.0);
+    return model->findValue(in_slew, 0.0, 0.0, 0.0);
   else
     return 0.0;
 }
@@ -2910,18 +2911,21 @@ TableTemplate::TableTemplate(const char *name) :
   name_(stringCopy(name)),
   axis1_(nullptr),
   axis2_(nullptr),
-  axis3_(nullptr)
+  axis3_(nullptr),
+  axis4_(nullptr)
 {
 }
 
 TableTemplate::TableTemplate(const char *name,
                              TableAxisPtr axis1,
                              TableAxisPtr axis2,
-                             TableAxisPtr axis3) :
+                             TableAxisPtr axis3,
+			     TableAxisPtr axis4) :
   name_(stringCopy(name)),
   axis1_(axis1),
   axis2_(axis2),
-  axis3_(axis3)
+  axis3_(axis3),
+  axis4_(axis4)
 {
 }
 
@@ -2953,6 +2957,12 @@ void
 TableTemplate::setAxis3(TableAxisPtr axis)
 {
   axis3_ = axis;
+}
+
+void
+TableTemplate::setAxis4(TableAxisPtr axis)
+{
+  axis4_ = axis;
 }
 
 ////////////////////////////////////////////////////////////////

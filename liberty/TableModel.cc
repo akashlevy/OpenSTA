@@ -193,12 +193,12 @@ GateTableModel::reportTableLookup(const char *result_name,
 				  int digits) const
 {
   if (model) {
-    float axis_value1, axis_value2, axis_value3;
+    float axis_value1, axis_value2, axis_value3, axis_value4;
     findAxisValues(model, in_slew, load_cap, related_out_cap,
-		   axis_value1, axis_value2, axis_value3);
+		   axis_value1, axis_value2, axis_value3, axis_value4);
     const LibertyLibrary *library = cell_->libertyLibrary();
     return model->reportValue(result_name, cell_, pvt, axis_value1, nullptr,
-                              axis_value2, axis_value3,
+                              axis_value2, axis_value3, axis_value4,
                               library->units()->timeUnit(), digits);
   }
   return "";
@@ -212,10 +212,11 @@ GateTableModel::findValue(const Pvt *pvt,
 			  float related_out_cap) const
 {
   if (model) {
-    float axis_value1, axis_value2, axis_value3;
+    float axis_value1, axis_value2, axis_value3, axis_value4;
     findAxisValues(model, in_slew, load_cap, related_out_cap,
-		   axis_value1, axis_value2, axis_value3);
-    return model->findValue(cell_, pvt, axis_value1, axis_value2, axis_value3);
+		   axis_value1, axis_value2, axis_value3, axis_value4);
+    return model->findValue(cell_, pvt, axis_value1, axis_value2, axis_value3,
+    			    axis_value4);
   }
   else
     return 0.0;
@@ -229,19 +230,22 @@ GateTableModel::findAxisValues(const TableModel *model,
 			       // Return values.
 			       float &axis_value1,
 			       float &axis_value2,
-			       float &axis_value3) const
+			       float &axis_value3,
+			       float &axis_value4) const
 {
   switch (model->order()) {
   case 0:
     axis_value1 = 0.0;
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 1:
     axis_value1 = axisValue(model->axis1(), in_slew, load_cap,
 			    related_out_cap);
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 2:
     axis_value1 = axisValue(model->axis1(), in_slew, load_cap,
@@ -249,6 +253,7 @@ GateTableModel::findAxisValues(const TableModel *model,
     axis_value2 = axisValue(model->axis2(), in_slew, load_cap,
 			    related_out_cap);
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 3:
     axis_value1 = axisValue(model->axis1(), in_slew, load_cap,
@@ -257,11 +262,22 @@ GateTableModel::findAxisValues(const TableModel *model,
 			    related_out_cap);
     axis_value3 = axisValue(model->axis3(), in_slew, load_cap,
 			    related_out_cap);
+    axis_value4 = 0.0;
+  case 4:
+    axis_value1 = axisValue(model->axis1(), in_slew, load_cap,
+			    related_out_cap);
+    axis_value2 = axisValue(model->axis2(), in_slew, load_cap,
+			    related_out_cap);
+    axis_value3 = axisValue(model->axis3(), in_slew, load_cap,
+			    related_out_cap);
+    axis_value4 = axisValue(model->axis4(), in_slew, load_cap,
+			    related_out_cap);
     break;
   default:
     axis_value1 = 0.0;
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     criticalError(239, "unsupported table order");
   }
 }
@@ -285,6 +301,7 @@ GateTableModel::maxCapSlew(float in_slew,
   const TableAxis *axis1 = slew_model_->axis1();
   const TableAxis *axis2 = slew_model_->axis2();
   const TableAxis *axis3 = slew_model_->axis3();
+  const TableAxis *axis4 = slew_model_->axis4();
   if (axis1
       && axis1->variable() == TableAxisVariable::total_output_net_capacitance) {
     cap = axis1->axisValue(axis1->size() - 1);
@@ -298,6 +315,11 @@ GateTableModel::maxCapSlew(float in_slew,
   else if (axis3
 	   && axis3->variable()==TableAxisVariable::total_output_net_capacitance) {
     cap = axis3->axisValue(axis3->size() - 1);
+    slew = findValue(pvt, slew_model_, in_slew, cap, 0.0);
+  }
+  else if (axis4
+	   && axis4->variable()==TableAxisVariable::total_output_net_capacitance) {
+    cap = axis4->axisValue(axis4->size() - 1);
     slew = findValue(pvt, slew_model_, in_slew, cap, 0.0);
   }
   else {
@@ -447,10 +469,11 @@ CheckTableModel::findValue(const Pvt *pvt,
 			   float related_out_cap) const
 {
   if (model) {
-    float axis_value1, axis_value2, axis_value3;
+    float axis_value1, axis_value2, axis_value3, axis_value4;
     findAxisValues(from_slew, to_slew, related_out_cap,
-		   axis_value1, axis_value2, axis_value3);
-    return model->findValue(cell_, pvt, axis_value1, axis_value2, axis_value3);
+		   axis_value1, axis_value2, axis_value3, axis_value4);
+    return model->findValue(cell_, pvt, axis_value1, axis_value2, axis_value3,
+			    axis_value4);
   }
   else
     return 0.0;
@@ -492,13 +515,13 @@ CheckTableModel::reportTableDelay(const char *result_name,
 				  int digits) const
 {
   if (model) {
-    float axis_value1, axis_value2, axis_value3;
+    float axis_value1, axis_value2, axis_value3, axis_value4;
     findAxisValues(from_slew, to_slew, related_out_cap,
-		   axis_value1, axis_value2, axis_value3);
+		   axis_value1, axis_value2, axis_value3, axis_value4);
     string result = reportPvt(cell_, pvt, digits);
     result += model_->reportValue(result_name, cell_, pvt,
                                   axis_value1, from_slew_annotation, axis_value2,
-                                  axis_value3,
+                                  axis_value3, axis_value4,
                                   cell_->libertyLibrary()->units()->timeUnit(), digits);
     return result;
   }
@@ -512,19 +535,22 @@ CheckTableModel::findAxisValues(float from_slew,
 				// Return values.
 				float &axis_value1,
 				float &axis_value2,
-				float &axis_value3) const
+				float &axis_value3,
+				float &axis_value4) const
 {
   switch (model_->order()) {
   case 0:
     axis_value1 = 0.0;
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 1:
     axis_value1 = axisValue(model_->axis1(), from_slew, to_slew,
 			    related_out_cap);
     axis_value2 = 0.0;
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 2:
     axis_value1 = axisValue(model_->axis1(), from_slew, to_slew,
@@ -532,6 +558,7 @@ CheckTableModel::findAxisValues(float from_slew,
     axis_value2 = axisValue(model_->axis2(), from_slew, to_slew,
 			    related_out_cap);
     axis_value3 = 0.0;
+    axis_value4 = 0.0;
     break;
   case 3:
     axis_value1 = axisValue(model_->axis1(), from_slew, to_slew,
@@ -539,6 +566,16 @@ CheckTableModel::findAxisValues(float from_slew,
     axis_value2 = axisValue(model_->axis2(), from_slew, to_slew,
 			    related_out_cap);
     axis_value3 = axisValue(model_->axis3(), from_slew, to_slew,
+			    related_out_cap);
+    axis_value4 = 0.0;
+  case 4:
+    axis_value1 = axisValue(model_->axis1(), from_slew, to_slew,
+			    related_out_cap);
+    axis_value2 = axisValue(model_->axis2(), from_slew, to_slew,
+			    related_out_cap);
+    axis_value3 = axisValue(model_->axis3(), from_slew, to_slew,
+			    related_out_cap);
+    axis_value4 = axisValue(model_->axis4(), from_slew, to_slew,
 			    related_out_cap);
     break;
   default:
@@ -640,20 +677,28 @@ TableModel::axis3() const
   return table_->axis3();
 }
 
+const TableAxis *
+TableModel::axis4() const
+{
+  return table_->axis4();
+}
+
 float
 TableModel::value(size_t axis_index1,
                   size_t axis_index2,
-                  size_t axis_index3) const
+                  size_t axis_index3,
+		  size_t axis_index4) const
 {
-  return table_->value(axis_index1, axis_index2, axis_index3);
+  return table_->value(axis_index1, axis_index2, axis_index3, axis_index4);
 }
 
 float
 TableModel::findValue(float axis_value1,
 		      float axis_value2,
-		      float axis_value3) const
+		      float axis_value3,
+		      float axis_value4) const
 {
-  return table_->findValue(axis_value1, axis_value2, axis_value3);
+  return table_->findValue(axis_value1, axis_value2, axis_value3, axis_value4);
 }
 
 float
@@ -661,9 +706,10 @@ TableModel::findValue(const LibertyCell *cell,
 		      const Pvt *pvt,
 		      float axis_value1,
 		      float axis_value2,
-		      float axis_value3) const
+		      float axis_value3,
+		      float axis_value4) const
 {
-  return table_->findValue(axis_value1, axis_value2, axis_value3)
+  return table_->findValue(axis_value1, axis_value2, axis_value3, axis_value4)
     * scaleFactor(cell, pvt);
 }
 
@@ -688,17 +734,18 @@ TableModel::reportValue(const char *result_name,
 			const char *comment1,
 			float value2,
 			float value3,
+			float value4,
                         const Unit *table_unit,
 			int digits) const
 {
   string result = table_->reportValue("Table value", cell, pvt, value1,
-                                      comment1, value2, value3, table_unit, digits);
+                                      comment1, value2, value3, value4, table_unit, digits);
 
   result += reportPvtScaleFactor(cell, pvt, digits);
 
   result += result_name;
   result += " = ";
-  result += table_unit->asString(findValue(cell, pvt, value1, value2, value3), digits);
+  result += table_unit->asString(findValue(cell, pvt, value1, value2, value3, value4), digits);
   result += '\n';
   return result;
 }
@@ -750,13 +797,15 @@ Table0::Table0(float value) :
 float
 Table0::value(size_t,
               size_t,
-              size_t) const
+              size_t,
+	      size_t) const
 {
   return value_;
 }
 
 float
 Table0::findValue(float,
+		  float,
 		  float,
 		  float) const
 {
@@ -771,12 +820,13 @@ Table0::reportValue(const char *result_name,
 		    const char *comment1,
 		    float value2,
 		    float value3,
+		    float value4,
                     const Unit *table_unit,
 		    int digits) const
 {
   string result = result_name;
   result += " constant = ";
-  result += table_unit->asString(findValue(value1, value2, value3), digits);
+  result += table_unit->asString(findValue(value1, value2, value3, value4), digits);
   if (comment1)
     result += comment1;
   result += '\n';
@@ -843,7 +893,8 @@ Table1::operator=(Table1 &&table)
 float
 Table1::value(size_t axis_index1,
               size_t,
-              size_t) const
+              size_t,
+	      size_t) const
 {
   return value(axis_index1);
 }
@@ -856,6 +907,7 @@ Table1::value(size_t axis_index1) const
 
 float
 Table1::findValue(float axis_value1,
+		  float,
 		  float,
 		  float) const
 {
@@ -910,6 +962,7 @@ Table1::reportValue(const char *result_name,
 		    const char *comment1,
 		    float value2,
 		    float value3,
+		    float value4,
                     const Unit *table_unit,
 		    int digits) const
 {
@@ -943,7 +996,7 @@ Table1::reportValue(const char *result_name,
 
   result += result_name;
   result += " = ";
-  result += table_unit->asString(findValue(value1, value2, value3), digits);
+  result += table_unit->asString(findValue(value1, value2, value3, value4), digits);
   result += '\n';
   return result;
 }
@@ -993,7 +1046,8 @@ Table2::~Table2()
 float
 Table2::value(size_t axis_index1,
               size_t axis_index2,
-              size_t) const
+              size_t,
+	      size_t) const
 {
   return value(axis_index1, axis_index2);
 }
@@ -1010,6 +1064,7 @@ Table2::value(size_t axis_index1,
 float
 Table2::findValue(float axis_value1,
 		  float axis_value2,
+		  float,
 		  float) const
 {
   size_t size1 = axis1_->size();
@@ -1076,6 +1131,7 @@ Table2::reportValue(const char *result_name,
 		    const char *comment1,
 		    float value2,
 		    float value3,
+		    float value4,
                     const Unit *table_unit,
 		    int digits) const
 {
@@ -1130,7 +1186,7 @@ Table2::reportValue(const char *result_name,
 
   result += result_name;
   result += " = ";
-  result += table_unit->asString(findValue(value1, value2, value3), digits);
+  result += table_unit->asString(findValue(value1, value2, value3, value4), digits);
   result += '\n';
   return result;
 }
@@ -1177,7 +1233,8 @@ Table3::Table3(FloatTable *values,
 float
 Table3::value(size_t axis_index1,
               size_t axis_index2,
-              size_t axis_index3) const
+              size_t axis_index3,
+	      size_t) const
 {
   size_t row = axis_index1 * axis2_->size() + axis_index2;
   return values_->operator[](row)->operator[](axis_index3);
@@ -1187,7 +1244,8 @@ Table3::value(size_t axis_index1,
 float
 Table3::findValue(float axis_value1,
 		  float axis_value2,
-		  float axis_value3) const
+		  float axis_value3,
+		  float) const
 {
   size_t axis_index1 = axis1_->findAxisIndex(axis_value1);
   size_t axis_index2 = axis2_->findAxisIndex(axis_value2);
@@ -1198,7 +1256,7 @@ Table3::findValue(float axis_value1,
   double dx1 = 0.0;
   double dx2 = 0.0;
   double dx3 = 0.0;
-  double y000 = value(axis_index1, axis_index2, axis_index3);
+  double y000 = value(axis_index1, axis_index2, axis_index3, 0.0);
   double y001 = 0.0;
   double y010 = 0.0;
   double y011 = 0.0;
@@ -1211,28 +1269,28 @@ Table3::findValue(float axis_value1,
     double x1l = axis1_->axisValue(axis_index1);
     double x1u = axis1_->axisValue(axis_index1 + 1);
     dx1 = (x1 - x1l) / (x1u - x1l);
-    y100 = value(axis_index1 + 1, axis_index2, axis_index3);
+    y100 = value(axis_index1 + 1, axis_index2, axis_index3, 0.0);
     if (axis3_->size() != 1)
-      y101 = value(axis_index1 + 1, axis_index2, axis_index3 + 1);
+      y101 = value(axis_index1 + 1, axis_index2, axis_index3 + 1, 0.0);
     if (axis2_->size() != 1) {
-      y110 = value(axis_index1 + 1, axis_index2 + 1, axis_index3);
+      y110 = value(axis_index1 + 1, axis_index2 + 1, axis_index3, 0.0);
       if (axis3_->size() != 1)
-	y111 = value(axis_index1 + 1, axis_index2 + 1, axis_index3 + 1);
+	y111 = value(axis_index1 + 1, axis_index2 + 1, axis_index3 + 1, 0.0);
     }
   }
   if (axis2_->size() != 1) {
     double x2l = axis2_->axisValue(axis_index2);
     double x2u = axis2_->axisValue(axis_index2 + 1);
     dx2 = (x2 - x2l) / (x2u - x2l);
-    y010 = value(axis_index1, axis_index2 + 1, axis_index3);
+    y010 = value(axis_index1, axis_index2 + 1, axis_index3, 0.0);
     if (axis3_->size() != 1)
-      y011 = value(axis_index1, axis_index2 + 1, axis_index3 + 1);
+      y011 = value(axis_index1, axis_index2 + 1, axis_index3 + 1, 0.0);
   }
   if (axis3_->size() != 1) {
     double x3l = axis3_->axisValue(axis_index3);
     double x3u = axis3_->axisValue(axis_index3 + 1);
     dx3 = (x3 - x3l) / (x3u - x3l);
-    y001 = value(axis_index1, axis_index2, axis_index3 + 1);
+    y001 = value(axis_index1, axis_index2, axis_index3 + 1, 0.0);
   }
 
   double tbl_value
@@ -1266,6 +1324,7 @@ Table3::reportValue(const char *result_name,
 		    const char *comment1,
 		    float value2,
 		    float value3,
+		    float,
                     const Unit *table_unit,
 		    int digits) const
 {
@@ -1312,11 +1371,11 @@ Table3::reportValue(const char *result_name,
     result += " ";
     result += unit1->asString(axis1_->axisValue(axis_index1+1), digits);
     result += "   v   / ";
-    result += table_unit->asString(value(axis_index1+1,axis_index2,axis_index3),
+    result += table_unit->asString(value(axis_index1+1,axis_index2,axis_index3,0),
 				    digits);
     if (axis3_->size() != 1) {
       result += "     ";
-      result += table_unit->asString(value(axis_index1+1,axis_index2,axis_index3+1),
+      result += table_unit->asString(value(axis_index1+1,axis_index2,axis_index3+1,0),
 				      digits);
     }
   }
@@ -1330,10 +1389,10 @@ Table3::reportValue(const char *result_name,
   result += "  ";
   result += unit2->asString(axis2_->axisValue(axis_index2), digits);
   result += " | ";
-  result += table_unit->asString(value(axis_index1, axis_index2, axis_index3), digits);
+  result += table_unit->asString(value(axis_index1, axis_index2, axis_index3, 0), digits);
   if (axis3_->size() != 1) {
     result += "     ";
-    result += table_unit->asString(value(axis_index1, axis_index2, axis_index3+1),
+    result += table_unit->asString(value(axis_index1, axis_index2, axis_index3+1, 0),
 				    digits);
   }
   result += '\n';
@@ -1341,11 +1400,11 @@ Table3::reportValue(const char *result_name,
   result += "           |/ ";
   if (axis1_->size() != 1
       && axis2_->size() != 1) {
-    result += table_unit->asString(value(axis_index1+1,axis_index2+1,axis_index3),
+    result += table_unit->asString(value(axis_index1+1,axis_index2+1,axis_index3,0),
 				    digits);
     if (axis3_->size() != 1) {
       result += "     ";
-      result +=table_unit->asString(value(axis_index1+1,axis_index2+1,axis_index3+1),
+      result +=table_unit->asString(value(axis_index1+1,axis_index2+1,axis_index3+1,0),
 				     digits);
     }
   }
@@ -1355,11 +1414,11 @@ Table3::reportValue(const char *result_name,
   result += unit2->asString(axis2_->axisValue(axis_index2 + 1), digits);
   result += " | ";
   if (axis2_->size() != 1) {
-    result += table_unit->asString(value(axis_index1, axis_index2+1, axis_index3),
+    result += table_unit->asString(value(axis_index1, axis_index2+1, axis_index3, 0),
                                    digits);
     if (axis3_->size() != 1) {
       result += "     ";
-      result +=table_unit->asString(value(axis_index1, axis_index2+1,axis_index3+1),
+      result +=table_unit->asString(value(axis_index1, axis_index2+1, axis_index3+1, 0),
                                     digits);
     }
   }
@@ -1367,7 +1426,7 @@ Table3::reportValue(const char *result_name,
 
   result += result_name;
   result += " = ";
-  result += table_unit->asString(findValue(value1, value2, value3), digits);
+  result += table_unit->asString(findValue(value1, value2, value3, 0.0), digits);
   result += '\n';
   return result;
 }
@@ -1406,12 +1465,68 @@ Table3::report(const Units *units,
       line = unit2->asString(axis2_->axisValue(axis_index2),digits);
       line += " |";
       for (size_t axis_index3 = 0; axis_index3 < axis3_->size(); axis_index3++) {
-        line += table_unit->asString(value(axis_index1, axis_index2, axis_index3),digits);
+        line += table_unit->asString(value(axis_index1, axis_index2, axis_index3, 0),digits);
         line += " ";
       }
       report->reportLineString(line);
     }
   }
+}
+
+////////////////////////////////////////////////////////////////
+
+Table4::Table4(FloatTable *values,
+	       TableAxisPtr axis1,
+	       TableAxisPtr axis2,
+	       TableAxisPtr axis3,
+	       TableAxisPtr axis4) :
+  Table3(values, axis1, axis2, axis3),
+  axis4_(axis4)
+{
+}
+
+float
+Table4::value(size_t axis_index1,
+	      size_t axis_index2,
+	      size_t axis_index3,
+	      size_t axis_index4) const
+{
+  size_t row = axis_index1 * axis2_->size() * axis3_->size() +
+               axis_index2 * axis3_->size() + axis_index3;
+  return values_->operator[](row)->operator[](axis_index4);
+}
+
+float
+Table4::findValue(float,
+		  float,
+		  float,
+		  float) const
+{
+  // TODO: IMPLEMENT
+  return 0;
+}
+
+string
+Table4::reportValue(const char *,
+		    const LibertyCell *,
+		    const Pvt *,
+		    float,
+		    const char *,
+		    float,
+		    float,
+		    float,
+		    const Unit *,
+		    int) const
+{
+  // TODO: IMPLEMENT
+  return "Unimplemented";
+}
+
+void
+Table4::report(const Units *,
+	       Report *) const
+{
+  // TODO: IMPLEMENT
 }
 
 ////////////////////////////////////////////////////////////////
@@ -2073,7 +2188,7 @@ DriverWaveform::waveform(float slew)
   FloatSeq *time_values = new FloatSeq;
   FloatSeq *volt_values = new FloatSeq;
   for (float volt : *volt_axis->values()) {
-    float time = waveforms_->findValue(slew, volt, 0.0);
+    float time = waveforms_->findValue(slew, volt, 0.0, 0.0);
     time_values->push_back(time);
     volt_values->push_back(volt);
   }

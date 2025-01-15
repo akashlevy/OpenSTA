@@ -1065,7 +1065,8 @@ public:
   TableTemplate(const char *name,
 		TableAxisPtr axis1,
 		TableAxisPtr axis2,
-		TableAxisPtr axis3);
+		TableAxisPtr axis3,
+		TableAxisPtr axis4);
   ~TableTemplate();
   const char *name() const { return name_; }
   void setName(const char *name);
@@ -1078,12 +1079,16 @@ public:
   const TableAxis *axis3() const { return axis3_.get(); }
   TableAxisPtr axis3ptr() const { return axis3_; }
   void setAxis3(TableAxisPtr axis);
+  const TableAxis *axis4() const { return axis4_.get(); }
+  TableAxisPtr axis4ptr() const { return axis4_; }
+  void setAxis4(TableAxisPtr axis);
 
 protected:
   const char *name_;
   TableAxisPtr axis1_;
   TableAxisPtr axis2_;
   TableAxisPtr axis3_;
+  TableAxisPtr axis4_;
 };
 
 class TestCell : public LibertyCell

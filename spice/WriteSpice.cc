@@ -500,6 +500,12 @@ WriteSpice::slewAxisMinValue(TimingArc *arc)
     if (var3 == TableAxisVariable::input_transition_time
 	|| var3 == TableAxisVariable::input_net_transition)
       return axis3->axisValue(0);
+
+    const TableAxis *axis4 = model->axis4();
+    TableAxisVariable var4 = axis4->variable();
+    if (var4 == TableAxisVariable::input_transition_time
+	|| var4 == TableAxisVariable::input_net_transition)
+      return axis4->axisValue(0);
   }
   return 0.0;
 }

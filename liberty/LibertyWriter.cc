@@ -207,6 +207,7 @@ LibertyWriter::writeTableTemplate(const TableTemplate *tbl_template)
   const TableAxis *axis1 = tbl_template->axis1();
   const TableAxis *axis2 = tbl_template->axis2();
   const TableAxis *axis3 = tbl_template->axis3();
+  const TableAxis *axis4 = tbl_template->axis4();
   // skip scalar templates
   if (axis1) {
     fprintf(stream_, "  lu_table_template(%s) {\n", tbl_template->name());
@@ -218,12 +219,17 @@ LibertyWriter::writeTableTemplate(const TableTemplate *tbl_template)
     if (axis3)
       fprintf(stream_, "    variable_3 : %s;\n",
               tableVariableString(axis3->variable()));
+    if (axis4)
+      fprintf(stream_, "    variable_4 : %s;\n",
+	      tableVariableString(axis4->variable()));
     if (axis1 && axis1->values())
       writeTableAxis4(axis1, 1);
     if (axis2 && axis2->values())
       writeTableAxis4(axis2, 2);
     if (axis3 && axis3->values())
       writeTableAxis4(axis3, 3);
+    if (axis4 && axis4->values())
+      writeTableAxis4(axis4, 4);
     fprintf(stream_, "  }\n");
   }
 }
@@ -481,7 +487,7 @@ LibertyWriter::writeTableModel(const TableModel *model)
 void
 LibertyWriter::writeTableModel0(const TableModel *model)
 {
-  float value = model->value(0, 0, 0);
+  float value = model->value(0, 0, 0, 0);
   fprintf(stream_, "          values(\"%s\");\n",
           time_unit_->asString(value, 5));
 }
@@ -493,7 +499,7 @@ LibertyWriter::writeTableModel1(const TableModel *model)
   fprintf(stream_, "          values(\"");
   bool first_col = true;
   for (size_t index1 = 0; index1 < model->axis1()->size(); index1++) {
-    float value = model->value(index1, 0, 0);
+    float value = model->value(index1, 0, 0, 0);
     if (!first_col)
       fprintf(stream_, ",");
     fprintf(stream_, "%s", time_unit_->asString(value, 5));
@@ -516,7 +522,7 @@ LibertyWriter::writeTableModel2(const TableModel *model)
     }
     bool first_col = true;
     for (size_t index2 = 0; index2 < model->axis2()->size(); index2++) {
-      float value = model->value(index1, index2, 0);
+      float value = model->value(index1, index2, 0, 0);
       if (!first_col)
         fprintf(stream_, ",");
       fprintf(stream_, "%s", time_unit_->asString(value, 5));

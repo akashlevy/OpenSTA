@@ -752,6 +752,9 @@ MakeTimingModel::loadCapacitanceAxis(const TableModel *table)
   else if (table->axis3()
            && table->axis3()->variable() == TableAxisVariable::total_output_net_capacitance)
     return table->axis3();
+  else if (table->axis4()
+	   && table->axis4()->variable() == TableAxisVariable::total_output_net_capacitance)
+    return table->axis4();
   else
     return nullptr;
 }
