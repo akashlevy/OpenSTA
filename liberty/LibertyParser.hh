@@ -74,6 +74,7 @@ public:
                           int line);
   LibertyAttrType attrValueType(const char *value_type_name);
   LibertyGroupType groupType(const char *group_type_name);
+  const std::string groupTypeString(LibertyGroupType group_type);
   void groupBegin(const char *type,
                   LibertyAttrValueSeq *params,
                   int line);

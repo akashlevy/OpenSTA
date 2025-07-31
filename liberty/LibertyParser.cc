@@ -124,6 +124,23 @@ LibertyParser::groupType(const char *group_type_name)
     return LibertyGroupType::unknown;
 }
 
+const std::string
+LibertyParser::groupTypeString(LibertyGroupType group_type)
+{
+  switch (group_type) {
+  case LibertyGroupType::library:
+    return "library";
+  case LibertyGroupType::cell:
+    return "cell";
+  case LibertyGroupType::pin:
+    return "pin";
+  case LibertyGroupType::timing:
+    return "timing";
+  default:
+    return "unknown";
+  }
+}
+
 void
 LibertyParser::groupBegin(const char *type,
                           LibertyAttrValueSeq *params,
