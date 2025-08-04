@@ -1009,6 +1009,18 @@ set_pocv_enabled(bool enabled)
   return Sta::sta()->setPocvEnabled(enabled);
 }
 
+bool
+strip_escaped_bus()
+{
+  return Sta::sta()->stripEscapedBus();
+}
+
+void
+set_strip_escaped_bus(bool enable)
+{
+  Sta::sta()->setStripEscapedBus(enable);
+}
+
 float
 pocv_sigma_factor()
 {

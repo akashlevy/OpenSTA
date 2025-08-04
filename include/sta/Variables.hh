@@ -76,8 +76,12 @@ public:
   // TCL variable sta_input_port_default_clock.
   bool useDefaultArrivalClock() { return use_default_arrival_clock_; }
   void setUseDefaultArrivalClock(bool enable);
+  // TCL variable sta_pocv_enabled.
   bool pocvEnabled() const { return pocv_enabled_; }
   void setPocvEnabled(bool enabled);
+  // TCL variable sta_strip_escaped_bus.
+  bool stripEscapedBus() const { return strip_escaped_bus_; }
+  void setStripEscapedBus(bool enable);
 
 private:
   bool crpr_enabled_;
@@ -94,6 +98,7 @@ private:
   bool propagate_all_clks_;
   bool use_default_arrival_clock_;
   bool pocv_enabled_;
+  bool strip_escaped_bus_;
 };
 
 } // namespace

@@ -2371,6 +2371,18 @@ Sta::setClkThruTristateEnabled(bool enable)
   }
 }
 
+bool
+Sta::stripEscapedBus() const
+{
+  return variables_->stripEscapedBus();
+}
+
+void
+Sta::setStripEscapedBus(bool enable)
+{
+  variables_->setStripEscapedBus(enable);
+}
+
 ////////////////////////////////////////////////////////////////
 
 Corner *

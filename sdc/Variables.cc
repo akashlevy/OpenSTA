@@ -40,7 +40,8 @@ Variables::Variables() :
   dynamic_loop_breaking_(false),
   propagate_all_clks_(false),
   use_default_arrival_clock_(false),
-  pocv_enabled_(false)
+  pocv_enabled_(false),
+  strip_escaped_bus_(false)
 {
 }
 
@@ -126,6 +127,12 @@ void
 Variables::setPocvEnabled(bool enabled)
 {
   pocv_enabled_ = enabled;
+}
+
+void
+Variables::setStripEscapedBus(bool enable)
+{
+  strip_escaped_bus_ = enable;
 }
   
 } // namespace
