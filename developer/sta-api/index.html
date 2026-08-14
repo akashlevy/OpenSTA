@@ -1,0 +1,1736 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="OpenSTA static timing analyzer">
+      
+      
+      
+        <link rel="canonical" href="https://opensta.readthedocs.io/developer/sta-api/">
+      
+      
+        <link rel="prev" href="../../changelog/">
+      
+      
+        <link rel="next" href="../coding-guidelines/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>STA API - OpenSTA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sta-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenSTA" class="md-header__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSTA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              STA API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenSTA" class="md-nav__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenSTA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../command-line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tcl-interpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl interpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filter-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filter expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../messages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STA API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STA API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Units
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liberty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liberty
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SDC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delay-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delay Calculation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Delay Calculation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unitdelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UnitDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lumpedcaparcdelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LumpedCapArcDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dmpceffelmoredelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DmpCeffElmoreDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dmpcefftwopoledelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DmpCeffTwoPoleDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcl-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tcl Interface
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-alternatives-for-using-the-sta-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture alternatives for using the STA Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture alternatives for using the STA Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sta-with-tcl-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STA with Tcl application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sta-with-c-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STA with C++ application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-application-without-native-network-data-structures-linking-sta-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ application without native Network data structures linking STA libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-application-with-native-network-data-structures-linking-sta-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ application with native Network data structures linking STA libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Units
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liberty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liberty
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SDC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delay-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delay Calculation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Delay Calculation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unitdelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UnitDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lumpedcaparcdelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LumpedCapArcDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dmpceffelmoredelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DmpCeffElmoreDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dmpcefftwopoledelaycalc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DmpCeffTwoPoleDelayCalc
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcl-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tcl Interface
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-alternatives-for-using-the-sta-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture alternatives for using the STA Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture alternatives for using the STA Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sta-with-tcl-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STA with Tcl application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sta-with-c-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STA with C++ application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-application-without-native-network-data-structures-linking-sta-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ application without native Network data structures linking STA libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-application-with-native-network-data-structures-linking-sta-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ application with native Network data structures linking STA libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sta-api">STA API<a class="headerlink" href="#sta-api" title="Permanent link">&para;</a></h1>
+<p>The STA is built in C++ with heavy use of STL (Standard Template
+Libraries). It also uses the zlib library to read compressed Liberty,
+Verilog, SDF, SPF, and SPEF files.</p>
+<p>The sub-directories of the STA code are:</p>
+<table>
+<thead>
+<tr>
+<th>Directory</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>doc</code></td>
+<td>Documentation files.</td>
+</tr>
+<tr>
+<td><code>util</code></td>
+<td>Basic utilities.</td>
+</tr>
+<tr>
+<td><code>liberty</code></td>
+<td>Liberty timing library classes and file reader.</td>
+</tr>
+<tr>
+<td><code>network</code></td>
+<td>Network and library API used by all STA code.</td>
+</tr>
+<tr>
+<td><code>verilog</code></td>
+<td>Verilog netlist reader that implements the network API.</td>
+</tr>
+<tr>
+<td><code>graph</code></td>
+<td>Timing graph built from network and library cell timing arcs.</td>
+</tr>
+<tr>
+<td><code>sdc</code></td>
+<td>SDC timing constraint classes.</td>
+</tr>
+<tr>
+<td><code>sdf</code></td>
+<td>SDF reader, writer and annotator.</td>
+</tr>
+<tr>
+<td><code>dcalc</code></td>
+<td>Delay calculator API and implementations.</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>Search engine used to annotate the graph with arrival, required times and find timing check slacks.</td>
+</tr>
+<tr>
+<td><code>parasitics</code></td>
+<td>Parasitics API, Spef and Spf readers.</td>
+</tr>
+<tr>
+<td><code>app</code></td>
+<td>Interface between Tcl and STA (built with SWIG). Main program definition.</td>
+</tr>
+<tr>
+<td><code>tcl</code></td>
+<td>User interface code. SDC argument parsing.</td>
+</tr>
+</tbody>
+</table>
+<p>Each sub-directory builds a library that is linked to build the STA
+executable or linked into another application.</p>
+<p>The file <a href="../coding-guidelines/">Coding guidelines</a> defines naming conventions used in
+the code.</p>
+<p>Major components of the STA such as the network, timing graph, sdc,
+and search are implemented as separate classes. The <code>Sta</code> class
+contains an instance of each of these components.</p>
+<p>The <code>Sta</code> class defines the bulk of the externally visible API used by
+the Tcl interface, and coordinates operations that involve multiple
+components. For example, when a false path command is entered into
+the Tcl command interpreter, the <code>Sta</code> passes the declaration on to the
+<code>Sdc</code> component and tells the <code>Search</code> component to invalidate all arrival
+and required times.</p>
+<p>Applications should call functions defined by the <code>Sta</code> class rather
+than functions defined by the components. Calling functions defined
+by the components will get you in trouble unless you understand them
+in detail. For example, telling the delay calculator to recompute the
+delays leaves the arrival times that depend on them wrong. Always
+remember that the <code>Sta</code> coordinates the components.</p>
+<p>In general, objects passed as arguments to <code>Sta</code> functions that are
+constructors become "owned" by the STA and should not be deleted by
+the caller. For example, a set of pins passed into
+<code>Sta::makeExceptionFrom</code> are used in the resulting object (rather than
+copied into another set). On the other hand, strings passed as
+arguments are copied by the <code>Sta</code> functions before they are retained in
+STA data structures.</p>
+<p>In many cases the major components contain pointers to other
+components. The <code>StaState</code> class is a simple container for these
+components that makes initialization of pointers to the components
+easier.</p>
+<p>An STA with modified behavior can be built by defining classes derived
+from the component classes and overloading some of the member
+functions (which may have to be modified to be virtual). Components
+are created by <code>Sta::makeComponents()</code>. The <code>Sta::makeComponents()</code>
+function in turn calls each of the <code>Sta::make&lt;Component&gt;</code> component
+constructors. These constructors can be overloaded by redefining them
+in a class derived from <code>Sta</code>. Because the components refer to each
+other, <code>Sta::updateComponentsState()</code> must be called to notify the
+components if any of them are changed after creation.</p>
+<h2 id="units">Units<a class="headerlink" href="#units" title="Permanent link">&para;</a></h2>
+<p>Units for values in <code>Sta</code> and liberty data structures are always the
+following:</p>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>time</td>
+<td>seconds</td>
+</tr>
+<tr>
+<td>length</td>
+<td>meters</td>
+</tr>
+<tr>
+<td>capacitance</td>
+<td>farads</td>
+</tr>
+<tr>
+<td>resistance</td>
+<td>ohms</td>
+</tr>
+<tr>
+<td>voltage</td>
+<td>volts</td>
+</tr>
+<tr>
+<td>current</td>
+<td>amperes</td>
+</tr>
+<tr>
+<td>power</td>
+<td>watts</td>
+</tr>
+</tbody>
+</table>
+<p>All file readers and the user interface are responsible for converting
+any user input or output to these units.</p>
+<h2 id="utilities">Utilities<a class="headerlink" href="#utilities" title="Permanent link">&para;</a></h2>
+<p>The STA uses the C++ standard library containers (<code>std::vector</code>,
+<code>std::map</code>, <code>std::set</code>, and related types). Helper functions for
+lookups and iteration live in <code>ContainerHelpers.hh</code> (<code>sta::findKey</code>,
+<code>sta::findKeyValue</code>, and range helpers). Prefer range-<code>for</code> over
+hand-written iterators.</p>
+<p>All printing done by the STA core is done using the <code>Report</code> class API.
+The report class supports output redirection to a file and logging to
+a file. The Tcl interpreter prints to "channels" that are
+encapsulated by functions in the <code>ReportTcl</code> class. Printing inside
+the STA is directed to the Tcl channels so that it appears with the
+Tcl interpreter output.</p>
+<h2 id="network">Network<a class="headerlink" href="#network" title="Permanent link">&para;</a></h2>
+<p>The network API is the key to making the STA a timing engine that can
+be bolted onto another application. This API allows the STA to
+efficiently communicate with external network data structures without
+the overhead of making and maintaining a copy of it.</p>
+<p>The network API encapsulates both library and netlist accessors.
+Libraries are composed of cells that have ports that define connections
+to the cell. Netlists are built out of cell instances, pins and nets.</p>
+<p>The <code>ConcreteLibrary</code> and <code>ConcreteNetwork</code> classes are used by the STA
+netlist readers (notably Verilog). These class definitions are to
+support a stand alone STA that does not depend on external netlist
+data structures.</p>
+<p>External network data structures are interfaced to the STA by casting
+pointers to network objects across the interface. The external objects
+do not have to be derived from STA network base classes. The network
+API functions are typically very thin functions that cast the STA
+network types to the external class types and call the corresponding
+external network database accessor.</p>
+<p>Bus ports are expanded into ports for each bit in the bus, and
+iterators are provided for the expanded and unexpanded set of cell
+ports.</p>
+<p>Network instances are calls of cells in the design hierarchy. Both
+hierarchical and leaf instances are in the network. Hierarchical
+instances have children instances at the next lower hierarchy level.
+Leaf instances have liberty cells with timing model data. At the top
+of the hierarchy is a top level instance that has instances for the
+top level netlist. If a cell has multiple instances the entire
+sub-tree of hierarchy is repeated in the network. This "unfolded"
+network representation allows optimization to specialize instances of
+a hierarchical block. A "folded" network representation that has only
+one sub-tree for each hierarchical block means that all copies must
+have identical sub-trees, preventing optimizations that specialize the
+contents.</p>
+<p>Pins are a connection between an instance and a net corresponding to a
+port. For bus ports each bit in the bus has a corresponding pin
+(library iterators can be used to find the pins that correspond to all
+of the bits in a bus). Ports on the top level instance also have pins
+in the network that are the top level inputs and outputs.</p>
+<p>Nets connect together a group of pins. Both hierarchical and leaf
+pins are on a net. Nets can connect pins on multiple levels of
+hierarchy.</p>
+<p>The network objects inside the STA are always pointers to instances of
+undefined class objects. The implementation and definition of the
+network objects themselves is never visible inside the STA. The
+network API is implemented as an adapter that performs all operations
+on all network objects. There is one network adapter instance used by
+all STA code. For example, to find the cell of an instance:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Cell</span><span class="w"> </span><span class="o">*</span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">network</span><span class="o">-&gt;</span><span class="n">cell</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
+</code></pre></div>
+<p>The network adapter returns iterators for looping over groups of
+network objects. For example, the following code iterates over the
+children of the top level instance.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Instance</span><span class="w"> </span><span class="o">*</span><span class="n">top_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">network</span><span class="o">-&gt;</span><span class="n">topInstance</span><span class="p">();</span>
+<span class="n">InstanceChildIterator</span><span class="w"> </span><span class="o">*</span><span class="n">child_iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">network</span><span class="o">-&gt;</span><span class="n">childIterator</span><span class="p">(</span><span class="n">top_instance</span><span class="p">);</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">child_iter</span><span class="o">-&gt;</span><span class="n">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Instance</span><span class="w"> </span><span class="o">*</span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">child_iter</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">();</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="p">}</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">child_iter</span><span class="p">;</span>
+</code></pre></div>
+<p>An adapter to a network database is built by defining a class derived
+from the base class <code>Network</code>, or <code>NetworkEdit</code> if it supports incremental
+editing operations. <code>network/ConcreteNetwork.cc</code> is an example of
+a network adapter that supports hierarchy. An example of a network adapter
+for a flat DEF based netlist is in OpenROAD:
+<a href="https://github.com/The-OpenROAD-Project/OpenROAD/blob/master/src/dbSta/include/db_sta/dbNetwork.hh">dbNetwork.hh</a>,
+<a href="https://github.com/The-OpenROAD-Project/OpenROAD/blob/master/src/dbSta/src/dbNetwork.cc">dbNetwork.cc</a>.</p>
+<p>A network adaptor to interface to an external network database must
+define the virtual functions of the <code>Network</code> class (about 45
+functions). The external network objects do not have to use any STA
+network objects as base classes or even be C++ objects. These network
+adapter functions should cast the network object pointers to the
+underlying network object.</p>
+<p>Network adapters built on the <code>Network</code> class must define the following
+functions to find corresponding liberty objects.</p>
+<div class="highlight"><pre><span></span><code><span class="k">virtual</span><span class="w"> </span><span class="n">LibertyLibrary</span><span class="w"> </span><span class="o">*</span><span class="nf">libertyLibrary</span><span class="p">(</span><span class="n">Library</span><span class="w"> </span><span class="o">*</span><span class="n">library</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="k">virtual</span><span class="w"> </span><span class="n">LibertyLibrary</span><span class="w"> </span><span class="o">*</span><span class="nf">makeLibertyLibrary</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span>
+<span class="w">                                           </span><span class="n">LibraryAnalysisPt</span><span class="w"> </span><span class="o">*</span><span class="n">ap</span><span class="p">);</span>
+<span class="k">virtual</span><span class="w"> </span><span class="n">LibertyCell</span><span class="w"> </span><span class="o">*</span><span class="nf">libertyCell</span><span class="p">(</span><span class="n">Cell</span><span class="w"> </span><span class="o">*</span><span class="n">cell</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="k">virtual</span><span class="w"> </span><span class="n">LibertyPort</span><span class="w"> </span><span class="o">*</span><span class="nf">libertyPort</span><span class="p">(</span><span class="n">Port</span><span class="w"> </span><span class="o">*</span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</code></pre></div>
+<p>The <code>NetworkLiberty</code> class provides implementations of the first two
+functions for derived network classes.</p>
+<p>If the network adapter implements the <code>NetworkEdit</code> API the following
+Tcl commands are supported:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">make_cell</span>
+<span class="nv">replace_cell</span>
+<span class="nv">delete_cell</span>
+<span class="nv">make_net</span>
+<span class="nv">delete_net</span>
+<span class="nv">connect_pins</span>
+<span class="nv">disconnect_pins</span>
+</code></pre></div>
+<p>Each of these commands call corresponding functions in <code>network/NetworkEdit.i</code>
+that notify the <code>Sta</code> before and/or after the network operation is
+performed.</p>
+<h2 id="liberty">Liberty<a class="headerlink" href="#liberty" title="Permanent link">&para;</a></h2>
+<p>The liberty timing library reader builds classes that are derived from
+the concrete library classes. In addition to the library, cell and
+port classes, there are classes to represent timing arcs, timing
+models, wireload models, operating conditions, and scale factors for
+derating timing data.</p>
+<p>Timing arcs are grouped into sets of arcs between a pair of cell
+ports. For example, a buffer has two timing arcs between the input
+and output; one for a rising output and another for a falling output.
+The timing arcs are:</p>
+<div class="highlight"><pre><span></span><code>A r -&gt; Z r
+A f -&gt; Z f
+</code></pre></div>
+<p>Since a buffer is non-inverting, the timing arc set is positive-unate.
+Similarly, an inverter has two negative-unate timing arcs.</p>
+<div class="highlight"><pre><span></span><code>A f -&gt; Z r
+A r -&gt; Z f
+</code></pre></div>
+<p>On the other hand, a multiplexor, has a non-unate path from the select
+input to the output because a rise or fall change on the input can
+cause the output to either rise or fall. There are four timing arcs
+in this arc set:</p>
+<div class="highlight"><pre><span></span><code>S f -&gt; Z r
+S f -&gt; Z f
+S r -&gt; Z r
+S r -&gt; Z f
+</code></pre></div>
+<p>The liberty file reader can be customized to read attributes that are
+not used by the STA.</p>
+<h2 id="graph">Graph<a class="headerlink" href="#graph" title="Permanent link">&para;</a></h2>
+<p>The timing graph is the central data structure used by the delay
+calculation and search algorithms. It is annotated with timing arc
+delay values and slews (from SDF or a delay calculator). A forward
+search annotates the graph with arrival times, and a backward search
+annotates required times.</p>
+<p>The graph is composed of vertices and edges. Each pin in the design
+has a vertex. Bidirect pins have two vertices, one for its use as an
+input and another for its use as an output.</p>
+<p>The <code>Network</code> adapter supplies functions to find and set the index
+(unsigned) of a graph vertex corresponding to a pin.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Network</span><span class="o">::</span><span class="n">vertexIndex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Pin</span><span class="w"> </span><span class="o">*</span><span class="n">pin</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="n">Network</span><span class="o">::</span><span class="n">setVertexIndex</span><span class="p">(</span><span class="n">Pin</span><span class="w"> </span><span class="o">*</span><span class="n">pin</span><span class="p">,</span><span class="w"> </span><span class="n">VertexIndex</span><span class="w"> </span><span class="n">index</span><span class="p">);</span>
+</code></pre></div>
+<p>An STL map can be used for the lookup, but it is rather memory hungry
+compared to storing the value in the pin structure.</p>
+<p>A pointer to the vertex used for a bidirectional pin driver is kept in
+a map owned by the <code>Graph</code> class.</p>
+<p>Edges in the graph connect vertices. The pins connected together by a
+net have wire edges between the pin vertices. Timing arc sets in the
+leaf instance timing models have corresponding edges in the graph
+between pins on the instance.</p>
+<h2 id="sdc">SDC<a class="headerlink" href="#sdc" title="Permanent link">&para;</a></h2>
+<p>There is no support for updating SDC when network edits delete
+the instance, pin, or net objects referred to by the SDC.</p>
+<h2 id="delay-calculation">Delay Calculation<a class="headerlink" href="#delay-calculation" title="Permanent link">&para;</a></h2>
+<p>The graph is annotated with arc delay values and slews (also known as
+transition times) by the graph delay calculator or the SDF reader.
+The <code>GraphDelayCalc</code> class seeds slews from SDC constraints and uses a
+breadth first search to visit each gate output pin. The <code>GraphDelayCalc</code>
+then calls a timing arc delay calculator for each timing arc and
+annotates the graph arc delays and vertex slews.</p>
+<p>The delay calculator is architected to support multiple delay
+calculation results. Each result has an associated delay calculation
+analysis point (class <code>DcalcAnalysisPt</code>) that specifies the operating
+conditions and parasitics used to find the delays.</p>
+<p>The <code>ArcDelayCalc</code> class defines the API used by the <code>GraphDelayCalc</code> to
+calculate the gate delay, driver slew, load delays and load slews
+driven by a timing arc. The following delay calculation algorithms
+are defined in the <code>dcalc</code> directory.</p>
+<h3 id="unitdelaycalc"><code>UnitDelayCalc</code><a class="headerlink" href="#unitdelaycalc" title="Permanent link">&para;</a></h3>
+<p>All gate delays are 1. Wire delays are zero.</p>
+<h3 id="lumpedcaparcdelaycalc"><code>LumpedCapArcDelayCalc</code><a class="headerlink" href="#lumpedcaparcdelaycalc" title="Permanent link">&para;</a></h3>
+<p>Liberty table models using lumped capacitive load (RSPF pi model
+total capacitance). Wire delays are zero.</p>
+<h3 id="dmpceffelmoredelaycalc"><code>DmpCeffElmoreDelayCalc</code><a class="headerlink" href="#dmpceffelmoredelaycalc" title="Permanent link">&para;</a></h3>
+<p>RSPF (Driver Pi model with elmore interconnect delays) delay
+calculator. Liberty table models using effective capacitive model as
+described in "Performance Computation for Precharacterized CMOS Gates
+with RC Loads", Florentin Dartu, Noel Menezes and Lawrence Pileggi,
+IEEE Transactions on Computer-Aided Design of Integrated Circuits and
+Systems, Vol 15, No 5, May 1996. Wire delays are computed by applying
+the driver waveform to the RSPF dependent source and solving the RC
+network.</p>
+<h3 id="dmpcefftwopoledelaycalc"><code>DmpCeffTwoPoleDelayCalc</code><a class="headerlink" href="#dmpcefftwopoledelaycalc" title="Permanent link">&para;</a></h3>
+<p>Driver Pi model with two pole interconnect delays and effective
+capacitance as in <code>DmpCeffElmoreDelayCalc</code>.</p>
+<p>Other delay calculators can be interfaced by defining a class based on
+<code>ArcDelayCalc</code> and using the <code>registerDelayCalc</code> function to register it
+for the <code>set_delay_calculator</code> Tcl command. The <code>Sta::setArcDelayCalc</code>
+function can be used to set the delay calculator at run time.</p>
+<h2 id="search">Search<a class="headerlink" href="#search" title="Permanent link">&para;</a></h2>
+<p>A breadth first forward search is used to find arrival times at graph
+vertices. Vertices are annotated with instances of the <code>Event</code> class to
+record signal arrival and required times. As each vertex is visited
+in the forward search its required time is found using If the vertex
+is constrained by setup or hold timing checks, min/max path delay
+exceptions or gated timing checks its required time is found from the
+SDC. The slack is the difference between the vertex required time and
+arrival time. If the vertex is constrained it is scheduled for a
+breadth first backward search to propagate required times to the fanin
+vertices. Separate events (and hence arrival and required times) are
+used for each clock edge and exception set that cause a vertex to
+change.</p>
+<p>Arrival, required and slack calculations are incremental using a level
+based "lazy evaluation" algorithm. The first time arrival/required
+times are found for a vertex the arrival/required times are propagated
+to/from the vertex's logic level. After that no search is required
+for any vertex with a lower/higher logic level when the
+arrival/required time is requested.</p>
+<p>Clock arrival times are found before data arrival times by
+<code>Search::findClkArrivals()</code>. Clock arrival times include insertion delay
+(source latency).</p>
+<p>When an incremental netlist change is made (for instance, changing the
+drive strength of a gate with <code>swap_cell</code>), the STA incrementally updates
+delay calculation, arrival times, required times and slacks. Because
+gate delay is only weakly dependent on slew, the effect of the change
+will diminish in gates downstream of the change. The STA uses a
+tolerance on the gate delays to determine when to stop propagating the
+change. The tolerance is set using the
+<code>Sta::setIncrementalDelayTolerance</code> function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Sta::setIncrementalDelayTolerance</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">tol</span><span class="p">);</span>
+</code></pre></div>
+<p>The tolerance is a percentage (0.0:1.0) change in delay that causes
+downstream delays to be recomputed during incremental delay
+calculation. The default value is 0.0 for maximum accuracy and
+slowest incremental speed. The delay calculation will not recompute
+delays for downstream gates when the change in the gate delay is less
+than the tolerance. Required times must be recomputed backward from
+any gate delay changes, so increasing the tolerance can significantly
+reduce incremental timing run time.</p>
+<h2 id="tcl-interface">Tcl Interface<a class="headerlink" href="#tcl-interface" title="Permanent link">&para;</a></h2>
+<p>The interface from Tcl to C++ is written in a SWIG
+(<a href="https://www.swig.org">www.swig.org</a>) interface description
+(<code>app/StaApp.i</code>). SWIG generates the interface code from the
+description file.</p>
+<p>All commands are written in Tcl. SDC argument parsing and checking is
+done with Tcl procedures that call a SWIG interface function.</p>
+<p>The Tcl <code>sta</code> namespace is used to segregate internal STA functions
+from the global Tcl namespace. All user visible STA and SDC commands
+are exported to the global Tcl namespace.</p>
+<p>A lot of the internal STA state can be accessed from Tcl to make
+debugging easier. Some debugging commands are not intended for casual
+users and live in the <code>sta</code> namespace. Others, such as <code>report_arrival</code>,
+<code>report_required</code>, <code>report_slack</code>, and <code>report_edges</code>, are also exported
+to the global namespace. Examples:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_arrival</span>
+<span class="nv">report_required</span>
+<span class="nv">report_slack</span>
+<span class="nv">report_edges</span>
+<span class="nv">report_slews</span>
+<span class="nv">sta</span><span class="o">::</span>report_level<span class="w"> </span>pin
+<span class="nv">sta</span><span class="o">::</span>report_constant<span class="w"> </span>pin<span class="o">|</span>instance
+<span class="nv">sta</span><span class="o">::</span>report_network
+
+<span class="nv">sta</span><span class="o">::</span>network_pin_count
+<span class="nv">sta</span><span class="o">::</span>network_net_count
+<span class="nv">sta</span><span class="o">::</span>network_leaf_instance_count
+<span class="nv">sta</span><span class="o">::</span>network_leaf_pin_count
+</code></pre></div>
+<p>Additionally, many of the STA network and graph objects themselves are
+exposed to Tcl using SWIG. These Tcl objects have methods for
+inspecting them. Examples of how to use these methods can be found in
+the <code>tcl/Graph.tcl</code> and <code>tcl/Network.tcl</code> files.</p>
+<h2 id="architecture-alternatives-for-using-the-sta-engine">Architecture alternatives for using the STA Engine<a class="headerlink" href="#architecture-alternatives-for-using-the-sta-engine" title="Permanent link">&para;</a></h2>
+<p>There are a number of alternatives for using the STA engine with
+an application.</p>
+<h3 id="sta-with-tcl-application">STA with Tcl application<a class="headerlink" href="#sta-with-tcl-application" title="Permanent link">&para;</a></h3>
+<p>The simplest example is an application written in Tcl. The application
+calls STA commands and primitives defined in the SWIG C++/Tcl
+interface. A stand-alone STA executable is built and a Tcl file that
+defines the application is included as part of the STA by modifying
+<code>CMakeLists.txt</code> to add the Tcl file to <code>STA_TCL_FILES</code> (encoded into
+<code>StaTclInitVar.cc</code>).</p>
+<p>The user calls STA commands to read design files (liberty, verilog,
+SDF, parasitics) to define and link the design. The user defines SDC
+commands or sources an SDC file. The user calls the application's Tcl
+commands.</p>
+<p>A simple gate sizer is an example of an application that can be built
+this way because it has very little computation in the sizer itself.
+STA Tcl commands can be used to find the worst path and upsize gates
+or insert buffers.</p>
+<h3 id="sta-with-c-application">STA with C++ application<a class="headerlink" href="#sta-with-c-application" title="Permanent link">&para;</a></h3>
+<p>The application is built by adding C++ files to the <code>app</code> directory and
+modifying <code>CMakeLists.txt</code> to include them in the executable. Interface
+commands between C++ and Tcl are put in a SWIG <code>.i</code> file in the <code>app</code>
+directory and modifying <code>app/StaApp.i</code> to include them. Tcl commands are
+added to the STA by modifying <code>CMakeLists.txt</code> to add the application's
+Tcl files to <code>STA_TCL_FILES</code>.</p>
+<p>The user calls STA commands to read design files (liberty, verilog,
+SDF, parasitics) to define and link the design. The user defines SDC
+commands or sources an SDC file. The user calls the application's Tcl
+commands.</p>
+<h3 id="c-application-without-native-network-data-structures-linking-sta-libraries">C++ application without native Network data structures linking STA libraries<a class="headerlink" href="#c-application-without-native-network-data-structures-linking-sta-libraries" title="Permanent link">&para;</a></h3>
+<p>The application builds <code>main()</code> and links STA libraries. On startup it
+calls STA initialization functions like <code>staMain()</code> defined in
+<code>app/StaMain.cc</code>.</p>
+<p>The application must link and instantiate a Tcl interpreter to read
+SDC commands like <code>staMain()</code>. The application can choose to expose the Tcl
+interpreter to the user or not. The STA depends on the following data
+that can be read by calling Tcl commands or <code>Sta</code> class member functions.</p>
+<p>Liberty files that define the leaf cells used in the design.
+Read using the <code>read_liberty</code> command or by calling <code>Sta::readLibertyFile()</code>.</p>
+<p>Verilog files that define the netlist. Read using the <code>read_verilog</code>
+command or by calling <code>readVerilogFile()</code> (see <code>verilog/Verilog.i</code>
+<code>read_verilog</code>).</p>
+<p>Link the design using the <code>link_design</code> command or calling <code>Sta::linkDesign()</code>.</p>
+<p>SDC commands to define timing constraints.
+Defined using SDC commands in the Tcl interpreter, or sourced
+from a file using <code>Tcl_Eval(sta::tclInterp())</code>.</p>
+<p>Parasitics used by delay calculation.
+Read using the <code>read_spef</code> command, <code>Sta::readSpef()</code>, or
+using the <code>Sta::Parasitics</code> class API.</p>
+<p>The application calls network editing functions such as
+<code>Sta::deleteInstance()</code> to edit the network.</p>
+<h3 id="c-application-with-native-network-data-structures-linking-sta-libraries">C++ application with native Network data structures linking STA libraries<a class="headerlink" href="#c-application-with-native-network-data-structures-linking-sta-libraries" title="Permanent link">&para;</a></h3>
+<p>The application defines a Network adapter (described above) so that
+the STA can use the native network data structures without duplicating
+them in the STA. The application defines a class built on class <code>Sta</code>
+that defines the <code>makeNetwork()</code> member function to build an instance of
+the network adapter.</p>
+<p>The application builds <code>main()</code> and links STA libraries. On startup it
+calls STA initialization functions like <code>staMain()</code> defined in
+<code>app/StaMain.cc</code>. The application reads the netlist and builds network
+data structures that the STA accesses through the Network adapter.</p>
+<p>The application must link and instantiate a Tcl interpreter to read
+SDC commands like <code>staMain()</code>. The application can choose to expose the Tcl
+interpreter to the user or not. The STA depends on the following data
+that can be read by calling Tcl commands or <code>Sta</code> class member functions.</p>
+<p>Liberty files that define the leaf cells used in the design.
+Read using the <code>read_liberty</code> command or by calling <code>Sta::readLibertyFile</code>.</p>
+<p>SDC commands to define timing constraints.
+Defined using SDC commands in the Tcl interpreter, or sourced
+from a file using <code>sta::sourceTclFile</code>.</p>
+<p>Parasitics used by delay calculation.
+Read using the <code>read_spef</code> command, <code>Sta::readSpef()</code>, or
+using the <code>Sta::Parasitics</code> class API.</p>
+<p>The application calls network editing before/after functions such as
+<code>Sta::deleteInstanceBefore()</code> to notify the <code>Sta</code> of network edits.</p>
+<p>A placement tool is likely to use this pattern to integrate the STA
+because the DEF file includes netlist connectivity.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

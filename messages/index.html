@@ -1,0 +1,4078 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="OpenSTA static timing analyzer">
+      
+      
+      
+        <link rel="canonical" href="https://opensta.readthedocs.io/messages/">
+      
+      
+        <link rel="prev" href="../variables/">
+      
+      
+        <link rel="next" href="../changelog/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Messages - OpenSTA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#messages" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenSTA" class="md-header__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSTA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Messages
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenSTA" class="md-nav__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenSTA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../command-line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcl-interpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl interpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filter-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filter expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/sta-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STA API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/coding-guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/api-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h1>
+<p>This page is generated by <code>etc/FindMessages.tcl</code>.
+Do not edit it by hand; rebuild OpenSTA to regenerate.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Location</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0100</td>
+<td>CmdArgs.tcl:116</td>
+<td>unsupported object type $object_type.</td>
+</tr>
+<tr>
+<td>0101</td>
+<td>CmdArgs.tcl:173</td>
+<td>object '$obj' not found.</td>
+</tr>
+<tr>
+<td>0102</td>
+<td>CmdArgs.tcl:428</td>
+<td>$scene_arg is not the name of a scene.</td>
+</tr>
+<tr>
+<td>0103</td>
+<td>CmdArgs.tcl:434</td>
+<td>-scene keyword required with multi-scene analysis.</td>
+</tr>
+<tr>
+<td>0104</td>
+<td>CmdArgs.tcl:455</td>
+<td>$scene_name is not the name of a scene.</td>
+</tr>
+<tr>
+<td>0105</td>
+<td>CmdArgs.tcl:460</td>
+<td>missing -scene arg.</td>
+</tr>
+<tr>
+<td>0106</td>
+<td>CmdArgs.tcl:478</td>
+<td>$scene_name is not the name of a scene.</td>
+</tr>
+<tr>
+<td>0107</td>
+<td>CmdArgs.tcl:502</td>
+<td>$scene_name is not the name of a scene.</td>
+</tr>
+<tr>
+<td>0108</td>
+<td>CmdArgs.tcl:587</td>
+<td>both -min and -max specified.</td>
+</tr>
+<tr>
+<td>0109</td>
+<td>CmdArgs.tcl:601</td>
+<td>both -min and -max specified.</td>
+</tr>
+<tr>
+<td>0110</td>
+<td>CmdArgs.tcl:628</td>
+<td>only one of -early and -late can be specified.</td>
+</tr>
+<tr>
+<td>0111</td>
+<td>CmdArgs.tcl:634</td>
+<td>-early or -late must be specified.</td>
+</tr>
+<tr>
+<td>0112</td>
+<td>CmdArgs.tcl:641</td>
+<td>both -early and -late specified.</td>
+</tr>
+<tr>
+<td>0113</td>
+<td>CmdArgs.tcl:656</td>
+<td>$arg_name must be a single library.</td>
+</tr>
+<tr>
+<td>0114</td>
+<td>CmdArgs.tcl:662</td>
+<td>$arg_name type '$object_type' is not a library.</td>
+</tr>
+<tr>
+<td>0115</td>
+<td>CmdArgs.tcl:667</td>
+<td>library '$arg' not found.</td>
+</tr>
+<tr>
+<td>0116</td>
+<td>CmdArgs.tcl:684</td>
+<td>$arg_name must be a single lib cell.</td>
+</tr>
+<tr>
+<td>0123</td>
+<td>CmdArgs.tcl:771</td>
+<td>$arg_name must be a single instance.</td>
+</tr>
+<tr>
+<td>0124</td>
+<td>CmdArgs.tcl:777</td>
+<td>$arg_name type '$object_type' is not an instance.</td>
+</tr>
+<tr>
+<td>0125</td>
+<td>CmdArgs.tcl:782</td>
+<td>instance '$arg' not found.</td>
+</tr>
+<tr>
+<td>0126</td>
+<td>CmdArgs.tcl:801</td>
+<td>$arg_name type '$object_type' is not an instance.</td>
+</tr>
+<tr>
+<td>0127</td>
+<td>CmdArgs.tcl:808</td>
+<td>instance '$arg' not found.</td>
+</tr>
+<tr>
+<td>0128</td>
+<td>CmdArgs.tcl:828</td>
+<td>$arg_name type '$object_type' is not a liberty cell.</td>
+</tr>
+<tr>
+<td>0129</td>
+<td>CmdArgs.tcl:835</td>
+<td>liberty cell '$arg' not found.</td>
+</tr>
+<tr>
+<td>0131</td>
+<td>CmdArgs.tcl:896</td>
+<td>$arg_name type '$object_type' is not a pin or port.</td>
+</tr>
+<tr>
+<td>0132</td>
+<td>CmdArgs.tcl:903</td>
+<td>pin '$arg' not found.</td>
+</tr>
+<tr>
+<td>0133</td>
+<td>CmdArgs.tcl:923</td>
+<td>$arg_name type '$object_type' is not a port.</td>
+</tr>
+<tr>
+<td>0134</td>
+<td>CmdArgs.tcl:552</td>
+<td>$scene_arg is not the name of a scene.</td>
+</tr>
+<tr>
+<td>0135</td>
+<td>CmdArgs.tcl:547</td>
+<td>scene object type '$object_type' is not a scene.</td>
+</tr>
+<tr>
+<td>0139</td>
+<td>CmdArgs.tcl:1004</td>
+<td>unsupported object type $object_type.</td>
+</tr>
+<tr>
+<td>0141</td>
+<td>CmdArgs.tcl:1025</td>
+<td>$arg_name '$object_type' is not a net.</td>
+</tr>
+<tr>
+<td>0142</td>
+<td>CmdArgs.tcl:1049</td>
+<td>unsupported object type $object_type.</td>
+</tr>
+<tr>
+<td>0143</td>
+<td>CmdArgs.tcl:1030</td>
+<td>$arg_name '$arg' not found.</td>
+</tr>
+<tr>
+<td>0144</td>
+<td>CmdArgs.tcl:423</td>
+<td>scene object type '$object_type' is not a scene.</td>
+</tr>
+<tr>
+<td>0160</td>
+<td>CmdUtil.tcl:61</td>
+<td>no commands match '$pattern'.</td>
+</tr>
+<tr>
+<td>0161</td>
+<td>CmdUtil.tcl:217</td>
+<td>Usage: $cmd $cmd_args($cmd)</td>
+</tr>
+<tr>
+<td>0162</td>
+<td>CmdUtil.tcl:219</td>
+<td>Usage: $cmd argument error</td>
+</tr>
+<tr>
+<td>0164</td>
+<td>CmdUtil.tcl:400</td>
+<td>unsupported object type $list_type.</td>
+</tr>
+<tr>
+<td>0165</td>
+<td>CmdUtil.tcl:418</td>
+<td>unknown namespace $namespc.</td>
+</tr>
+<tr>
+<td>0166</td>
+<td>CmdUtil.tcl:344</td>
+<td>unknown unit $unit prefix '${arg_prefix}'.</td>
+</tr>
+<tr>
+<td>0167</td>
+<td>CmdUtil.tcl:347</td>
+<td>incorrect unit suffix '$arg_suffix'.</td>
+</tr>
+<tr>
+<td>0168</td>
+<td>Search.tcl:841</td>
+<td>unknown field $field.</td>
+</tr>
+<tr>
+<td>0170</td>
+<td>SdfParse.yy:43</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>0171</td>
+<td>VerilogParse.yy:47</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>0172</td>
+<td>SdfReader.cc:310</td>
+<td>INSTANCE wildcards not supported.</td>
+</tr>
+<tr>
+<td>0173</td>
+<td>SdfReader.cc:627</td>
+<td>NOCHANGE not supported.</td>
+</tr>
+<tr>
+<td>0180</td>
+<td>SdfReader.cc:162</td>
+<td>TIMESCALE units not us, ns, or ps.</td>
+</tr>
+<tr>
+<td>0181</td>
+<td>SdfReader.cc:165</td>
+<td>TIMESCALE multiplier not 1, 10, or 100.</td>
+</tr>
+<tr>
+<td>0182</td>
+<td>SdfReader.cc:187</td>
+<td>pin {} is a hierarchical pin.</td>
+</tr>
+<tr>
+<td>0183</td>
+<td>SdfReader.cc:189</td>
+<td>pin {} is a hierarchical pin.</td>
+</tr>
+<tr>
+<td>0184</td>
+<td>SdfReader.cc:192</td>
+<td>INTERCONNECT from {} to {} not found.</td>
+</tr>
+<tr>
+<td>0185</td>
+<td>SdfReader.cc:198</td>
+<td>pin {} not found.</td>
+</tr>
+<tr>
+<td>0186</td>
+<td>SdfReader.cc:200</td>
+<td>pin {} not found.</td>
+</tr>
+<tr>
+<td>0187</td>
+<td>SdfReader.cc:216</td>
+<td>pin {} not found.</td>
+</tr>
+<tr>
+<td>0188</td>
+<td>SdfReader.cc:269</td>
+<td>{} with no triples.</td>
+</tr>
+<tr>
+<td>0189</td>
+<td>SdfReader.cc:271</td>
+<td>{} with more than 2 triples.</td>
+</tr>
+<tr>
+<td>0190</td>
+<td>SdfReader.cc:299</td>
+<td>instance {} cell {} does not match enclosing cell {}.</td>
+</tr>
+<tr>
+<td>0191</td>
+<td>SdfReader.cc:383</td>
+<td>cell {} IOPATH {} -&gt; {} not found.</td>
+</tr>
+<tr>
+<td>0192</td>
+<td>SdfReader.cc:468</td>
+<td>cell {} {} -&gt; {} {} check not found.</td>
+</tr>
+<tr>
+<td>0193</td>
+<td>SdfReader.cc:290</td>
+<td>INSTANCE wildcards not supported.</td>
+</tr>
+<tr>
+<td>0194</td>
+<td>SdfReader.cc:401</td>
+<td>instance {} port {} not found.</td>
+</tr>
+<tr>
+<td>0195</td>
+<td>SdfReader.cc:977</td>
+<td>instance {} not found.</td>
+</tr>
+<tr>
+<td>0196</td>
+<td>SdfReader.cc:1039</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>0204</td>
+<td>ArnoldiDelayCalc.cc:644</td>
+<td>arnoldi delay calc failed.</td>
+</tr>
+<tr>
+<td>0220</td>
+<td>Link.tcl:53</td>
+<td>missing top_cell_name argument and no current_design.</td>
+</tr>
+<tr>
+<td>0225</td>
+<td>InternalPower.cc:156</td>
+<td>unsupported table order</td>
+</tr>
+<tr>
+<td>0226</td>
+<td>InternalPower.cc:171</td>
+<td>unsupported table axes</td>
+</tr>
+<tr>
+<td>0230</td>
+<td>Network.tcl:59</td>
+<td>instance $instance_path not found.</td>
+</tr>
+<tr>
+<td>0231</td>
+<td>Network.tcl:180</td>
+<td>net $net_path not found.</td>
+</tr>
+<tr>
+<td>0232</td>
+<td>Network.tcl:183</td>
+<td>net $net_path not found.</td>
+</tr>
+<tr>
+<td>0233</td>
+<td>Network.tcl:44</td>
+<td>report_instance -connections is deprecated.</td>
+</tr>
+<tr>
+<td>0234</td>
+<td>Network.tcl:48</td>
+<td>report_instance -verbose is deprecated.</td>
+</tr>
+<tr>
+<td>0239</td>
+<td>TableModel.cc:324</td>
+<td>unsupported table order</td>
+</tr>
+<tr>
+<td>0240</td>
+<td>TableModel.cc:387</td>
+<td>unsupported table axes</td>
+</tr>
+<tr>
+<td>0241</td>
+<td>TableModel.cc:634</td>
+<td>unsupported table order</td>
+</tr>
+<tr>
+<td>0242</td>
+<td>TableModel.cc:652</td>
+<td>unsupported table axes</td>
+</tr>
+<tr>
+<td>0243</td>
+<td>TimingArc.cc:252</td>
+<td>timing arc max index exceeded</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0244</td>
+<td>Clock.cc:421</td>
+<td>generated clock edges size is not three.</td>
+</tr>
+<tr>
+<td>0249</td>
+<td>GatedClk.cc:251</td>
+<td>illegal gated clock active value</td>
+</tr>
+<tr>
+<td>0250</td>
+<td>NetworkEdit.tcl:135</td>
+<td>unsupported object type $object_type.</td>
+</tr>
+<tr>
+<td>0252</td>
+<td>NetworkEdit.tcl:213</td>
+<td>unsupported object type $object_type.</td>
+</tr>
+<tr>
+<td>0253</td>
+<td>NetworkEdit.tcl:235</td>
+<td>unsupported object type $object_type.</td>
+</tr>
+<tr>
+<td>0266</td>
+<td>VertexVisitor.cc:40</td>
+<td>VertexPinCollector::copy not supported.</td>
+</tr>
+<tr>
+<td>0268</td>
+<td>VerilogWriter.cc:263</td>
+<td>unknown port direction</td>
+</tr>
+<tr>
+<td>0276</td>
+<td>Parasitics.tcl:93</td>
+<td>path instance '$path' not found.</td>
+</tr>
+<tr>
+<td>0280</td>
+<td>PathEnum.cc:717</td>
+<td>diversion path not found</td>
+</tr>
+<tr>
+<td>0303</td>
+<td>Power.tcl:256</td>
+<td>activity cannot be set on clock ports.</td>
+</tr>
+<tr>
+<td>0304</td>
+<td>Power.tcl:72</td>
+<td>No liberty libraries have been read.</td>
+</tr>
+<tr>
+<td>0305</td>
+<td>Power.tcl:292</td>
+<td>read_power_activities is deprecated. Use read_vcd.</td>
+</tr>
+<tr>
+<td>0306</td>
+<td>Power.tcl:161</td>
+<td>Specify -activity or -density.</td>
+</tr>
+<tr>
+<td>0307</td>
+<td>Power.tcl:173</td>
+<td>-activity requires a clock to be defined</td>
+</tr>
+<tr>
+<td>0308</td>
+<td>Power.tcl:184</td>
+<td>-clock ignored for -density</td>
+</tr>
+<tr>
+<td>0309</td>
+<td>Power.tcl:192</td>
+<td>duty should be 0.0 to 1.0</td>
+</tr>
+<tr>
+<td>0310</td>
+<td>Power.tcl:207</td>
+<td>activity cannot be set on clock ports.</td>
+</tr>
+<tr>
+<td>0311</td>
+<td>Power.tcl:85</td>
+<td>unknown power report -format $format</td>
+</tr>
+<tr>
+<td>0326</td>
+<td>Sdc.tcl:465</td>
+<td>object '$pattern' is not an instance.</td>
+</tr>
+<tr>
+<td>0327</td>
+<td>Sdc.tcl:520</td>
+<td>object '$pattern' is not an clock.</td>
+</tr>
+<tr>
+<td>0328</td>
+<td>Sdc.tcl:593</td>
+<td>object '$pattern' is not a liberty cell.</td>
+</tr>
+<tr>
+<td>0329</td>
+<td>Sdc.tcl:690</td>
+<td>object '$pattern' is not a liberty pin.</td>
+</tr>
+<tr>
+<td>0330</td>
+<td>Sdc.tcl:780</td>
+<td>object '$pattern' is not a liberty library.</td>
+</tr>
+<tr>
+<td>0331</td>
+<td>Sdc.tcl:889</td>
+<td>object '$pattern' is not a net.</td>
+</tr>
+<tr>
+<td>0332</td>
+<td>Sdc.tcl:991</td>
+<td>object '$pattern' is not a pin.</td>
+</tr>
+<tr>
+<td>0333</td>
+<td>Sdc.tcl:1061</td>
+<td>object '$pattern' is not a port.</td>
+</tr>
+<tr>
+<td>0334</td>
+<td>Sdc.tcl:3412</td>
+<td>object '$cell_name' is not a liberty cell.</td>
+</tr>
+<tr>
+<td>0335</td>
+<td>Sdc.tcl:675</td>
+<td>positional arguments not supported with -of_objects.</td>
+</tr>
+<tr>
+<td>0339</td>
+<td>Util.tcl:607</td>
+<td>tcl version &gt; 8.6 required for zlib support.</td>
+</tr>
+<tr>
+<td>0340</td>
+<td>Util.tcl:603</td>
+<td>cannot open '$filename'.</td>
+</tr>
+<tr>
+<td>0341</td>
+<td>Util.tcl:654</td>
+<td>incomplete command at end of file.</td>
+</tr>
+<tr>
+<td>0342</td>
+<td>Sdc.tcl:157</td>
+<td>hierarchy separator must be one of '$sdc_dividers'.</td>
+</tr>
+<tr>
+<td>0343</td>
+<td>Sdc.tcl:224</td>
+<td>unknown unit $unit prefix '${arg_prefix}'.</td>
+</tr>
+<tr>
+<td>0344</td>
+<td>Sdc.tcl:243</td>
+<td>unknown $unit prefix '$prefix'.</td>
+</tr>
+<tr>
+<td>0345</td>
+<td>Sdc.tcl:249</td>
+<td>$unit scale [format %.0e $scale] does not match library scale [format %.0e $unit_scale].</td>
+</tr>
+<tr>
+<td>0346</td>
+<td>Sdc.tcl:345</td>
+<td>only one of -cells, -data_pins, -clock_pins, -async_pins, -output_pins are suppported.</td>
+</tr>
+<tr>
+<td>0347</td>
+<td>Sdc.tcl:389</td>
+<td>current_design for other than top cell not supported.</td>
+</tr>
+<tr>
+<td>0348</td>
+<td>Sdc.tcl:439</td>
+<td>patterns argument not supported with -of_objects.</td>
+</tr>
+<tr>
+<td>0349</td>
+<td>Sdc.tcl:478</td>
+<td>instance '$pattern' not found.</td>
+</tr>
+<tr>
+<td>0351</td>
+<td>Sdc.tcl:529</td>
+<td>clock '$pattern' not found.</td>
+</tr>
+<tr>
+<td>0352</td>
+<td>Sdc.tcl:568</td>
+<td>positional arguments not supported with -of_objects.</td>
+</tr>
+<tr>
+<td>0353</td>
+<td>Sdc.tcl:605</td>
+<td>library '$lib_name' not found.</td>
+</tr>
+<tr>
+<td>0354</td>
+<td>Sdc.tcl:617</td>
+<td>cell '$cell_pattern' not found.</td>
+</tr>
+<tr>
+<td>0355</td>
+<td>Sdc.tcl:703</td>
+<td>library/cell/port '$pattern' not found.</td>
+</tr>
+<tr>
+<td>0356</td>
+<td>Sdc.tcl:726</td>
+<td>port '$port_pattern' not found.</td>
+</tr>
+<tr>
+<td>0357</td>
+<td>Sdc.tcl:731</td>
+<td>library '$lib_name' not found.</td>
+</tr>
+<tr>
+<td>0358</td>
+<td>Sdc.tcl:746</td>
+<td>-nocase ignored without -regexp.</td>
+</tr>
+<tr>
+<td>0359</td>
+<td>Sdc.tcl:789</td>
+<td>library '$pattern' not found.</td>
+</tr>
+<tr>
+<td>0360</td>
+<td>Sdc.tcl:870</td>
+<td>patterns argument not supported with -of_objects.</td>
+</tr>
+<tr>
+<td>0361</td>
+<td>Sdc.tcl:900</td>
+<td>net '$pattern' not found.</td>
+</tr>
+<tr>
+<td>0362</td>
+<td>Sdc.tcl:949</td>
+<td>patterns argument not supported with -of_objects.</td>
+</tr>
+<tr>
+<td>0363</td>
+<td>Sdc.tcl:1007</td>
+<td>pin '$pattern' not found.</td>
+</tr>
+<tr>
+<td>0365</td>
+<td>Sdc.tcl:1050</td>
+<td>patterns argument not supported with -of_objects.</td>
+</tr>
+<tr>
+<td>0366</td>
+<td>Sdc.tcl:1070</td>
+<td>port '$pattern' not found.</td>
+</tr>
+<tr>
+<td>0368</td>
+<td>Sdc.tcl:1138</td>
+<td>-add requires -name.</td>
+</tr>
+<tr>
+<td>0369</td>
+<td>Sdc.tcl:1143</td>
+<td>-name or port_pin_list must be specified.</td>
+</tr>
+<tr>
+<td>0370</td>
+<td>Sdc.tcl:1151</td>
+<td>missing -period argument.</td>
+</tr>
+<tr>
+<td>0371</td>
+<td>Sdc.tcl:1157</td>
+<td>-waveform edge_list must have an even number of edge times.</td>
+</tr>
+<tr>
+<td>0372</td>
+<td>Sdc.tcl:1166</td>
+<td>non-increasing clock -waveform edge times.</td>
+</tr>
+<tr>
+<td>0373</td>
+<td>Sdc.tcl:1169</td>
+<td>-waveform time greater than two periods.</td>
+</tr>
+<tr>
+<td>0374</td>
+<td>Sdc.tcl:1285</td>
+<td>empty ports/pins/nets argument.</td>
+</tr>
+<tr>
+<td>0375</td>
+<td>Sdc.tcl:1293</td>
+<td>-add requires -name.</td>
+</tr>
+<tr>
+<td>0376</td>
+<td>Sdc.tcl:1298</td>
+<td>name or port_pin_list must be specified.</td>
+</tr>
+<tr>
+<td>0377</td>
+<td>Sdc.tcl:1305</td>
+<td>missing -source argument.</td>
+</tr>
+<tr>
+<td>0378</td>
+<td>Sdc.tcl:1320</td>
+<td>-master_clock argument empty.</td>
+</tr>
+<tr>
+<td>0379</td>
+<td>Sdc.tcl:1323</td>
+<td>-add requireds -master_clock.</td>
+</tr>
+<tr>
+<td>0380</td>
+<td>Sdc.tcl:1327</td>
+<td>-multiply_by and -divide_by options are exclusive.</td>
+</tr>
+<tr>
+<td>0381</td>
+<td>Sdc.tcl:1331</td>
+<td>-divide_by is not an integer greater than one.</td>
+</tr>
+<tr>
+<td>0382</td>
+<td>Sdc.tcl:1334</td>
+<td>-combinational implies -divide_by 1.</td>
+</tr>
+<tr>
+<td>0383</td>
+<td>Sdc.tcl:1339</td>
+<td>-multiply_by is not an integer greater than one.</td>
+</tr>
+<tr>
+<td>0384</td>
+<td>Sdc.tcl:1345</td>
+<td>-duty_cycle is not a float between 0 and 100.</td>
+</tr>
+<tr>
+<td>0385</td>
+<td>Sdc.tcl:1351</td>
+<td>-edges only supported for three edges.</td>
+</tr>
+<tr>
+<td>0386</td>
+<td>Sdc.tcl:1357</td>
+<td>edges times are not monotonically increasing.</td>
+</tr>
+<tr>
+<td>0387</td>
+<td>Sdc.tcl:1366</td>
+<td>-edge_shift length does not match -edges length.</td>
+</tr>
+<tr>
+<td>0388</td>
+<td>Sdc.tcl:1372</td>
+<td>missing -multiply_by, -divide_by, -combinational or -edges argument.</td>
+</tr>
+<tr>
+<td>0389</td>
+<td>Sdc.tcl:1380</td>
+<td>cannot specify -invert without -multiply_by, -divide_by or -combinational.</td>
+</tr>
+<tr>
+<td>0390</td>
+<td>Sdc.tcl:1386</td>
+<td>-duty_cycle requires -multiply_by value.</td>
+</tr>
+<tr>
+<td>0391</td>
+<td>Sdc.tcl:1467</td>
+<td>group_path command failed.</td>
+</tr>
+<tr>
+<td>0392</td>
+<td>Sdc.tcl:1474</td>
+<td>positional arguments not supported.</td>
+</tr>
+<tr>
+<td>0393</td>
+<td>Sdc.tcl:1478</td>
+<td>-from, -through or -to required.</td>
+</tr>
+<tr>
+<td>0394</td>
+<td>Sdc.tcl:1484</td>
+<td>-name and -default are mutually exclusive.</td>
+</tr>
+<tr>
+<td>0395</td>
+<td>Sdc.tcl:1486</td>
+<td>-name or -default option is required.</td>
+</tr>
+<tr>
+<td>0396</td>
+<td>Sdc.tcl:1540</td>
+<td>cannot specify both -high and -low.</td>
+</tr>
+<tr>
+<td>0397</td>
+<td>Sdc.tcl:1548</td>
+<td>missing -setup or -hold argument.</td>
+</tr>
+<tr>
+<td>0398</td>
+<td>Sdc.tcl:1562</td>
+<td>-high and -low only permitted for pins and instances.</td>
+</tr>
+<tr>
+<td>0399</td>
+<td>Sdc.tcl:1569</td>
+<td>-high and -low only permitted for pins and instances.</td>
+</tr>
+<tr>
+<td>0400</td>
+<td>Sdc.tcl:1621</td>
+<td>one of -logically_exclusive, -physically_exclusive or -asynchronous is required.</td>
+</tr>
+<tr>
+<td>0401</td>
+<td>Sdc.tcl:1624</td>
+<td>the keywords -logically_exclusive, -physically_exclusive and -asynchronous are mutually exclusive.</td>
+</tr>
+<tr>
+<td>0402</td>
+<td>Sdc.tcl:1643</td>
+<td>unknown keyword argument $arg.</td>
+</tr>
+<tr>
+<td>0403</td>
+<td>Sdc.tcl:1645</td>
+<td>extra positional argument $arg.</td>
+</tr>
+<tr>
+<td>0404</td>
+<td>Sdc.tcl:1682</td>
+<td>the -all and -name options are mutually exclusive.</td>
+</tr>
+<tr>
+<td>0405</td>
+<td>Sdc.tcl:1685</td>
+<td>either -all or -name options must be specified.</td>
+</tr>
+<tr>
+<td>0406</td>
+<td>Sdc.tcl:1693</td>
+<td>one of -logically_exclusive, -physically_exclusive or -asynchronous is required.</td>
+</tr>
+<tr>
+<td>0407</td>
+<td>Sdc.tcl:1696</td>
+<td>the keywords -logically_exclusive, -physically_exclusive and -asynchronous are mutually exclusive.</td>
+</tr>
+<tr>
+<td>0408</td>
+<td>Sdc.tcl:1755</td>
+<td>-clock ignored for clock objects.</td>
+</tr>
+<tr>
+<td>0409</td>
+<td>Sdc.tcl:1769</td>
+<td>-source '[get_full_name $pin]' is not a clock pin.</td>
+</tr>
+<tr>
+<td>0410</td>
+<td>Sdc.tcl:1776</td>
+<td>-early/-late is only allowed with -source.</td>
+</tr>
+<tr>
+<td>0411</td>
+<td>Sdc.tcl:1811</td>
+<td>-clock ignored for clock objects.</td>
+</tr>
+<tr>
+<td>0412</td>
+<td>Sdc.tcl:1823</td>
+<td>-source '[$pin path_name]' is not a clock pin.</td>
+</tr>
+<tr>
+<td>0413</td>
+<td>Sdc.tcl:1866</td>
+<td>set_sense -type data not supported.</td>
+</tr>
+<tr>
+<td>0414</td>
+<td>Sdc.tcl:1870</td>
+<td>set_sense -type clock|data</td>
+</tr>
+<tr>
+<td>0415</td>
+<td>Sdc.tcl:1890</td>
+<td>set_clock_sense is deprecated as of SDC 2.1. Use set_sense -type clock.</td>
+</tr>
+<tr>
+<td>0416</td>
+<td>Sdc.tcl:1902</td>
+<td>-pulse argument not supported.</td>
+</tr>
+<tr>
+<td>0417</td>
+<td>Sdc.tcl:1911</td>
+<td>-positive, -negative, -stop_propagation and -pulse are mutually exclusive.</td>
+</tr>
+<tr>
+<td>0418</td>
+<td>Sdc.tcl:1924</td>
+<td>hierarchical pin '[get_full_name $pin]' not supported.</td>
+</tr>
+<tr>
+<td>0419</td>
+<td>Sdc.tcl:1953</td>
+<td>transition time can not be specified for virtual clocks.</td>
+</tr>
+<tr>
+<td>0420</td>
+<td>Sdc.tcl:2014</td>
+<td>missing uncertainty value.</td>
+</tr>
+<tr>
+<td>0421</td>
+<td>Sdc.tcl:2062</td>
+<td>-from/-to must be used together.</td>
+</tr>
+<tr>
+<td>0422</td>
+<td>Sdc.tcl:2082</td>
+<td>-rise, -fall options not allowed for single clock uncertainty.</td>
+</tr>
+<tr>
+<td>0423</td>
+<td>Sdc.tcl:2155</td>
+<td>-from/-to must be used together.</td>
+</tr>
+<tr>
+<td>0424</td>
+<td>Sdc.tcl:2175</td>
+<td>-rise, -fall options not allowed for single clock uncertainty.</td>
+</tr>
+<tr>
+<td>0425</td>
+<td>Sdc.tcl:2223</td>
+<td>missing -from, -rise_from or -fall_from argument.</td>
+</tr>
+<tr>
+<td>0426</td>
+<td>Sdc.tcl:2235</td>
+<td>missing -to, -rise_to or -fall_to argument.</td>
+</tr>
+<tr>
+<td>0427</td>
+<td>Sdc.tcl:2289</td>
+<td>missing -from, -rise_from or -fall_from argument.</td>
+</tr>
+<tr>
+<td>0428</td>
+<td>Sdc.tcl:2301</td>
+<td>missing -to, -rise_to or -fall_to argument.</td>
+</tr>
+<tr>
+<td>0429</td>
+<td>Sdc.tcl:2379</td>
+<td>-from/-to keywords ignored for lib_pin, port and pin arguments.</td>
+</tr>
+<tr>
+<td>0430</td>
+<td>Sdc.tcl:2409</td>
+<td>-from/-to hierarchical instance not supported.</td>
+</tr>
+<tr>
+<td>0431</td>
+<td>Sdc.tcl:2441</td>
+<td>pin '[get_full_name $inst]${hierarchy_separator}${port_name}' not found.</td>
+</tr>
+<tr>
+<td>0432</td>
+<td>Sdc.tcl:2498</td>
+<td>pin '[get_name $cell]${hierarchy_separator}${port_name}' not found.</td>
+</tr>
+<tr>
+<td>0434</td>
+<td>Sdc.tcl:2538</td>
+<td>-from/-to keywords ignored for lib_pin, port and pin arguments.</td>
+</tr>
+<tr>
+<td>0435</td>
+<td>Sdc.tcl:2590</td>
+<td>-from/-to hierarchical instance not supported.</td>
+</tr>
+<tr>
+<td>0436</td>
+<td>Sdc.tcl:2657</td>
+<td>'$args' ignored.</td>
+</tr>
+<tr>
+<td>0437</td>
+<td>Sdc.tcl:2661</td>
+<td>-from, -through or -to required.</td>
+</tr>
+<tr>
+<td>0438</td>
+<td>Sdc.tcl:2774</td>
+<td>-source_latency_included ignored with -reference_pin.</td>
+</tr>
+<tr>
+<td>0439</td>
+<td>Sdc.tcl:2777</td>
+<td>-network_latency_included ignored with -reference_pin.</td>
+</tr>
+<tr>
+<td>0440</td>
+<td>Sdc.tcl:2796</td>
+<td>$cmd not allowed on [pin_direction $pin] port '[get_full_name $pin]'.</td>
+</tr>
+<tr>
+<td>0441</td>
+<td>Sdc.tcl:2798</td>
+<td>$cmd relative to a clock defined on the same port/pin not allowed.</td>
+</tr>
+<tr>
+<td>0442</td>
+<td>Sdc.tcl:2866</td>
+<td>missing delay argument.</td>
+</tr>
+<tr>
+<td>0443</td>
+<td>Sdc.tcl:2872</td>
+<td>'$args' ignored.</td>
+</tr>
+<tr>
+<td>0444</td>
+<td>Sdc.tcl:3094</td>
+<td>missing path multiplier argument.</td>
+</tr>
+<tr>
+<td>0445</td>
+<td>Sdc.tcl:3099</td>
+<td>'$args' ignored.</td>
+</tr>
+<tr>
+<td>0446</td>
+<td>Sdc.tcl:3106</td>
+<td>cannot use -start with -end.</td>
+</tr>
+<tr>
+<td>0447</td>
+<td>Sdc.tcl:3162</td>
+<td>$cmd command failed.</td>
+</tr>
+<tr>
+<td>0448</td>
+<td>Sdc.tcl:3169</td>
+<td>positional arguments not supported.</td>
+</tr>
+<tr>
+<td>0449</td>
+<td>Sdc.tcl:3173</td>
+<td>-from, -through or -to required.</td>
+</tr>
+<tr>
+<td>0450</td>
+<td>Sdc.tcl:3263</td>
+<td>virtual clock [get_name $clk] can not be propagated.</td>
+</tr>
+<tr>
+<td>0451</td>
+<td>Sdc.tcl:3315</td>
+<td>value must be 0, zero, 1, one, rise, rising, fall, or falling.</td>
+</tr>
+<tr>
+<td>0452</td>
+<td>Sdc.tcl:3406</td>
+<td>cell '$lib_name:$cell_name' not found.</td>
+</tr>
+<tr>
+<td>0453</td>
+<td>Sdc.tcl:3419</td>
+<td>'$cell_name' not found.</td>
+</tr>
+<tr>
+<td>0454</td>
+<td>Sdc.tcl:3423</td>
+<td>missing -lib_cell argument.</td>
+</tr>
+<tr>
+<td>0455</td>
+<td>Sdc.tcl:3431</td>
+<td>port '$to_port_name' not found.</td>
+</tr>
+<tr>
+<td>0456</td>
+<td>Sdc.tcl:3443</td>
+<td>-pin argument required for cells with multiple outputs.</td>
+</tr>
+<tr>
+<td>0457</td>
+<td>Sdc.tcl:3458</td>
+<td>port '$from_port_name' not found.</td>
+</tr>
+<tr>
+<td>0458</td>
+<td>Sdc.tcl:3476</td>
+<td>-multiply_by ignored.</td>
+</tr>
+<tr>
+<td>0459</td>
+<td>Sdc.tcl:3479</td>
+<td>-dont_scale ignored.</td>
+</tr>
+<tr>
+<td>0460</td>
+<td>Sdc.tcl:3482</td>
+<td>-no_design_rule ignored.</td>
+</tr>
+<tr>
+<td>0461</td>
+<td>Sdc.tcl:3506</td>
+<td>set_fanout_load not supported.</td>
+</tr>
+<tr>
+<td>0462</td>
+<td>Sdc.tcl:3535</td>
+<td>-clock not supported.</td>
+</tr>
+<tr>
+<td>0463</td>
+<td>Sdc.tcl:3538</td>
+<td>-clock_fall not supported.</td>
+</tr>
+<tr>
+<td>0464</td>
+<td>Sdc.tcl:3608</td>
+<td>-pin_load not allowed for net objects.</td>
+</tr>
+<tr>
+<td>0465</td>
+<td>Sdc.tcl:3611</td>
+<td>-wire_load not allowed for net objects.</td>
+</tr>
+<tr>
+<td>0466</td>
+<td>Sdc.tcl:3614</td>
+<td>-rise/-fall not allowed for net objects.</td>
+</tr>
+<tr>
+<td>0467</td>
+<td>Sdc.tcl:3722</td>
+<td>port '[get_name $port]' is not an input.</td>
+</tr>
+<tr>
+<td>0468</td>
+<td>Sdc.tcl:3779</td>
+<td>-data_path, -clock_path, -rise, -fall ignored for ports and designs.</td>
+</tr>
+<tr>
+<td>0469</td>
+<td>Sdc.tcl:3873</td>
+<td>derating factor greater than 2.0.</td>
+</tr>
+<tr>
+<td>0470</td>
+<td>Sdc.tcl:3910</td>
+<td>-cell_delay and -cell_check flags ignored for net objects.</td>
+</tr>
+<tr>
+<td>0471</td>
+<td>Sdc.tcl:3981</td>
+<td>no valid objects specified for $key.</td>
+</tr>
+<tr>
+<td>0472</td>
+<td>Sdc.tcl:4014</td>
+<td>no valid objects specified for $key</td>
+</tr>
+<tr>
+<td>0473</td>
+<td>Sdc.tcl:4063</td>
+<td>no valid objects specified for $key.</td>
+</tr>
+<tr>
+<td>0474</td>
+<td>Sdc.tcl:4144</td>
+<td>operating condition '$op_cond_name' not found.</td>
+</tr>
+<tr>
+<td>0475</td>
+<td>Sdc.tcl:4162</td>
+<td>operating condition '$op_cond_name' not found.</td>
+</tr>
+<tr>
+<td>0476</td>
+<td>Sdc.tcl:4176</td>
+<td>-analysis_type must be single, bc_wc or on_chip_variation.</td>
+</tr>
+<tr>
+<td>0477</td>
+<td>Sdc.tcl:4189</td>
+<td>set_wire_load_min_block_size not supported.</td>
+</tr>
+<tr>
+<td>0478</td>
+<td>Sdc.tcl:4203</td>
+<td>mode must be top, enclosed or segmented.</td>
+</tr>
+<tr>
+<td>0479</td>
+<td>Sdc.tcl:4224</td>
+<td>no wire load model specified.</td>
+</tr>
+<tr>
+<td>0480</td>
+<td>Sdc.tcl:4246</td>
+<td>wire load model '$model_name' not found.</td>
+</tr>
+<tr>
+<td>0481</td>
+<td>Sdc.tcl:4291</td>
+<td>wire load selection group '$selection_name' not found.</td>
+</tr>
+<tr>
+<td>0482</td>
+<td>Sta.tcl:109</td>
+<td>define_corners must be called before read_liberty.</td>
+</tr>
+<tr>
+<td>0483</td>
+<td>Sta.tcl:78</td>
+<td>-liberty or -liberty_min and -liberty_max are required arguments.</td>
+</tr>
+<tr>
+<td>0484</td>
+<td>Sta.tcl:92</td>
+<td>-spef_min and -spef_max are required arguments.</td>
+</tr>
+<tr>
+<td>0486</td>
+<td>Sdc.tcl:3593</td>
+<td>-subtract_pin_load not allowed for port objects.</td>
+</tr>
+<tr>
+<td>0500</td>
+<td>Sdc.tcl:4472</td>
+<td>no default operating conditions found.</td>
+</tr>
+<tr>
+<td>0501</td>
+<td>Sdc.tcl:227</td>
+<td>incorrect unit suffix '$arg_suffix'.</td>
+</tr>
+<tr>
+<td>0502</td>
+<td>Search.tcl:209</td>
+<td>$cmd -endpoint_count is deprecated. Use -endpoint_path_count instead.</td>
+</tr>
+<tr>
+<td>0503</td>
+<td>Search.tcl:222</td>
+<td>$cmd -group_count is deprecated. Use -group_path_count instead.</td>
+</tr>
+<tr>
+<td>0510</td>
+<td>Search.tcl:183</td>
+<td>$cmd -path_delay must be min, min_rise, min_fall, max, max_rise, max_fall or min_max.</td>
+</tr>
+<tr>
+<td>0511</td>
+<td>Search.tcl:193</td>
+<td>$cmd command failed.</td>
+</tr>
+<tr>
+<td>0512</td>
+<td>Search.tcl:216</td>
+<td>-endpoint_path_count must be a positive integer.</td>
+</tr>
+<tr>
+<td>0513</td>
+<td>Search.tcl:230</td>
+<td>-group_path_count must be &gt;= 1.</td>
+</tr>
+<tr>
+<td>0514</td>
+<td>Search.tcl:261</td>
+<td>'$arg' is not a known keyword or flag.</td>
+</tr>
+<tr>
+<td>0515</td>
+<td>Search.tcl:263</td>
+<td>positional arguments not supported.</td>
+</tr>
+<tr>
+<td>0516</td>
+<td>Search.tcl:299</td>
+<td>report_clock_skew -setup and -hold are mutually exclusive options.</td>
+</tr>
+<tr>
+<td>0520</td>
+<td>Search.tcl:567</td>
+<td>analysis type single is not consistent with doing both setup/max and hold/min checks.</td>
+</tr>
+<tr>
+<td>0521</td>
+<td>Search.tcl:573</td>
+<td>positional arguments not supported.</td>
+</tr>
+<tr>
+<td>0522</td>
+<td>Search.tcl:738</td>
+<td>-min and -max cannot both be specified.</td>
+</tr>
+<tr>
+<td>0523</td>
+<td>Search.tcl:758</td>
+<td>pin '$pin_arg' is hierarchical.</td>
+</tr>
+<tr>
+<td>0524</td>
+<td>Search.tcl:811</td>
+<td>-format $format not recognized.</td>
+</tr>
+<tr>
+<td>0526</td>
+<td>Search.tcl:1017</td>
+<td>specify one of -setup and -hold.</td>
+</tr>
+<tr>
+<td>0527</td>
+<td>Search.tcl:1097</td>
+<td>unknown path group '$name'.</td>
+</tr>
+<tr>
+<td>0540</td>
+<td>Sta.tcl:377</td>
+<td>-from/-to arguments not supported with -of_objects.</td>
+</tr>
+<tr>
+<td>0541</td>
+<td>Sta.tcl:241</td>
+<td>No load pins connected to net [get_full_name $net].</td>
+</tr>
+<tr>
+<td>0560</td>
+<td>Util.tcl:52</td>
+<td>$cmd $key missing value.</td>
+</tr>
+<tr>
+<td>0561</td>
+<td>Util.tcl:69</td>
+<td>$cmd $key missing value.</td>
+</tr>
+<tr>
+<td>0562</td>
+<td>Util.tcl:79</td>
+<td>$cmd $arg is not a known keyword or flag.</td>
+</tr>
+<tr>
+<td>0563</td>
+<td>Util.tcl:101</td>
+<td>$cmd $arg is not a known keyword or flag.</td>
+</tr>
+<tr>
+<td>0564</td>
+<td>Util.tcl:481</td>
+<td>$cmd positional arguments not supported.</td>
+</tr>
+<tr>
+<td>0565</td>
+<td>Util.tcl:487</td>
+<td>$cmd requires one positional argument.</td>
+</tr>
+<tr>
+<td>0566</td>
+<td>Util.tcl:494</td>
+<td>$cmd requires zero or one positional arguments.</td>
+</tr>
+<tr>
+<td>0567</td>
+<td>Util.tcl:500</td>
+<td>$cmd requires two positional arguments.</td>
+</tr>
+<tr>
+<td>0568</td>
+<td>Util.tcl:507</td>
+<td>$cmd requires one or two positional arguments.</td>
+</tr>
+<tr>
+<td>0569</td>
+<td>Util.tcl:513</td>
+<td>$cmd requires three positional arguments.</td>
+</tr>
+<tr>
+<td>0570</td>
+<td>Util.tcl:519</td>
+<td>$cmd requires four positional arguments.</td>
+</tr>
+<tr>
+<td>0571</td>
+<td>Util.tcl:527</td>
+<td>$cmd_arg '$arg' is not a float.</td>
+</tr>
+<tr>
+<td>0572</td>
+<td>Util.tcl:533</td>
+<td>$cmd_arg '$arg' is not a positive float.</td>
+</tr>
+<tr>
+<td>0573</td>
+<td>Util.tcl:539</td>
+<td>$cmd_arg '$arg' is not an integer.</td>
+</tr>
+<tr>
+<td>0574</td>
+<td>Util.tcl:545</td>
+<td>$cmd_arg '$arg' is not a positive integer.</td>
+</tr>
+<tr>
+<td>0575</td>
+<td>Util.tcl:551</td>
+<td>$cmd_arg '$arg' is not an integer greater than or equal to one.</td>
+</tr>
+<tr>
+<td>0576</td>
+<td>Util.tcl:557</td>
+<td>$cmd_arg '$arg' is not between 0 and 100.</td>
+</tr>
+<tr>
+<td>0577</td>
+<td>Sta.tcl:112</td>
+<td>define_corners must define at least one corner.</td>
+</tr>
+<tr>
+<td>0578</td>
+<td>Sta.tcl:130</td>
+<td>$scene_name is not the name of a scene.</td>
+</tr>
+<tr>
+<td>0579</td>
+<td>Sta.tcl:159</td>
+<td>$mode_name is not the name of a mode.</td>
+</tr>
+<tr>
+<td>0590</td>
+<td>Variables.tcl:45</td>
+<td>sta_report_default_digits must be a positive integer.</td>
+</tr>
+<tr>
+<td>0591</td>
+<td>Variables.tcl:70</td>
+<td>sta_crpr_mode must be pin or transition.</td>
+</tr>
+<tr>
+<td>0592</td>
+<td>Variables.tcl:261</td>
+<td>$var_name value must be 0 or 1.</td>
+</tr>
+<tr>
+<td>0593</td>
+<td>Variables.tcl:169</td>
+<td>sta_pocv_mode must be scalar, normal, or skew_normal.</td>
+</tr>
+<tr>
+<td>0594</td>
+<td>Variables.tcl:187</td>
+<td>sta_pocv_quantile must be a positive floating point number.</td>
+</tr>
+<tr>
+<td>0616</td>
+<td>Levelize.cc:516</td>
+<td>maximum logic level exceeded</td>
+</tr>
+<tr>
+<td>0617</td>
+<td>Levelize.cc:666</td>
+<td>level check failed {} {} -&gt; {} {}</td>
+</tr>
+<tr>
+<td>0618</td>
+<td>Levelize.cc:647</td>
+<td>maximum logic level exceeded</td>
+</tr>
+<tr>
+<td>0620</td>
+<td>Sdf.tcl:68</td>
+<td>-cond_use must be min, max or min_max.</td>
+</tr>
+<tr>
+<td>0621</td>
+<td>Sdf.tcl:73</td>
+<td>-cond_use min_max cannot be used with analysis type single.</td>
+</tr>
+<tr>
+<td>0623</td>
+<td>Sdf.tcl:245</td>
+<td>SDF -divider must be / or .</td>
+</tr>
+<tr>
+<td>0624</td>
+<td>Sdf.tcl:130</td>
+<td>-list_annotated is deprecated. Use -report_annotated.</td>
+</tr>
+<tr>
+<td>0626</td>
+<td>Sdf.tcl:203</td>
+<td>-list_annotated is deprecated. Use -report_annotated.</td>
+</tr>
+<tr>
+<td>0627</td>
+<td>Sdf.tcl:209</td>
+<td>-list_not_annotated is deprecated. Use -report_unannotated.</td>
+</tr>
+<tr>
+<td>0800</td>
+<td>VcdParse.cc:107</td>
+<td>unknown vcd command.</td>
+</tr>
+<tr>
+<td>0801</td>
+<td>VcdParse.cc:141</td>
+<td>timescale syntax error.</td>
+</tr>
+<tr>
+<td>0802</td>
+<td>VcdParse.cc:156</td>
+<td>Unknown timescale unit.</td>
+</tr>
+<tr>
+<td>0804</td>
+<td>VcdParse.cc:203</td>
+<td>Variable syntax error.</td>
+</tr>
+<tr>
+<td>0805</td>
+<td>VcdParse.cc:94</td>
+<td>invalid time {}</td>
+</tr>
+<tr>
+<td>0806</td>
+<td>VcdParse.cc:97</td>
+<td>time out of range {}</td>
+</tr>
+<tr>
+<td>0807</td>
+<td>VcdParse.cc:245</td>
+<td>unknown variable {}</td>
+</tr>
+<tr>
+<td>0808</td>
+<td>VcdParse.cc:238</td>
+<td>unknown variable {}</td>
+</tr>
+<tr>
+<td>0809</td>
+<td>VcdParse.cc:186</td>
+<td>Unknown variable type {}.</td>
+</tr>
+<tr>
+<td>0820</td>
+<td>VcdReader.cc:445</td>
+<td>No clocks have been defined.</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>ConcreteNetwork.cc:2002</td>
+<td>cell type {} can not be linked.</td>
+</tr>
+<tr>
+<td>1010</td>
+<td>CycleAccting.cc:96</td>
+<td>No common period was found between clocks {} and {}.</td>
+</tr>
+<tr>
+<td>1040</td>
+<td>DmpCeff.cc:1020</td>
+<td>parasitic Pi model has NaNs.</td>
+</tr>
+<tr>
+<td>1060</td>
+<td>Genclks.cc:242</td>
+<td>no master clock found for generated clock {}.</td>
+</tr>
+<tr>
+<td>1100</td>
+<td>GraphDelayCalc.cc:588</td>
+<td>port not found in cell.</td>
+</tr>
+<tr>
+<td>1101</td>
+<td>GraphDelayCalc.cc:910</td>
+<td>mult_drvr missing load.</td>
+</tr>
+<tr>
+<td>1110</td>
+<td>Liberty.cc:749</td>
+<td>cell {}/{} port {} not found in cell {}/{}.</td>
+</tr>
+<tr>
+<td>1111</td>
+<td>Liberty.cc:777</td>
+<td>cell {}/{} {} -&gt; {} timing group {} not found in cell {}/{}.</td>
+</tr>
+<tr>
+<td>1112</td>
+<td>Liberty.cc:796</td>
+<td>Liberty cell {}/{} for corner {}/{} not found.</td>
+</tr>
+<tr>
+<td>1113</td>
+<td>Liberty.cc:1722</td>
+<td>cell {}/{} {} -&gt; {} latch enable {}<em>edge is inconsistent with {} -&gt; {} setup</em>{} check.</td>
+</tr>
+<tr>
+<td>1114</td>
+<td>Liberty.cc:1658</td>
+<td>cell {}/{} {} -&gt; {} latch enable {}_edge is inconsistent with latch group enable function positive sense.</td>
+</tr>
+<tr>
+<td>1115</td>
+<td>Liberty.cc:1666</td>
+<td>cell {}/{} {} -&gt; {} latch enable {}_edge is inconsistent with latch group enable function negative sense.</td>
+</tr>
+<tr>
+<td>1116</td>
+<td>Liberty.cc:348</td>
+<td>unsupported slew degradation table axes</td>
+</tr>
+<tr>
+<td>1117</td>
+<td>Liberty.cc:364</td>
+<td>unsupported slew degradation table axes</td>
+</tr>
+<tr>
+<td>1118</td>
+<td>Liberty.cc:369</td>
+<td>unsupported slew degradation table order</td>
+</tr>
+<tr>
+<td>1119</td>
+<td>Liberty.cc:399</td>
+<td>unsupported slew degradation table axes</td>
+</tr>
+<tr>
+<td>1120</td>
+<td>Liberty.cc:1871</td>
+<td>library missing vdd</td>
+</tr>
+<tr>
+<td>1121</td>
+<td>Liberty.cc:1676</td>
+<td>cell {}/{} no latch enable found for {} -&gt; {}.</td>
+</tr>
+<tr>
+<td>1128</td>
+<td>LibertyParser.cc:355</td>
+<td>LibertyAttrValue::floatValue() called on string</td>
+</tr>
+<tr>
+<td>1130</td>
+<td>LibExprReader.cc:83</td>
+<td>{} references unknown port {}.</td>
+</tr>
+<tr>
+<td>1131</td>
+<td>LibExprReader.cc:135</td>
+<td>{} {}.</td>
+</tr>
+<tr>
+<td>1140</td>
+<td>LibertyReader.cc:280</td>
+<td>library {} already exists.</td>
+</tr>
+<tr>
+<td>1141</td>
+<td>LibertyReader.cc:309</td>
+<td>library missing name.</td>
+</tr>
+<tr>
+<td>1142</td>
+<td>LibertyReader.cc:832</td>
+<td>default_wire_load {} not found.</td>
+</tr>
+<tr>
+<td>1143</td>
+<td>LibertyReader.cc:863</td>
+<td>default_wire_selection {} not found.</td>
+</tr>
+<tr>
+<td>1144</td>
+<td>LibertyReader.cc:680</td>
+<td>default_operating_condition {} not found.</td>
+</tr>
+<tr>
+<td>1145</td>
+<td>LibertyReader.cc:536</td>
+<td>input_threshold_pct_{} not found.</td>
+</tr>
+<tr>
+<td>1146</td>
+<td>LibertyReader.cc:538</td>
+<td>output_threshold_pct_{} not found.</td>
+</tr>
+<tr>
+<td>1147</td>
+<td>LibertyReader.cc:540</td>
+<td>slew_lower_threshold_pct_{} not found.</td>
+</tr>
+<tr>
+<td>1148</td>
+<td>LibertyReader.cc:542</td>
+<td>slew_upper_threshold_pct_{} not found.</td>
+</tr>
+<tr>
+<td>1150</td>
+<td>LibertyReader.cc:406</td>
+<td>unknown unit multiplier {}.</td>
+</tr>
+<tr>
+<td>1151</td>
+<td>LibertyReader.cc:429</td>
+<td>unknown unit scale {}.</td>
+</tr>
+<tr>
+<td>1152</td>
+<td>LibertyReader.cc:432</td>
+<td>unknown unit suffix {}.</td>
+</tr>
+<tr>
+<td>1153</td>
+<td>LibertyReader.cc:435</td>
+<td>unknown unit suffix {}.</td>
+</tr>
+<tr>
+<td>1154</td>
+<td>LibertyReader.cc:364</td>
+<td>capacitive_load_units are not ff or pf.</td>
+</tr>
+<tr>
+<td>1155</td>
+<td>LibertyReader.cc:367</td>
+<td>capacitive_load_units are not a string.</td>
+</tr>
+<tr>
+<td>1156</td>
+<td>LibertyReader.cc:373</td>
+<td>capacitive_load_units missing suffix.</td>
+</tr>
+<tr>
+<td>1157</td>
+<td>LibertyReader.cc:370</td>
+<td>capacitive_load_units scale is not a float.</td>
+</tr>
+<tr>
+<td>1158</td>
+<td>LibertyReader.cc:375</td>
+<td>capacitive_load_units missing scale and suffix.</td>
+</tr>
+<tr>
+<td>1160</td>
+<td>LibertyReader.cc:453</td>
+<td>delay_model {} not supported.</td>
+</tr>
+<tr>
+<td>1161</td>
+<td>LibertyReader.cc:457</td>
+<td>delay_model {} not supported.</td>
+</tr>
+<tr>
+<td>1162</td>
+<td>LibertyReader.cc:461</td>
+<td>delay_model {} not supported.</td>
+</tr>
+<tr>
+<td>1163</td>
+<td>LibertyReader.cc:466</td>
+<td>delay_model {} not supported..</td>
+</tr>
+<tr>
+<td>1164</td>
+<td>LibertyReader.cc:469</td>
+<td>unknown delay_model {}.</td>
+</tr>
+<tr>
+<td>1165</td>
+<td>LibertyReader.cc:486</td>
+<td>unknown bus_naming_style format.</td>
+</tr>
+<tr>
+<td>1166</td>
+<td>LibertyReader.cc:640</td>
+<td>voltage_map voltage is not a float.</td>
+</tr>
+<tr>
+<td>1171</td>
+<td>LibertyReader.cc:962</td>
+<td>{} is 0.0.</td>
+</tr>
+<tr>
+<td>1172</td>
+<td>LibertyReader.cc:964</td>
+<td>{} is 0.0.</td>
+</tr>
+<tr>
+<td>1173</td>
+<td>LibertyReader.cc:2561</td>
+<td>non-increasing table index values.</td>
+</tr>
+<tr>
+<td>1174</td>
+<td>LibertyReader.cc:847</td>
+<td>default_wire_load_mode {} not found.</td>
+</tr>
+<tr>
+<td>1175</td>
+<td>LibertyReader.cc:577</td>
+<td>table template missing name.</td>
+</tr>
+<tr>
+<td>1177</td>
+<td>LibertyReader.cc:2554</td>
+<td>missing table index values.</td>
+</tr>
+<tr>
+<td>1178</td>
+<td>LibertyReader.cc:603</td>
+<td>non-increasing table index values.</td>
+</tr>
+<tr>
+<td>1179</td>
+<td>LibertyReader.cc:508</td>
+<td>bus type missing bit_from.</td>
+</tr>
+<tr>
+<td>1180</td>
+<td>LibertyReader.cc:510</td>
+<td>bus type missing bit_to.</td>
+</tr>
+<tr>
+<td>1183</td>
+<td>LibertyReader.cc:3271</td>
+<td>{} value {} is not a float.</td>
+</tr>
+<tr>
+<td>1184</td>
+<td>LibertyReader.cc:774</td>
+<td>wire_load missing name.</td>
+</tr>
+<tr>
+<td>1185</td>
+<td>LibertyReader.cc:770</td>
+<td>fanout_length is missing length and fanout.</td>
+</tr>
+<tr>
+<td>1187</td>
+<td>LibertyReader.cc:804</td>
+<td>wireload {} not found.</td>
+</tr>
+<tr>
+<td>1189</td>
+<td>LibertyReader.cc:811</td>
+<td>wire_load_from_area min not a float.</td>
+</tr>
+<tr>
+<td>1190</td>
+<td>LibertyReader.cc:814</td>
+<td>wire_load_from_area max not a float.</td>
+</tr>
+<tr>
+<td>1191</td>
+<td>LibertyReader.cc:817</td>
+<td>wire_load_from_area missing parameters.</td>
+</tr>
+<tr>
+<td>1193</td>
+<td>LibertyReader.cc:190</td>
+<td>cell missing name.</td>
+</tr>
+<tr>
+<td>1196</td>
+<td>LibertyReader.cc:1723</td>
+<td>{} {} bus width mismatch.</td>
+</tr>
+<tr>
+<td>1200</td>
+<td>LibertyReader.cc:2847</td>
+<td>latch enable function is non-unate for port {}.</td>
+</tr>
+<tr>
+<td>1201</td>
+<td>LibertyReader.cc:2852</td>
+<td>latch enable function is unknown for port {}.</td>
+</tr>
+<tr>
+<td>1202</td>
+<td>LibertyReader.cc:1021</td>
+<td>operating conditions {} not found.</td>
+</tr>
+<tr>
+<td>1203</td>
+<td>LibertyReader.cc:1025</td>
+<td>scaled_cell missing operating condition.</td>
+</tr>
+<tr>
+<td>1204</td>
+<td>LibertyReader.cc:1028</td>
+<td>scaled_cell cell {} has not been defined.</td>
+</tr>
+<tr>
+<td>1205</td>
+<td>LibertyReader.cc:1031</td>
+<td>scaled_cell missing name.</td>
+</tr>
+<tr>
+<td>1206</td>
+<td>LibertyReader.cc:1043</td>
+<td>scaled_cell {}, {} ports do not match cell ports</td>
+</tr>
+<tr>
+<td>1207</td>
+<td>LibertyReader.cc:1053</td>
+<td>scaled_cell ports do not match cell ports.</td>
+</tr>
+<tr>
+<td>1209</td>
+<td>LibertyReader.cc:1936</td>
+<td>combinational timing to an input port.</td>
+</tr>
+<tr>
+<td>1210</td>
+<td>LibertyReader.cc:2184</td>
+<td>missing {}_transition.</td>
+</tr>
+<tr>
+<td>1211</td>
+<td>LibertyReader.cc:2186</td>
+<td>missing cell_{}.</td>
+</tr>
+<tr>
+<td>1212</td>
+<td>LibertyReader.cc:2592</td>
+<td>timing group from output port.</td>
+</tr>
+<tr>
+<td>1213</td>
+<td>LibertyReader.cc:2602</td>
+<td>timing group from output port.</td>
+</tr>
+<tr>
+<td>1214</td>
+<td>LibertyReader.cc:2612</td>
+<td>timing group from output port.</td>
+</tr>
+<tr>
+<td>1215</td>
+<td>LibertyReader.cc:2647</td>
+<td>timing group from output port.</td>
+</tr>
+<tr>
+<td>1219</td>
+<td>LibertyReader.cc:2362</td>
+<td>unsupported model axis.</td>
+</tr>
+<tr>
+<td>1221</td>
+<td>LibertyReader.cc:2467</td>
+<td>output current waveform {:.2e} {:.2e} not found.</td>
+</tr>
+<tr>
+<td>1224</td>
+<td>LibertyReader.cc:2415</td>
+<td>vector reference_time not found.</td>
+</tr>
+<tr>
+<td>1227</td>
+<td>LibertyReader.cc:2895</td>
+<td>normalized_driver_waveform missing template.</td>
+</tr>
+<tr>
+<td>1228</td>
+<td>LibertyReader.cc:2915</td>
+<td>level_shifter_type must be HL, LH, or HL_LH</td>
+</tr>
+<tr>
+<td>1229</td>
+<td>LibertyReader.cc:2931</td>
+<td>switch_cell_type must be coarse_grain or fine_grain</td>
+</tr>
+<tr>
+<td>1230</td>
+<td>LibertyReader.cc:1863</td>
+<td>scaling_factors {} not found.</td>
+</tr>
+<tr>
+<td>1232</td>
+<td>LibertyReader.cc:1143</td>
+<td>pin {} not found.</td>
+</tr>
+<tr>
+<td>1233</td>
+<td>LibertyReader.cc:1147</td>
+<td>pin name is not a string.</td>
+</tr>
+<tr>
+<td>1234</td>
+<td>LibertyReader.cc:1197</td>
+<td>pin name is not a string.</td>
+</tr>
+<tr>
+<td>1235</td>
+<td>LibertyReader.cc:1117</td>
+<td>bus_type {} not found.</td>
+</tr>
+<tr>
+<td>1236</td>
+<td>LibertyReader.cc:1121</td>
+<td>bus_type not found.</td>
+</tr>
+<tr>
+<td>1237</td>
+<td>LibertyReader.cc:2947</td>
+<td>OCV derate group named {} not found.</td>
+</tr>
+<tr>
+<td>1238</td>
+<td>LibertyReader.cc:1376</td>
+<td>{} attribute is not boolean.</td>
+</tr>
+<tr>
+<td>1239</td>
+<td>LibertyReader.cc:1379</td>
+<td>{} attribute is not boolean.</td>
+</tr>
+<tr>
+<td>1240</td>
+<td>LibertyReader.cc:1491</td>
+<td>unknown port direction.</td>
+</tr>
+<tr>
+<td>1241</td>
+<td>LibertyReader.cc:1551</td>
+<td>max_transition is 0.0.</td>
+</tr>
+<tr>
+<td>1242</td>
+<td>LibertyReader.cc:1426</td>
+<td>pulse_latch unknown pulse type.</td>
+</tr>
+<tr>
+<td>1243</td>
+<td>LibertyReader.cc:1956</td>
+<td>timing group missing related_pin/related_bus_pin.</td>
+</tr>
+<tr>
+<td>1244</td>
+<td>LibertyReader.cc:2017</td>
+<td>unknown timing_type {}.</td>
+</tr>
+<tr>
+<td>1245</td>
+<td>LibertyReader.cc:2003</td>
+<td>unknown timing_sense {}.</td>
+</tr>
+<tr>
+<td>1246</td>
+<td>LibertyReader.cc:2074</td>
+<td>mode value is not a string.</td>
+</tr>
+<tr>
+<td>1248</td>
+<td>LibertyReader.cc:2068</td>
+<td>mode name is not a string.</td>
+</tr>
+<tr>
+<td>1249</td>
+<td>LibertyReader.cc:2077</td>
+<td>mode requirees 2 values.</td>
+</tr>
+<tr>
+<td>1251</td>
+<td>LibertyReader.cc:2496</td>
+<td>unsupported model axis.</td>
+</tr>
+<tr>
+<td>1253</td>
+<td>LibertyReader.cc:2502</td>
+<td>table template {} not found.</td>
+</tr>
+<tr>
+<td>1254</td>
+<td>LibertyReader.cc:916</td>
+<td>unsupported model axis.</td>
+</tr>
+<tr>
+<td>1256</td>
+<td>LibertyReader.cc:2871</td>
+<td>table template {} not found.</td>
+</tr>
+<tr>
+<td>1257</td>
+<td>LibertyReader.cc:2541</td>
+<td>{} is missing values.</td>
+</tr>
+<tr>
+<td>1258</td>
+<td>LibertyReader.cc:3194</td>
+<td>{} is not a list of floats.</td>
+</tr>
+<tr>
+<td>1259</td>
+<td>LibertyReader.cc:3197</td>
+<td>{} row has {} columns but axis has {}.</td>
+</tr>
+<tr>
+<td>1260</td>
+<td>LibertyReader.cc:3208</td>
+<td>{} missing axis values.</td>
+</tr>
+<tr>
+<td>1261</td>
+<td>LibertyReader.cc:3211</td>
+<td>{} has {} rows but axis has {}.</td>
+</tr>
+<tr>
+<td>1262</td>
+<td>LibertyReader.cc:3039</td>
+<td>cell {} test_cell redefinition.</td>
+</tr>
+<tr>
+<td>1263</td>
+<td>LibertyReader.cc:896</td>
+<td>mode definition missing name.</td>
+</tr>
+<tr>
+<td>1264</td>
+<td>LibertyReader.cc:892</td>
+<td>mode value missing name.</td>
+</tr>
+<tr>
+<td>1272</td>
+<td>LibertyReader.cc:3240</td>
+<td>{} is not a float.</td>
+</tr>
+<tr>
+<td>1273</td>
+<td>LibertyReader.cc:3245</td>
+<td>{} is not a float.</td>
+</tr>
+<tr>
+<td>1274</td>
+<td>LibertyReader.cc:3248</td>
+<td>{} requires 2 valules.</td>
+</tr>
+<tr>
+<td>1277</td>
+<td>LibertyReader.cc:3327</td>
+<td>{} has no values.</td>
+</tr>
+<tr>
+<td>1279</td>
+<td>LibertyReader.cc:1908</td>
+<td>{} attribute is not boolean.</td>
+</tr>
+<tr>
+<td>1280</td>
+<td>LibertyReader.cc:1911</td>
+<td>{} attribute is not boolean.</td>
+</tr>
+<tr>
+<td>1282</td>
+<td>LibertyReader.cc:3370</td>
+<td>attribute {} value {} not recognized.</td>
+</tr>
+<tr>
+<td>1283</td>
+<td>LibertyReader.cc:3386</td>
+<td>unknown early/late value.</td>
+</tr>
+<tr>
+<td>1284</td>
+<td>LibertyReader.cc:3438</td>
+<td>OCV derate group named {} not found.</td>
+</tr>
+<tr>
+<td>1285</td>
+<td>LibertyReader.cc:3524</td>
+<td>ocv_derate missing name.</td>
+</tr>
+<tr>
+<td>1286</td>
+<td>LibertyReader.cc:3466</td>
+<td>unknown rise/fall.</td>
+</tr>
+<tr>
+<td>1287</td>
+<td>LibertyReader.cc:3494</td>
+<td>unknown derate type.</td>
+</tr>
+<tr>
+<td>1288</td>
+<td>LibertyReader.cc:3352</td>
+<td>{} attribute is not boolean.</td>
+</tr>
+<tr>
+<td>1289</td>
+<td>LibertyReader.cc:3355</td>
+<td>{} attribute is not boolean.</td>
+</tr>
+<tr>
+<td>1290</td>
+<td>LibertyReader.cc:2782</td>
+<td>port {} not found.</td>
+</tr>
+<tr>
+<td>1291</td>
+<td>LibertyReader.cc:1232</td>
+<td>unknown pg_type.</td>
+</tr>
+<tr>
+<td>1292</td>
+<td>LibertyReader.cc:3573</td>
+<td>port {} subscript out of range.</td>
+</tr>
+<tr>
+<td>1293</td>
+<td>LibertyReader.cc:3576</td>
+<td>port range {} of non-bus port {}.</td>
+</tr>
+<tr>
+<td>1294</td>
+<td>LibertyReader.cc:3590</td>
+<td>port {} not found.</td>
+</tr>
+<tr>
+<td>1295</td>
+<td>LibertyReader.cc:3656</td>
+<td>port {} not found.</td>
+</tr>
+<tr>
+<td>1297</td>
+<td>LibertyReader.cc:590</td>
+<td>axis type {} not supported.</td>
+</tr>
+<tr>
+<td>1298</td>
+<td>LibertyReader.cc:3017</td>
+<td>statetable input port {} not found.</td>
+</tr>
+<tr>
+<td>1299</td>
+<td>LibertyReader.cc:1464</td>
+<td>unknown signal_type {}.</td>
+</tr>
+<tr>
+<td>1300</td>
+<td>LibertyReader.cc:2979</td>
+<td>table row must have 3 groups separated by ':'.</td>
+</tr>
+<tr>
+<td>1301</td>
+<td>LibertyReader.cc:2984</td>
+<td>table row has {} input values but {} are required.</td>
+</tr>
+<tr>
+<td>1303</td>
+<td>LibertyReader.cc:2997</td>
+<td>table row has {} next values but {} are required.</td>
+</tr>
+<tr>
+<td>1304</td>
+<td>LibertyReader.cc:3147</td>
+<td>table input value '{}' not recognized.</td>
+</tr>
+<tr>
+<td>1305</td>
+<td>LibertyReader.cc:3165</td>
+<td>table internal value '{}' not recognized.</td>
+</tr>
+<tr>
+<td>1306</td>
+<td>LibertyReader.cc:2811</td>
+<td>port {} not found.</td>
+</tr>
+<tr>
+<td>1307</td>
+<td>LibertyReader.cc:2702</td>
+<td>leakage_power missing value.</td>
+</tr>
+<tr>
+<td>1308</td>
+<td>LibertyReader.cc:3517</td>
+<td>table template {} not found.</td>
+</tr>
+<tr>
+<td>1309</td>
+<td>LibertyReader.cc:3480</td>
+<td>unknown early/late value.</td>
+</tr>
+<tr>
+<td>1310</td>
+<td>LibertyReader.cc:3290</td>
+<td>{} is not a float.</td>
+</tr>
+<tr>
+<td>1311</td>
+<td>LibertyReader.cc:2212</td>
+<td>no table models found in timing group.</td>
+</tr>
+<tr>
+<td>1312</td>
+<td>LibertyReader.cc:3520</td>
+<td>ocv_derate_factors missing template.</td>
+</tr>
+<tr>
+<td>1313</td>
+<td>LibertyReader.cc:1178</td>
+<td>bundle missing name.</td>
+</tr>
+<tr>
+<td>1314</td>
+<td>LibertyReader.cc:1246</td>
+<td>pg_pin missing name.</td>
+</tr>
+<tr>
+<td>1338</td>
+<td>Verilog.tcl:62</td>
+<td>The -sort flag is ignored.</td>
+</tr>
+<tr>
+<td>1340</td>
+<td>LibertyWriter.cc:322</td>
+<td>{}/{} bundled ports not supported.</td>
+</tr>
+<tr>
+<td>1341</td>
+<td>LibertyWriter.cc:482</td>
+<td>{}/{}/{} timing model not supported.</td>
+</tr>
+<tr>
+<td>1342</td>
+<td>LibertyWriter.cc:500</td>
+<td>3 axis table models not supported.</td>
+</tr>
+<tr>
+<td>1343</td>
+<td>LibertyWriter.cc:647</td>
+<td>{}/{}/{} timing arc type {} not supported.</td>
+</tr>
+<tr>
+<td>1350</td>
+<td>LumpedCapDelayCalc.cc:146</td>
+<td>gate delay load cap is NaN</td>
+</tr>
+<tr>
+<td>1351</td>
+<td>LumpedCapDelayCalc.cc:148</td>
+<td>gate delay input slew is NaN</td>
+</tr>
+<tr>
+<td>1360</td>
+<td>TagGroup.cc:314</td>
+<td>tag group missing tag</td>
+</tr>
+<tr>
+<td>1370</td>
+<td>PathEnum.cc:634</td>
+<td>path diversion missing edge.</td>
+</tr>
+<tr>
+<td>1380</td>
+<td>MakeTimingModel.cc:234</td>
+<td>clock {} pin {} is inside model block.</td>
+</tr>
+<tr>
+<td>1390</td>
+<td>VerilogReader.cc:1492</td>
+<td>{} is not a verilog module.</td>
+</tr>
+<tr>
+<td>1391</td>
+<td>VerilogReader.cc:1497</td>
+<td>{} is not a verilog module.</td>
+</tr>
+<tr>
+<td>1440</td>
+<td>Bdd.cc:100</td>
+<td>unknown function operator</td>
+</tr>
+<tr>
+<td>1450</td>
+<td>VcdReader.cc:454</td>
+<td>VCD max time is zero.</td>
+</tr>
+<tr>
+<td>1451</td>
+<td>VcdReader.cc:299</td>
+<td>problem parsing bus {}.</td>
+</tr>
+<tr>
+<td>1453</td>
+<td>VcdReader.cc:501</td>
+<td>clock {} pin {} has no vcd transitions.</td>
+</tr>
+<tr>
+<td>1490</td>
+<td>Sdc.cc:4141</td>
+<td>group path name and is_default are mutually exclusive.</td>
+</tr>
+<tr>
+<td>1510</td>
+<td>Search.cc:2686</td>
+<td>max tag group index exceeded</td>
+</tr>
+<tr>
+<td>1511</td>
+<td>Search.cc:2931</td>
+<td>max tag index exceeded</td>
+</tr>
+<tr>
+<td>1512</td>
+<td>Search.cc:3621</td>
+<td>unexpected filter path</td>
+</tr>
+<tr>
+<td>1513</td>
+<td>Search.cc:3813</td>
+<td>tns incr existing vertex</td>
+</tr>
+<tr>
+<td>1525</td>
+<td>SpefParse.yy:806</td>
+<td>{} is not positive.</td>
+</tr>
+<tr>
+<td>1526</td>
+<td>SpefParse.yy:815</td>
+<td>{:.4f} is not positive.</td>
+</tr>
+<tr>
+<td>1527</td>
+<td>SpefParse.yy:821</td>
+<td>{:.4f} is not positive.</td>
+</tr>
+<tr>
+<td>1550</td>
+<td>Sta.cc:2170</td>
+<td>'{}' is not a valid start point.</td>
+</tr>
+<tr>
+<td>1551</td>
+<td>Sta.cc:2229</td>
+<td>'{}' is not a valid endpoint.</td>
+</tr>
+<tr>
+<td>1552</td>
+<td>Sta.cc:2232</td>
+<td>'{}' is not a valid endpoint.</td>
+</tr>
+<tr>
+<td>1553</td>
+<td>Sta.cc:2590</td>
+<td>maximum scene count exceeded</td>
+</tr>
+<tr>
+<td>1554</td>
+<td>Sta.cc:2167</td>
+<td>'{}' is not a valid start point.</td>
+</tr>
+<tr>
+<td>1555</td>
+<td>Sta.cc:2738</td>
+<td>liberty name/filename {} not found.</td>
+</tr>
+<tr>
+<td>1556</td>
+<td>Sta.cc:575</td>
+<td>multiple scenes reference mode {}</td>
+</tr>
+<tr>
+<td>1557</td>
+<td>Sta.cc:4467</td>
+<td>net {} already exists.</td>
+</tr>
+<tr>
+<td>1558</td>
+<td>Sta.cc:2623</td>
+<td>Spef file {} not found.</td>
+</tr>
+<tr>
+<td>1559</td>
+<td>Sta.cc:2625</td>
+<td>Spef file {} not found.</td>
+</tr>
+<tr>
+<td>1560</td>
+<td>Sta.cc:4261</td>
+<td>spef {} not found.</td>
+</tr>
+<tr>
+<td>1561</td>
+<td>Sta.cc:2253</td>
+<td>mode {} not found.</td>
+</tr>
+<tr>
+<td>1563</td>
+<td>Sta.cc:4596</td>
+<td>corresponding timing arc set not found in equiv cells</td>
+</tr>
+<tr>
+<td>1570</td>
+<td>Sta.cc:3751</td>
+<td>No network has been linked.</td>
+</tr>
+<tr>
+<td>1571</td>
+<td>Sta.cc:3760</td>
+<td>No network has been linked.</td>
+</tr>
+<tr>
+<td>1572</td>
+<td>Sta.cc:2637</td>
+<td>mode {} not found.</td>
+</tr>
+<tr>
+<td>1578</td>
+<td>Sta.cc:2387</td>
+<td>No liberty POCV/LVF models found.</td>
+</tr>
+<tr>
+<td>1590</td>
+<td>Search.i:255</td>
+<td>{} is not a known path group name.</td>
+</tr>
+<tr>
+<td>1591</td>
+<td>Search.i:472</td>
+<td>unknown report path field {}</td>
+</tr>
+<tr>
+<td>1592</td>
+<td>Search.i:1009</td>
+<td>unknown common clk pessimism mode.</td>
+</tr>
+<tr>
+<td>1601</td>
+<td>WriteSpice.cc:420</td>
+<td>pg_pin {}/{} voltage {} not found,</td>
+</tr>
+<tr>
+<td>1602</td>
+<td>WriteSpice.cc:426</td>
+<td>Liberty pg_port {}/{} missing voltage_name attribute,</td>
+</tr>
+<tr>
+<td>1603</td>
+<td>WriteSpice.cc:400</td>
+<td>{} pg_port {} not found,</td>
+</tr>
+<tr>
+<td>1604</td>
+<td>WriteSpice.cc:863</td>
+<td>no register/latch found for path from {} to {},</td>
+</tr>
+<tr>
+<td>1605</td>
+<td>WriteSpice.cc:213</td>
+<td>The subkct file {} is missing definitions for {}</td>
+</tr>
+<tr>
+<td>1606</td>
+<td>WritePathSpice.cc:236</td>
+<td>No instance with Liberty cell found in path.</td>
+</tr>
+<tr>
+<td>1620</td>
+<td>WriteSdc.cc:1245</td>
+<td>unknown exception type</td>
+</tr>
+<tr>
+<td>1621</td>
+<td>WriteSdc.cc:1784</td>
+<td>illegal set_logic value</td>
+</tr>
+<tr>
+<td>1622</td>
+<td>WriteSdc.cc:1825</td>
+<td>invalid set_case_analysis value</td>
+</tr>
+<tr>
+<td>1640</td>
+<td>SpefReader.cc:131</td>
+<td>illegal bus delimiters.</td>
+</tr>
+<tr>
+<td>1641</td>
+<td>SpefReader.cc:188</td>
+<td>unknown units {}.</td>
+</tr>
+<tr>
+<td>1642</td>
+<td>SpefReader.cc:200</td>
+<td>unknown units {}.</td>
+</tr>
+<tr>
+<td>1643</td>
+<td>SpefReader.cc:212</td>
+<td>unknown units {}.</td>
+</tr>
+<tr>
+<td>1644</td>
+<td>SpefReader.cc:226</td>
+<td>unknown units {}.</td>
+</tr>
+<tr>
+<td>1645</td>
+<td>SpefReader.cc:247</td>
+<td>no name map entry for {}.</td>
+</tr>
+<tr>
+<td>1646</td>
+<td>SpefReader.cc:266</td>
+<td>unknown port direction {}.</td>
+</tr>
+<tr>
+<td>1647</td>
+<td>SpefReader.cc:292</td>
+<td>pin {}{}{} not found.</td>
+</tr>
+<tr>
+<td>1648</td>
+<td>SpefReader.cc:296</td>
+<td>instance {}{}{} not found.</td>
+</tr>
+<tr>
+<td>1649</td>
+<td>SpefReader.cc:303</td>
+<td>pin {} not found.</td>
+</tr>
+<tr>
+<td>1650</td>
+<td>SpefReader.cc:317</td>
+<td>net {} not found.</td>
+</tr>
+<tr>
+<td>1651</td>
+<td>SpefReader.cc:430</td>
+<td>{} not connected to net {}.</td>
+</tr>
+<tr>
+<td>1652</td>
+<td>SpefReader.cc:435</td>
+<td>pin {}{}{} not found.</td>
+</tr>
+<tr>
+<td>1653</td>
+<td>SpefReader.cc:445</td>
+<td>{}{}{} not connected to net {}.</td>
+</tr>
+<tr>
+<td>1654</td>
+<td>SpefReader.cc:450</td>
+<td>node {}{}{} not a pin or net:number</td>
+</tr>
+<tr>
+<td>1655</td>
+<td>SpefReader.cc:463</td>
+<td>{} not connected to net {}.</td>
+</tr>
+<tr>
+<td>1656</td>
+<td>SpefReader.cc:468</td>
+<td>pin {} not found.</td>
+</tr>
+<tr>
+<td>1657</td>
+<td>SpefReader.cc:471</td>
+<td>pin {} not found.</td>
+</tr>
+<tr>
+<td>1658</td>
+<td>SpefReader.cc:589</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>1670</td>
+<td>SpefParse.yy:44</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>1700</td>
+<td>CcsCeffDelayCalc.cc:115</td>
+<td>VDD not defined in library {}</td>
+</tr>
+<tr>
+<td>1701</td>
+<td>CcsCeffDelayCalc.cc:305</td>
+<td>unsupported ccs region count.</td>
+</tr>
+<tr>
+<td>1751</td>
+<td>ArcDcalcWaveforms.cc:64</td>
+<td>VDD not defined in library {}</td>
+</tr>
+<tr>
+<td>1752</td>
+<td>PrimaDelayCalc.cc:963</td>
+<td>G matrix is singular.</td>
+</tr>
+<tr>
+<td>1754</td>
+<td>PrimaDelayCalc.cc:450</td>
+<td>Port {}/{}/{} has no equivalent in scene {}.</td>
+</tr>
+<tr>
+<td>1800</td>
+<td>Sdc.tcl:2984</td>
+<td>missing margin argument.</td>
+</tr>
+<tr>
+<td>1801</td>
+<td>Sdc.tcl:2986</td>
+<td>'$args' ignored.</td>
+</tr>
+<tr>
+<td>1802</td>
+<td>Sdc.tcl:2990</td>
+<td>-from, -through or -to required.</td>
+</tr>
+<tr>
+<td>1860</td>
+<td>SaifReader.cc:210</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>1861</td>
+<td>SaifReader.cc:104</td>
+<td>SAIF TIMESCALE units not us, ns, or ps.</td>
+</tr>
+<tr>
+<td>1862</td>
+<td>SaifReader.cc:107</td>
+<td>SAIF TIMESCALE multiplier not 1, 10, or 100.</td>
+</tr>
+<tr>
+<td>1866</td>
+<td>LibertyParser.cc:295</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>1870</td>
+<td>VerilogReader.cc:1963</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>1903</td>
+<td>WriteSpice.tcl:180</td>
+<td>Cannot write $spice_dir.</td>
+</tr>
+<tr>
+<td>1904</td>
+<td>WriteSpice.tcl:183</td>
+<td>No -spice_filename specified.</td>
+</tr>
+<tr>
+<td>1905</td>
+<td>WriteSpice.tcl:189</td>
+<td>-lib_subckt_file $lib_subckt_file is not readable.</td>
+</tr>
+<tr>
+<td>1906</td>
+<td>WriteSpice.tcl:192</td>
+<td>No -lib_subckt_file specified.</td>
+</tr>
+<tr>
+<td>1907</td>
+<td>WriteSpice.tcl:198</td>
+<td>-model_file $model_file is not readable.</td>
+</tr>
+<tr>
+<td>1908</td>
+<td>WriteSpice.tcl:201</td>
+<td>No -model_file specified.</td>
+</tr>
+<tr>
+<td>1909</td>
+<td>WriteSpice.tcl:207</td>
+<td>No -power specified.</td>
+</tr>
+<tr>
+<td>1910</td>
+<td>WriteSpice.tcl:146</td>
+<td>Unknown circuit simulator</td>
+</tr>
+<tr>
+<td>1913</td>
+<td>WriteSpice.tcl:279</td>
+<td>Cannot write $plot_dir.</td>
+</tr>
+<tr>
+<td>1914</td>
+<td>WriteSpice.tcl:282</td>
+<td>No -plot_basename specified.</td>
+</tr>
+<tr>
+<td>1915</td>
+<td>WriteSpice.tcl:213</td>
+<td>No -ground specified.</td>
+</tr>
+<tr>
+<td>1920</td>
+<td>WriteSpice.tcl:71</td>
+<td>Directory $spice_dir not found.</td>
+</tr>
+<tr>
+<td>1921</td>
+<td>WriteSpice.tcl:74</td>
+<td>$spice_dir is not a directory.</td>
+</tr>
+<tr>
+<td>1922</td>
+<td>WriteSpice.tcl:77</td>
+<td>Cannot write in $spice_dir.</td>
+</tr>
+<tr>
+<td>1923</td>
+<td>WriteSpice.tcl:80</td>
+<td>No -spice_file specified.</td>
+</tr>
+<tr>
+<td>1924</td>
+<td>WriteSpice.tcl:86</td>
+<td>-lib_subckt_file $lib_subckt_file is not readable.</td>
+</tr>
+<tr>
+<td>1925</td>
+<td>WriteSpice.tcl:89</td>
+<td>No -lib_subckt_file specified.</td>
+</tr>
+<tr>
+<td>1926</td>
+<td>WriteSpice.tcl:95</td>
+<td>-model_file $model_file is not readable.</td>
+</tr>
+<tr>
+<td>1927</td>
+<td>WriteSpice.tcl:98</td>
+<td>No -model_file specified.</td>
+</tr>
+<tr>
+<td>1928</td>
+<td>WriteSpice.tcl:104</td>
+<td>No -power specified.</td>
+</tr>
+<tr>
+<td>1929</td>
+<td>WriteSpice.tcl:110</td>
+<td>No -ground specified.</td>
+</tr>
+<tr>
+<td>1930</td>
+<td>WriteSpice.tcl:116</td>
+<td>No -path_args specified.</td>
+</tr>
+<tr>
+<td>1931</td>
+<td>WriteSpice.tcl:121</td>
+<td>No paths found for -path_args $path_args.</td>
+</tr>
+<tr>
+<td>1932</td>
+<td>WriteSpice.tcl:174</td>
+<td>Missing -gates argument.</td>
+</tr>
+<tr>
+<td>1933</td>
+<td>WriteSpice.tcl:247</td>
+<td>Missing -gates argument.</td>
+</tr>
+<tr>
+<td>2100</td>
+<td>ArcDelayCalc.cc:101</td>
+<td>no timing arc for {} input/driver pins.</td>
+</tr>
+<tr>
+<td>2101</td>
+<td>ArcDelayCalc.cc:106</td>
+<td>{} not a valid rise/fall.</td>
+</tr>
+<tr>
+<td>2102</td>
+<td>ArcDelayCalc.cc:109</td>
+<td>Pin {}/{} not found.</td>
+</tr>
+<tr>
+<td>2103</td>
+<td>ArcDelayCalc.cc:112</td>
+<td>{} not a valid rise/fall.</td>
+</tr>
+<tr>
+<td>2104</td>
+<td>ArcDelayCalc.cc:115</td>
+<td>Pin {}/{} not found.</td>
+</tr>
+<tr>
+<td>2105</td>
+<td>ArcDelayCalc.cc:118</td>
+<td>Instance {} not found.</td>
+</tr>
+<tr>
+<td>2120</td>
+<td>Network.i:267</td>
+<td>unknown namespace</td>
+</tr>
+<tr>
+<td>2121</td>
+<td>Sdc.i:121</td>
+<td>unknown analysis type</td>
+</tr>
+<tr>
+<td>2122</td>
+<td>Sdc.i:260</td>
+<td>unknown wire load mode</td>
+</tr>
+<tr>
+<td>2123</td>
+<td>Sdc.i:1065</td>
+<td>unknown clock sense</td>
+</tr>
+<tr>
+<td>2140</td>
+<td>TclTypeHelpers.cc:166</td>
+<td>Delay calc arg requires 5 or 6 args.</td>
+</tr>
+<tr>
+<td>2141</td>
+<td>Sta.cc:3764</td>
+<td>No liberty libraries found.</td>
+</tr>
+<tr>
+<td>2150</td>
+<td>StaTclTypes.i:423</td>
+<td>Unknown transition '{}'.</td>
+</tr>
+<tr>
+<td>2151</td>
+<td>StaTclTypes.i:441</td>
+<td>Unknown rise/fall edge '{}'.</td>
+</tr>
+<tr>
+<td>2152</td>
+<td>StaTclTypes.i:459</td>
+<td>Unknown transition name '{}'.</td>
+</tr>
+<tr>
+<td>2153</td>
+<td>StaTclTypes.i:477</td>
+<td>Unknown port direction '{}'.</td>
+</tr>
+<tr>
+<td>2154</td>
+<td>StaTclTypes.i:492</td>
+<td>Unknown timing role '{}'.</td>
+</tr>
+<tr>
+<td>2155</td>
+<td>StaTclTypes.i:515</td>
+<td>Unknown logic value '{}'.</td>
+</tr>
+<tr>
+<td>2156</td>
+<td>StaTclTypes.i:530</td>
+<td>Unknown analysis type '{}'.</td>
+</tr>
+<tr>
+<td>2157</td>
+<td>StaTclTypes.i:735</td>
+<td>{} is not a floating point number.</td>
+</tr>
+<tr>
+<td>2158</td>
+<td>StaTclTypes.i:797</td>
+<td>{} is not an integer.</td>
+</tr>
+<tr>
+<td>2159</td>
+<td>StaTclTypes.i:859</td>
+<td>{} not min or max.</td>
+</tr>
+<tr>
+<td>2160</td>
+<td>StaTclTypes.i:880</td>
+<td>{} not min, max or min_max.</td>
+</tr>
+<tr>
+<td>2161</td>
+<td>StaTclTypes.i:896</td>
+<td>{} not min, max or min_max.</td>
+</tr>
+<tr>
+<td>2162</td>
+<td>StaTclTypes.i:918</td>
+<td>{} not setup, hold, min or max.</td>
+</tr>
+<tr>
+<td>2163</td>
+<td>StaTclTypes.i:938</td>
+<td>{} not setup, hold, setup_hold, min, max or min_max.</td>
+</tr>
+<tr>
+<td>2164</td>
+<td>StaTclTypes.i:953</td>
+<td>{} not early/min, late/max or early_late/min_max.</td>
+</tr>
+<tr>
+<td>2165</td>
+<td>StaTclTypes.i:967</td>
+<td>{} not early/min, late/max or early_late/min_max.</td>
+</tr>
+<tr>
+<td>2166</td>
+<td>StaTclTypes.i:982</td>
+<td>{} not net_delay, cell_delay or cell_check.</td>
+</tr>
+<tr>
+<td>2167</td>
+<td>StaTclTypes.i:995</td>
+<td>{} not cell_delay or cell_check.</td>
+</tr>
+<tr>
+<td>2168</td>
+<td>StaTclTypes.i:1008</td>
+<td>{} not clk or data.</td>
+</tr>
+<tr>
+<td>2169</td>
+<td>StaTclTypes.i:1021</td>
+<td>{} not group or slack.</td>
+</tr>
+<tr>
+<td>2170</td>
+<td>StaTclTypes.i:1046</td>
+<td>unknown path type {}.</td>
+</tr>
+<tr>
+<td>2171</td>
+<td>StaTclTypes.i:1413</td>
+<td>unknown circuit simulator {}.</td>
+</tr>
+<tr>
+<td>2173</td>
+<td>StaTclTypes.i:1237</td>
+<td>{} is not a scene object.</td>
+</tr>
+<tr>
+<td>2174</td>
+<td>StaTclTypes.i:1200</td>
+<td>{} is not a mode object.</td>
+</tr>
+<tr>
+<td>2175</td>
+<td>StaTclTypes.i:767</td>
+<td>{} is not a floating point number.</td>
+</tr>
+<tr>
+<td>2200</td>
+<td>Property.tcl:62</td>
+<td>get_property object is null.</td>
+</tr>
+<tr>
+<td>2201</td>
+<td>Property.tcl:67</td>
+<td>get_property -object_type must be specified with object name argument.</td>
+</tr>
+<tr>
+<td>2203</td>
+<td>Property.tcl:111</td>
+<td>get_property unsupported object type $object_type.</td>
+</tr>
+<tr>
+<td>2204</td>
+<td>Property.tcl:114</td>
+<td>get_property $object is not an object.</td>
+</tr>
+<tr>
+<td>2205</td>
+<td>Property.tcl:141</td>
+<td>$object_type not supported.</td>
+</tr>
+<tr>
+<td>2206</td>
+<td>Property.tcl:144</td>
+<td>$object_type '$object_name' not found.</td>
+</tr>
+<tr>
+<td>2207</td>
+<td>Property.tcl:162</td>
+<td>define_property -object_type must be specified.</td>
+</tr>
+<tr>
+<td>2208</td>
+<td>Property.tcl:165</td>
+<td>define_property -type must be specified.</td>
+</tr>
+<tr>
+<td>2209</td>
+<td>Property.i:173</td>
+<td>define_property -object_type {} not supported.</td>
+</tr>
+<tr>
+<td>2210</td>
+<td>Property.cc:1415</td>
+<td>unknown property type '{}' (use bool, float or string).</td>
+</tr>
+<tr>
+<td>2211</td>
+<td>Property.cc:1532</td>
+<td>{} property '{}' is not defined.</td>
+</tr>
+<tr>
+<td>2212</td>
+<td>Property.cc:1430</td>
+<td>'{}' is not a bool property value.</td>
+</tr>
+<tr>
+<td>2213</td>
+<td>Property.tcl:184</td>
+<td>set_property $object is not an object.</td>
+</tr>
+<tr>
+<td>2214</td>
+<td>Property.i:210</td>
+<td>set_property unsupported object type {}.</td>
+</tr>
+<tr>
+<td>2215</td>
+<td>Property.cc:1435</td>
+<td>'{}' is not a float property value.</td>
+</tr>
+<tr>
+<td>2300</td>
+<td>Bfs.cc:264</td>
+<td>vertex {} level {} != bfs level {}</td>
+</tr>
+<tr>
+<td>2400</td>
+<td>Power.cc:835</td>
+<td>unknown cudd constant</td>
+</tr>
+<tr>
+<td>2500</td>
+<td>DelayCalc.tcl:140</td>
+<td>delay calculator $alg not found.</td>
+</tr>
+<tr>
+<td>2501</td>
+<td>DelayCalc.tcl:172</td>
+<td>set_assigned_delay missing -from argument.</td>
+</tr>
+<tr>
+<td>2502</td>
+<td>DelayCalc.tcl:177</td>
+<td>set_assigned_delay missing -to argument.</td>
+</tr>
+<tr>
+<td>2503</td>
+<td>DelayCalc.tcl:182</td>
+<td>set_assigned_delay delay is not a float.</td>
+</tr>
+<tr>
+<td>2504</td>
+<td>DelayCalc.tcl:187</td>
+<td>set_annotated_delay -cell and -net options are mutually excluive.</td>
+</tr>
+<tr>
+<td>2505</td>
+<td>DelayCalc.tcl:193</td>
+<td>set_assigned_delay pin [get_full_name $pin] is not attached to instance [get_full_name $inst].</td>
+</tr>
+<tr>
+<td>2506</td>
+<td>DelayCalc.tcl:198</td>
+<td>set_assigned_delay pin [get_full_name $pin] is not attached to instance [get_full_name $inst]</td>
+</tr>
+<tr>
+<td>2508</td>
+<td>DelayCalc.tcl:203</td>
+<td>set_assigned_delay -cell or -net required.</td>
+</tr>
+<tr>
+<td>2509</td>
+<td>DelayCalc.tcl:247</td>
+<td>set_assigned_delay no timing arcs found between from/to pins.</td>
+</tr>
+<tr>
+<td>2510</td>
+<td>DelayCalc.tcl:279</td>
+<td>set_assigned_check missing -from argument.</td>
+</tr>
+<tr>
+<td>2511</td>
+<td>DelayCalc.tcl:288</td>
+<td>set_assigned_check -clock must be rise or fall.</td>
+</tr>
+<tr>
+<td>2512</td>
+<td>DelayCalc.tcl:295</td>
+<td>set_assigned_check missing -to argument.</td>
+</tr>
+<tr>
+<td>2513</td>
+<td>DelayCalc.tcl:310</td>
+<td>set_assigned_check missing -setup|-hold|-recovery|-removal check type..</td>
+</tr>
+<tr>
+<td>2514</td>
+<td>DelayCalc.tcl:318</td>
+<td>set_assigned_check check_value is not a float.</td>
+</tr>
+<tr>
+<td>2516</td>
+<td>DelayCalc.tcl:370</td>
+<td>set_assigned_check no check arcs found between from/to pins.</td>
+</tr>
+<tr>
+<td>2518</td>
+<td>DelayCalc.tcl:397</td>
+<td>set_assigned_transition transition is not a float.</td>
+</tr>
+<tr>
+<td>2600</td>
+<td>FilterObjects.cc:195</td>
+<td>-filter parsing failed at '{}'.</td>
+</tr>
+<tr>
+<td>2601</td>
+<td>FilterObjects.cc:238</td>
+<td>-filter extraneous ).</td>
+</tr>
+<tr>
+<td>2602</td>
+<td>FilterObjects.cc:244</td>
+<td>-filter extraneous ).</td>
+</tr>
+<tr>
+<td>2603</td>
+<td>FilterObjects.cc:257</td>
+<td>-filter unmatched (.</td>
+</tr>
+<tr>
+<td>2604</td>
+<td>FilterObjects.cc:323</td>
+<td>-filter logical OR requires at least two operands.</td>
+</tr>
+<tr>
+<td>2605</td>
+<td>FilterObjects.cc:335</td>
+<td>-filter logical AND requires two operands.</td>
+</tr>
+<tr>
+<td>2606</td>
+<td>FilterObjects.cc:350</td>
+<td>-filter NOT missing operand.</td>
+</tr>
+<tr>
+<td>2607</td>
+<td>FilterObjects.cc:423</td>
+<td>-filter expression is empty.</td>
+</tr>
+<tr>
+<td>2608</td>
+<td>FilterObjects.cc:426</td>
+<td>-filter expression evaluated to multiple sets.</td>
+</tr>
+<tr>
+<td>2700</td>
+<td>ConcreteParasitics.cc:981</td>
+<td>piModel called on non-PiElmore parasitic.</td>
+</tr>
+<tr>
+<td>2701</td>
+<td>ConcreteParasitics.cc:994</td>
+<td>setPiModel called on non-PiElmore parasitic.</td>
+</tr>
+<tr>
+<td>2720</td>
+<td>ReportPath.cc:257</td>
+<td>unknown path reporting field {}.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

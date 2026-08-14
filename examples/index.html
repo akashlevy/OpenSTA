@@ -1,0 +1,1122 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="OpenSTA static timing analyzer">
+      
+      
+      
+        <link rel="canonical" href="https://opensta.readthedocs.io/examples/">
+      
+      
+        <link rel="prev" href="../command-line/">
+      
+      
+        <link rel="next" href="../tcl-interpreter/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Examples - OpenSTA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#examples" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenSTA" class="md-header__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSTA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Examples
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenSTA" class="md-nav__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenSTA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../command-line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#timing-analysis-using-sdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing analysis using SDF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timing-analysis-with-multiple-scenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing analysis with multiple scenes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timing-analysis-with-multiple-modes-and-scenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing analysis with multiple modes and scenes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistical-timing-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical timing analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#power-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcl-interpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl interpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filter-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filter expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/sta-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STA API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/coding-guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/api-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#timing-analysis-using-sdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing analysis using SDF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timing-analysis-with-multiple-scenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing analysis with multiple scenes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timing-analysis-with-multiple-modes-and-scenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing analysis with multiple modes and scenes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistical-timing-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical timing analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#power-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h1>
+<p>To read a design into OpenSTA use the <code>read_liberty</code> command to read
+Liberty library files. Next, read hierarchical structural Verilog files
+with the <code>read_verilog</code> command. The <code>link_design</code> command links the
+Verilog to the Liberty timing cells. Any number of Liberty and Verilog
+files can be read before linking the design.</p>
+<p>Delays used for timing analysis are calculated using the Liberty timing
+models. If no parasitics are read only the pin capacitances of the
+timing models are used in delay calculation. Use the <code>read_spef</code>
+command to read parasitics from an extractor, or <code>read_sdf</code> to use
+delays calculated by an external delay calculator.</p>
+<p>Timing constraints can be entered as Tcl commands or read using the
+<code>read_sdc</code> command.</p>
+<p>The units used by OpenSTA for all command arguments and reports are
+taken from the first Liberty file that is read. Use the <code>set_cmd_units</code>
+command to override the default units. Use the <code>report_units</code> command
+to see the command units.</p>
+<h2 id="timing-analysis-using-sdf">Timing analysis using SDF<a class="headerlink" href="#timing-analysis-using-sdf" title="Permanent link">&para;</a></h2>
+<p>A sample command file that reads a library and a Verilog netlist and
+reports timing checks is shown below.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span><span class="w"> </span>example1_slow.lib
+<span class="nv">read_verilog</span><span class="w"> </span>example1.v
+<span class="nv">link_design</span><span class="w"> </span>top
+<span class="nv">read_sdf</span><span class="w"> </span>example1.sdf
+<span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>clk<span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">{</span><span class="nv">clk1</span><span class="w"> </span>clk2<span class="w"> </span>clk3<span class="k">}</span>
+<span class="nv">set_input_delay</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>clk<span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">{</span><span class="nv">in1</span><span class="w"> </span>in2<span class="k">}</span>
+<span class="nv">report_checks</span>
+</code></pre></div>
+<p>This example can be found in <code>examples/sdf_delays.tcl</code>.</p>
+<h2 id="timing-analysis-with-multiple-scenes">Timing analysis with multiple scenes<a class="headerlink" href="#timing-analysis-with-multiple-scenes" title="Permanent link">&para;</a></h2>
+<p>An example command script using three scenes and +/-10% min/max
+derating is shown below.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span><span class="w"> </span>nangate45_slow.lib.gz
+<span class="nv">read_liberty</span><span class="w"> </span>nangate45_typ.lib.gz
+<span class="nv">read_liberty</span><span class="w"> </span>nangate45_fast.lib.gz
+<span class="nv">read_verilog</span><span class="w"> </span>example1.v
+<span class="nv">link_design</span><span class="w"> </span>top
+<span class="nv">set_timing_derate</span><span class="w"> </span><span class="o">-</span>early<span class="w"> </span><span class="mf">0.9</span>
+<span class="nv">set_timing_derate</span><span class="w"> </span><span class="o">-</span>late<span class="w"> </span><span class="mf">1.1</span>
+<span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>clk<span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">{</span><span class="nv">clk1</span><span class="w"> </span>clk2<span class="w"> </span>clk3<span class="k">}</span>
+<span class="nv">set_input_delay</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>clk<span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">{</span><span class="nv">in1</span><span class="w"> </span>in2<span class="k">}</span>
+
+<span class="nv">define_scene</span><span class="w"> </span>ss<span class="w"> </span><span class="o">-</span>liberty<span class="w"> </span>nangate45_slow
+<span class="nv">define_scene</span><span class="w"> </span>tt<span class="w"> </span><span class="o">-</span>liberty<span class="w"> </span>nangate45_typ
+<span class="nv">define_scene</span><span class="w"> </span>ff<span class="w"> </span><span class="o">-</span>liberty<span class="w"> </span>nangate45_fast
+
+<span class="c"># report all scenes</span>
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>path_delay<span class="w"> </span>min_max
+<span class="c"># report typical scene</span>
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>scene<span class="w"> </span>tt
+</code></pre></div>
+<p>This example can be found in <code>examples/multi_corner.tcl</code>. Other examples
+can be found in the <code>examples</code> directory.</p>
+<h2 id="timing-analysis-with-multiple-modes-and-scenes">Timing analysis with multiple modes and scenes<a class="headerlink" href="#timing-analysis-with-multiple-modes-and-scenes" title="Permanent link">&para;</a></h2>
+<p>OpenSTA supports multi-corner, multi-mode analysis. SDC constraints in
+each mode describe an operating mode such as mission or scan. A scene
+is a combination of a mode with Liberty libraries and SPEF parasitics.</p>
+<p>A mode named "default" is initially created for SDC commands. It is
+deleted when a mode is defined with <code>set_mode</code> or <code>read_sdc -mode</code>.
+Similarly, a scene named "default" is initially created that is deleted
+when <code>define_scene</code> is used to define a scene.</p>
+<p>An example command script using two scenes and two modes is
+shown below.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span><span class="w"> </span>asap7_small_ff.lib.gz
+<span class="nv">read_liberty</span><span class="w"> </span>asap7_small_ss.lib.gz
+<span class="nv">read_verilog</span><span class="w"> </span>reg1_asap7.v
+<span class="nv">link_design</span><span class="w"> </span>top
+
+<span class="nv">read_sdc</span><span class="w"> </span><span class="o">-</span>mode<span class="w"> </span>mode1<span class="w"> </span>mcmm2_mode1.sdc
+<span class="nv">read_sdc</span><span class="w"> </span><span class="o">-</span>mode<span class="w"> </span>mode2<span class="w"> </span>mcmm2_mode2.sdc
+
+<span class="nv">read_spef</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>reg1_ff<span class="w"> </span>reg1_asap7.spef
+<span class="nv">read_spef</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>reg1_ss<span class="w"> </span>reg1_asap7_ss.spef
+
+<span class="nv">define_scene</span><span class="w"> </span>scene1<span class="w"> </span><span class="o">-</span>mode<span class="w"> </span>mode1<span class="w"> </span><span class="o">-</span>liberty<span class="w"> </span>asap7_small_ff<span class="w"> </span><span class="o">-</span>spef<span class="w"> </span>reg1_ff
+<span class="nv">define_scene</span><span class="w"> </span>scene2<span class="w"> </span><span class="o">-</span>mode<span class="w"> </span>mode2<span class="w"> </span><span class="o">-</span>liberty<span class="w"> </span>asap7_small_ss<span class="w"> </span><span class="o">-</span>spef<span class="w"> </span>reg1_ss
+
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>scenes<span class="w"> </span>scene1
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>scenes<span class="w"> </span>scene2
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>group_path_count<span class="w"> </span><span class="mi">4</span>
+</code></pre></div>
+<p>This example can be found in <code>examples/mcmm3.tcl</code>.</p>
+<p>In the example shown above the SDC for each mode is defined in a
+separate file. Alternatively, the SDC can be defined in the command
+file using the <code>set_mode</code> command between SDC command groups.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_mode</span><span class="w"> </span>mode1
+<span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>m1_clk<span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="k">{</span><span class="nv">clk1</span><span class="w"> </span>clk2<span class="w"> </span>clk3<span class="k">}</span>
+<span class="nv">set_input_delay</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>m1_clk<span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">{</span><span class="nv">in1</span><span class="w"> </span>in2<span class="k">}</span>
+
+<span class="nv">set_mode</span><span class="w"> </span>mode2
+<span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>m2_clk<span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k">{</span><span class="nv">clk1</span><span class="w"> </span>clk3<span class="k">}</span>
+<span class="nv">set_output_delay</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>m2_clk<span class="w"> </span><span class="mi">100</span><span class="w"> </span>out
+</code></pre></div>
+<h2 id="statistical-timing-analysis">Statistical timing analysis<a class="headerlink" href="#statistical-timing-analysis" title="Permanent link">&para;</a></h2>
+<p>OpenSTA also supports statistical timing analysis with Liberty Variation
+Format (LVF) libraries. Statistical timing uses a probability
+distribution to represent a delay or slew rather than a single number.</p>
+<p>Normal and skew normal probability distributions are supported. SSTA is
+enabled with the <code>sta_pocv_mode</code> variable.</p>
+<div class="highlight"><pre><span></span><code><span class="k">set</span><span class="w"> </span>sta_pocv_mode<span class="w"> </span>scalar<span class="o">|</span>normal<span class="o">|</span>skew_normal
+</code></pre></div>
+<ul>
+<li><code>scalar</code> mode is for non-SSTA analysis</li>
+<li><code>normal</code> mode uses gaussian normal distributions</li>
+<li><code>skew_normal</code> mode is for skew normal LVF moment based distributions</li>
+</ul>
+<p>The target quantile of a delay probability distribution (confidence
+level) is set with the <code>sta_pocv_quantile</code> variable.</p>
+<div class="highlight"><pre><span></span><code><span class="k">set</span><span class="w"> </span>sta_pocv_quantile<span class="w"> </span><span class="o">&lt;</span>float<span class="o">&gt;</span>
+</code></pre></div>
+<p>The default value is 3 standard deviations, or sigma.</p>
+<p>Use the <code>variation</code> field with the <code>report_checks</code> and
+<code>report_check_types</code> commands to see distribution parameters in timing
+reports.</p>
+<p>A command file for analyzing a design with statistical timing is shown
+below.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span><span class="w"> </span>lvf_library.lib.gz
+<span class="nv">read_verilog</span><span class="w"> </span>design.v
+<span class="nv">link_design</span><span class="w"> </span>top
+<span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">50</span><span class="w"> </span>clk
+<span class="nv">set_input_delay</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>clk<span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">{</span><span class="nv">in1</span><span class="w"> </span>in2<span class="k">}</span>
+<span class="k">set</span><span class="w"> </span>sta_pocv_mode<span class="w"> </span>skew_normal
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>fields<span class="w"> </span><span class="k">{</span><span class="nv">slew</span><span class="w"> </span>variation<span class="w"> </span>input_pin<span class="k">}</span><span class="w"> </span><span class="o">-</span>digits<span class="w"> </span><span class="mi">3</span>
+</code></pre></div>
+<p>The standard deviation for normal distributions is specified with the
+following Liberty timing groups.</p>
+<div class="highlight"><pre><span></span><code>ocv_sigma_cell_rise
+ocv_sigma_cell_fall
+ocv_sigma_rise_transition
+ocv_sigma_fall_transition
+ocv_sigma_rise_constraint
+ocv_sigma_fall_constraint
+</code></pre></div>
+<p>LVF skew normal distributions are specified with the Liberty groups
+below.</p>
+<div class="highlight"><pre><span></span><code>ocv_std_dev_cell_rise
+ocv_std_dev_cell_fall
+ocv_mean_shift_cell_rise
+ocv_mean_shift_cell_fall
+ocv_skewness_cell_rise
+ocv_skewness_cell_fall
+
+ocv_std_dev_rise_transition
+ocv_std_dev_fall_transition
+ocv_skewness_rise_transition
+ocv_skewness_fall_transition
+ocv_mean_shift_rise_transition
+ocv_mean_shift_fall_transition
+
+ocv_std_dev_rise_constraint
+ocv_std_dev_fall_constraint
+ocv_skewness_rise_constraint
+ocv_skewness_fall_constraint
+ocv_mean_shift_rise_constraint
+ocv_mean_shift_fall_constraint
+</code></pre></div>
+<h2 id="power-analysis">Power analysis<a class="headerlink" href="#power-analysis" title="Permanent link">&para;</a></h2>
+<p>OpenSTA also supports static power analysis with the <code>report_power</code>
+command. Probabilistic switching activities are propagated from the
+input ports to determine switching activities for internal pins.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span><span class="w"> </span>sky130hd_tt.lib
+<span class="nv">read_verilog</span><span class="w"> </span>gcd_sky130hd.v
+<span class="nv">link_design</span><span class="w"> </span>gcd
+<span class="nv">read_sdc</span><span class="w"> </span>gcd_sky130hd.sdc
+<span class="nv">read_spef</span><span class="w"> </span>gcd_sky130hd.spef
+<span class="nv">set_power_activity</span><span class="w"> </span><span class="o">-</span>input<span class="w"> </span><span class="o">-</span>activity<span class="w"> </span><span class="mf">0.1</span>
+<span class="nv">set_power_activity</span><span class="w"> </span><span class="o">-</span>input_port<span class="w"> </span>reset<span class="w"> </span><span class="o">-</span>activity<span class="w"> </span><span class="mi">0</span>
+<span class="nv">report_power</span>
+</code></pre></div>
+<p>In this example the activity for all inputs is set to <code>0.1</code>, and then
+the activity for the <code>reset</code> signal is set to zero because it does not
+switch during steady state operation.</p>
+<p>This example can be found in <code>examples/power.tcl</code>.</p>
+<p>Gate level simulation results can be used to get a more accurate power
+estimate. For example, the Icarus Verilog simulator can be used to run
+the test bench <code>examples/gcd_tb.v</code> for the gcd design in the previous
+example.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">iverilog</span><span class="w"> </span><span class="o">-</span>o<span class="w"> </span>gcd_tb<span class="w"> </span>gcd_tb.v
+<span class="nv">vvp</span><span class="w"> </span>gcd_tb
+</code></pre></div>
+<p>The test bench writes the VCD (Value Change Dump) file
+<code>gcd_sky130hd.vcd</code> which can then be read with the <code>read_vcd</code> command.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span><span class="w"> </span>sky130hd_tt.lib
+<span class="nv">read_verilog</span><span class="w"> </span>gcd_sky130hd.v
+<span class="nv">link_design</span><span class="w"> </span>gcd
+<span class="nv">read_sdc</span><span class="w"> </span>gcd_sky130hd.sdc
+<span class="nv">read_spef</span><span class="w"> </span>gcd_sky130hd.spef
+<span class="nv">read_vcd</span><span class="w"> </span><span class="o">-</span>scope<span class="w"> </span>gcd_tb<span class="o">/</span>gcd1<span class="w"> </span>gcd_sky130hd.vcd.gz
+<span class="nv">report_power</span>
+</code></pre></div>
+<p>This example can be found in <code>examples/power_vcd.tcl</code>.</p>
+<p>Note that in this simple example design, simulation-based activities
+do not significantly change the results.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

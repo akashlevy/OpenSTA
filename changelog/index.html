@@ -1,0 +1,1588 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="OpenSTA static timing analyzer">
+      
+      
+      
+        <link rel="canonical" href="https://opensta.readthedocs.io/changelog/">
+      
+      
+        <link rel="prev" href="../messages/">
+      
+      
+        <link rel="next" href="../developer/sta-api/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Changelog - OpenSTA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#opensta-timing-analyzer-release-notes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenSTA" class="md-header__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSTA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenSTA" class="md-nav__button md-logo" aria-label="OpenSTA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenSTA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/parallaxsw/OpenSTA" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../command-line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcl-interpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl interpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filter-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filter expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#20260802" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/08/02
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260720" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/07/20
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260501" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/05/01
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260323" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/03/23
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-301-20260312" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 3.0.1 2026/03/12
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/02/24
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-300-20251126" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 3.0.0 2025/11/26
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-270-20250519" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.7.0 2025/05/19
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-261-20250330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.6.1 2025/03/30
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-260-20240722" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.6.0 2024/07/22
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-250-20240117" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.5.0 2024/01/17
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-240-20230119" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.4.0 2023/01/19
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-233-20220924" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.3.3 2022/09/24
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-232-20220703" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.3.2 2022/07/03
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-231-20201108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.3.1 2020/11/08
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-220-20200718" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.2.0 2020/07/18
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-200-20180928" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.0.0 2018/09/28
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/sta-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STA API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/coding-guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/api-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#20260802" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/08/02
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260720" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/07/20
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260501" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/05/01
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260323" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/03/23
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-301-20260312" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 3.0.1 2026/03/12
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20260224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026/02/24
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-300-20251126" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 3.0.0 2025/11/26
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-270-20250519" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.7.0 2025/05/19
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-261-20250330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.6.1 2025/03/30
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-260-20240722" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.6.0 2024/07/22
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-250-20240117" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.5.0 2024/01/17
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-240-20230119" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.4.0 2023/01/19
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-233-20220924" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.3.3 2022/09/24
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-232-20220703" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.3.2 2022/07/03
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-231-20201108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.3.1 2020/11/08
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-220-20200718" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.2.0 2020/07/18
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-200-20180928" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release 2.0.0 2018/09/28
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="opensta-timing-analyzer-release-notes">OpenSTA Timing Analyzer Release Notes<a class="headerlink" href="#opensta-timing-analyzer-release-notes" title="Permanent link">&para;</a></h1>
+<p>This file summarizes user visible changes for each release.
+See <a href="../developer/api-changes/">API changes</a> for changes to the STA API.</p>
+<h2 id="20260802">2026/08/02<a class="headerlink" href="#20260802" title="Permanent link">&para;</a></h2>
+<p>The <code>set_path_margin</code> command applies a signed slack adjustment to the
+capture-clock side of matching timing paths. A positive margin
+tightens the path and a negative margin loosens it.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_path_margin</span><span class="w"> </span><span class="k">[</span><span class="nv">-setup</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-hold</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-rise</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-fall</span><span class="k">]</span>
+<span class="w">                </span><span class="k">[</span><span class="nv">-from</span><span class="w"> </span>from_list<span class="o">|-</span>rise_from<span class="w"> </span>from_list<span class="o">|-</span>fall_from<span class="w"> </span>from_list<span class="k">]</span>
+<span class="w">                </span><span class="k">[</span><span class="nv">-through</span><span class="w"> </span>through_list<span class="o">|-</span>rise_through<span class="w"> </span>through_list<span class="o">|-</span>fall_through<span class="w"> </span>through_list<span class="k">]</span>
+<span class="w">                </span><span class="k">[</span><span class="nv">-to</span><span class="w"> </span>to_list<span class="o">|-</span>rise_to<span class="w"> </span>to_list<span class="o">|-</span>fall_to<span class="w"> </span>to_list<span class="k">]</span>
+<span class="w">                </span><span class="k">[</span><span class="nv">-comment</span><span class="w"> </span>comment<span class="k">]</span>
+<span class="w">                </span><span class="nv">margin</span>
+</code></pre></div>
+<h2 id="20260720">2026/07/20<a class="headerlink" href="#20260720" title="Permanent link">&para;</a></h2>
+<p>The <code>read_vcd</code> command supports <code>-begin_time</code> / <code>-end_time</code> to limit
+activity annotation to a VCD time window.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_vcd</span><span class="w"> </span><span class="k">[</span><span class="nv">-scope</span><span class="w"> </span>scope<span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-mode</span><span class="w"> </span>mode_name<span class="k">]</span>
+<span class="w">         </span><span class="k">[</span><span class="nv">-begin_time</span><span class="w"> </span>begin_time<span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-end_time</span><span class="w"> </span>end_time<span class="k">]</span><span class="w"> </span><span class="nv">filename</span>
+</code></pre></div>
+<h2 id="20260501">2026/05/01<a class="headerlink" href="#20260501" title="Permanent link">&para;</a></h2>
+<p>The <code>write_sdc</code> command supports a <code>-mode</code> argument.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">write_sdc</span><span class="w"> </span><span class="k">[</span><span class="nv">-mode</span><span class="w"> </span>mode<span class="k">]</span>
+</code></pre></div>
+<h2 id="20260323">2026/03/23<a class="headerlink" href="#20260323" title="Permanent link">&para;</a></h2>
+<p>The <code>write_path_spice</code> command <code>-spice_directory</code> has been changed to
+<code>-spice_file</code>, which is a prefix for the spice filenames. Successive
+paths are written in files named <code>&lt;spice_file&gt;_&lt;path_number&gt;.sp</code>.</p>
+<h2 id="release-301-20260312">Release 3.0.1 2026/03/12<a class="headerlink" href="#release-301-20260312" title="Permanent link">&para;</a></h2>
+<p>Statistical timing (SSTA) with Liberty LVF (Liberty Variation Format)
+models is now supported. Statistical timing uses a probability
+distribution to represent a delay or slew rather than a single
+number.</p>
+<p>Normal and skew normal probability distributions are supported.</p>
+<p>SSTA is enabled with the <code>sta_pocv_mode</code> variable.</p>
+<div class="highlight"><pre><span></span><code><span class="k">set</span><span class="w"> </span>sta_pocv_mode<span class="w"> </span>scalar<span class="o">|</span>normal<span class="o">|</span>skew_normal
+</code></pre></div>
+<ul>
+<li><code>scalar</code> mode is for non-SSTA analysis</li>
+<li><code>normal</code> mode uses gaussian normal distributions</li>
+<li><code>skew_normal</code> mode is for skew normal LVF moment based distributions</li>
+</ul>
+<p>The target quantile of a delay probability distribution (confidence level) is
+set with the <code>sta_pocv_quantile</code> variable.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">sta_pocv_quantile</span><span class="w"> </span><span class="o">&lt;</span>float<span class="o">&gt;</span>
+</code></pre></div>
+<p>The default value is 3 standard deviations, or sigma.</p>
+<p>Use the <code>variation</code> field with <code>report_checks</code> or <code>report_check_types</code> to see
+distribution parameters in timing reports. See <a href="../examples/">Examples</a>
+for a command file, sample report, and the Liberty timing groups used
+for normal and skew-normal LVF.</p>
+<p>The following commands now support a <code>-report_variance</code> argument.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_arrival</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_variance</span><span class="k">]</span>
+<span class="nv">report_required</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_variance</span><span class="k">]</span>
+<span class="nv">report_slack</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_variance</span><span class="k">]</span>
+<span class="nv">report_slews</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_variance</span><span class="k">]</span>
+<span class="nv">report_edges</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_variance</span><span class="k">]</span>
+</code></pre></div>
+<p>The following commands now support a <code>-digits</code> option.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_edges</span><span class="w"> </span><span class="k">[</span><span class="nv">-digits</span><span class="w"> </span>digits<span class="k">]</span>
+<span class="nv">report_slews</span><span class="w"> </span><span class="k">[</span><span class="nv">-digits</span><span class="w"> </span>digits<span class="k">]</span>
+</code></pre></div>
+<h2 id="20260224">2026/02/24<a class="headerlink" href="#20260224" title="Permanent link">&para;</a></h2>
+<p>The <code>define_scene</code> <code>-library</code> argument now takes the library name or a
+library filename. If a filename is used, it must be the same as the
+filename used to read the library with <code>read_liberty</code>.</p>
+<h2 id="release-300-20251126">Release 3.0.0 2025/11/26<a class="headerlink" href="#release-300-20251126" title="Permanent link">&para;</a></h2>
+<p>This release adds multi-corner multi-mode (mcmm) support. The SDC
+constraints in each mode describe a different operating mode, such as
+mission mode or scan mode.</p>
+<p>A "scene" is the combination of a mode and corner. Each scene can have
+separate min/max liberty and spef files.</p>
+<p>The basic structure of a multi-corner/multi-mode command file is:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span>
+<span class="nv">read_verilog</span>
+<span class="nv">link_design</span>
+<span class="nv">read_sdc</span><span class="w"> </span><span class="o">-</span>mode...<span class="w"> </span>or<span class="w"> </span>set_mode<span class="w"> </span>followed<span class="w"> </span>by<span class="w"> </span>sdc<span class="w"> </span>commands
+<span class="nv">read_spef</span><span class="w"> </span><span class="o">-</span>name...
+<span class="nv">define_scene...</span>
+<span class="nv">report_checks</span><span class="w"> </span><span class="k">[</span><span class="nv">-scenes</span><span class="k">]</span>
+</code></pre></div>
+<p>This is an example script with 2 corners, 2 modes and 3 scenes.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_liberty</span><span class="w"> </span>bc.lib
+<span class="nv">read_liberty</span><span class="w"> </span>wc.lib
+
+<span class="nv">read_verilog</span><span class="w"> </span>design.v
+<span class="nv">link_design</span><span class="w"> </span>top
+
+<span class="nv">read_sdc</span><span class="w"> </span><span class="o">-</span>mode<span class="w"> </span>run<span class="w"> </span>design.sdc
+<span class="nv">read_sdc</span><span class="w"> </span><span class="o">-</span>mode<span class="w"> </span>scan<span class="w"> </span>design_scan.sdc
+
+<span class="nv">read_spef</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>bc<span class="w"> </span>bc.spef
+<span class="nv">read_spef</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>wc<span class="w"> </span>wc.spef
+
+<span class="nv">define_scene</span><span class="w"> </span>bc<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-mode</span><span class="w"> </span>run<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-liberty</span><span class="w"> </span>bc<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-spef</span><span class="w"> </span>bc
+<span class="nv">define_scene</span><span class="w"> </span>wc<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-mode</span><span class="w"> </span>run<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-liberty</span><span class="w"> </span>wc<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-spef</span><span class="w"> </span>wc
+<span class="nv">define_scene</span><span class="w"> </span>scan<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-mode</span><span class="w"> </span>scan<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-liberty</span><span class="w"> </span>wc<span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="nv">-spef</span><span class="w"> </span>wc
+
+<span class="nv">report_checks</span>
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>scenes<span class="w"> </span>bc
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>scenes<span class="w"> </span>wc
+<span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>scenes<span class="w"> </span>scan
+</code></pre></div>
+<p>Alternatively, the <code>set_mode</code> command can be used to define commands
+for each mode at the command level instead of using SDC files.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_mode</span><span class="w"> </span>run
+<span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">10</span><span class="w"> </span>clock
+<span class="nv">set_input_delay</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>clock<span class="w"> </span><span class="k">[</span><span class="nv">all_inputs</span><span class="w"> </span><span class="o">-</span>no_clocks<span class="k">]</span>
+<span class="nv">set_output_delay</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>clock<span class="w"> </span><span class="k">[</span><span class="nv">all_outputs</span><span class="k">]</span>
+
+<span class="nv">set_mode</span><span class="w"> </span>scan
+<span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">100</span><span class="w"> </span>scan_clock
+<span class="nv">set_input_delay</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>scan_clock<span class="w"> </span>scan_in
+<span class="nv">set_output_delay</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span>clock<span class="w"> </span>scan_clock<span class="w"> </span>scan_out
+</code></pre></div>
+<p>The <code>define_corners</code> command is supported for compatibility but should
+not be used with mcmm flows. Similarly, the <code>-min</code>/<code>-max</code> arguments to
+<code>read_liberty</code> and <code>read_spef</code> are supported for compatibility but should
+not be used with mcmm flows.</p>
+<p>An initial mode and scene named <code>default</code> are defined for single mode,
+single corner analysis. SDC commands defined interactively and read
+with <code>read_sdc</code> without a <code>-mode</code> argument are defined in the <code>default</code>
+mode.</p>
+<p>Use the <code>set_mode</code> command to define a mode or set the command
+interpreter to add following commands to mode <code>mode_name</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_mode</span><span class="w"> </span>mode_name
+</code></pre></div>
+<p>If <code>mode_name</code> does not exist it is created. When modes are created the
+default mode is deleted.</p>
+<p>The <code>read_sdc</code> command has a <code>-mode</code> argument to assign the commands in the file
+to a mode.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_sdc</span><span class="w"> </span><span class="k">[</span><span class="nv">-mode</span><span class="w"> </span>mode_name<span class="k">]</span>
+</code></pre></div>
+<p>If the mode does not exist it is created. Multiple SDC files can
+append commands to a mode by using the <code>-mode</code> argument for each
+one. If no <code>-mode</code> argument is used the commands are added to the
+current mode.</p>
+<p>The <code>define_scene</code> command defines a scene for a mode (SDC), liberty files
+and spef parasitics.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">define_scene</span><span class="w"> </span><span class="o">-</span>mode<span class="w"> </span>mode_name
+<span class="w">  </span><span class="nv">-liberty</span><span class="w"> </span>liberty_files<span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">-</span>liberty_min<span class="w"> </span>liberty_min_files<span class="w"> </span><span class="o">-</span>liberty_max<span class="w"> </span>liberty_max_files
+<span class="w">  </span><span class="k">[</span><span class="nv">-spef</span><span class="w"> </span>spef_file<span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">-</span>spef_min<span class="w"> </span>spef_min_file<span class="w"> </span><span class="o">-</span>spef_max<span class="w"> </span>spef_max_file<span class="k">]</span>
+</code></pre></div>
+<p>Use <code>get_scenes</code> to find defined scenes.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">get_scenes</span><span class="w"> </span><span class="k">[</span><span class="nv">-modes</span><span class="w"> </span>mode_names<span class="k">]</span><span class="w"> </span>scene_name
+</code></pre></div>
+<p>Use the <code>read_spef</code> <code>-name</code> argument to append multiple parasitics files
+to annotate hierarchical blocks. Scene definitions use the spef name
+to specify which parasitics to use for each scene.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_spef</span><span class="w"> </span><span class="o">-</span>name<span class="w"> </span>spef_name
+<span class="nv">report_parasitic_annotation</span><span class="w"> </span><span class="k">[</span><span class="nv">-name</span><span class="w"> </span>spef_name<span class="k">]</span>
+</code></pre></div>
+<p>If <code>-name</code> is omitted the base name of the file name is used.</p>
+<p>The <code>read_spef</code> <code>-corner</code>/<code>-min</code>/<code>-max</code> arguments are supported for compatibility
+but will be removed in a future release.</p>
+<p>The <code>read_spef</code> <code>-reduce</code> options don't work because sdc, liberty ap isn't known.</p>
+<p>The <code>report_checks</code> and <code>report_check_types</code> commands support a <code>-scenes</code>
+argument to report timing checks/paths from multiple scenes.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>scenes
+<span class="nv">report_check_types</span><span class="w"> </span><span class="o">-</span>scenes
+<span class="nv">report_slews</span><span class="w"> </span><span class="o">-</span>scenes
+<span class="nv">report_clock_latency</span><span class="w"> </span><span class="o">-</span>scenes
+</code></pre></div>
+<p>To annotate delays with SDF when there are multiple scenes, use
+the <code>-scene</code> argument.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_sdf</span><span class="w"> </span><span class="o">-</span>scene
+<span class="nv">report_annotated_delay</span><span class="w"> </span><span class="o">-</span>scene
+<span class="nv">report_annotated_check</span><span class="w"> </span><span class="o">-</span>scene
+</code></pre></div>
+<p>SDF annotation for mcmm analysis must follow the scene definitions.</p>
+<p>VCD annotation with <code>read_vcd</code> now supports a <code>-mode</code> argument.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_vcd</span><span class="w"> </span><span class="k">[</span><span class="nv">-mode</span><span class="w"> </span>mode_name<span class="k">]</span>
+</code></pre></div>
+<p>The <code>-corner</code> args has been removed from the following commands because they are no
+longer necessary.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_load</span><span class="w"> </span><span class="o">-</span>corner
+<span class="nv">set_port_fanout_number</span><span class="w"> </span><span class="o">-</span>corner
+</code></pre></div>
+<p>The <code>report_pulse_width_checks</code> command is no longer supported. Use
+<code>report_check_types -min_pulse_width</code>.</p>
+<p>Delay calculation slew values now propagate through <code>set_case_analysis</code>
+and <code>set_logic_zero</code>, <code>set_logic_one</code>, <code>set_logic_dc</code> constraints.</p>
+<p>Power analysis now ignores <code>set_case_analysis</code> and <code>set_logic_zero</code>,
+<code>set_logic_one</code>, <code>set_logic_dc</code>.</p>
+<h2 id="release-270-20250519">Release 2.7.0 2025/05/19<a class="headerlink" href="#release-270-20250519" title="Permanent link">&para;</a></h2>
+<p>The OpenSTA library <code>libOpenSTA</code> and <code>sta</code> executable are now built in the
+build directory instead of <code>app/</code>.</p>
+<p>The <code>set_max_delay</code> and <code>set_min_delay</code> commands now support the <code>-probe</code> option.
+With <code>-probe</code> these commands do not break paths at internal (non-startpoint) pins.</p>
+<p>The <code>report_checks</code> command now supports a <code>-unique_edges_to_endpoint</code> option
+to remove paths through identical pins and rise/fall edges.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_checks</span><span class="w"> </span><span class="k">[</span><span class="nv">-unique_edges_to_endpoint</span><span class="k">]</span>
+</code></pre></div>
+<p>Instances now have pins for verilog netlist power/ground connections.</p>
+<p><code>Sta::findPathEnds</code> <code>group_paths</code> arg has been changed from <code>PathGroupNameSet*</code>
+to <code>StringSeq&amp;</code>.</p>
+<h2 id="release-261-20250330">Release 2.6.1 2025/03/30<a class="headerlink" href="#release-261-20250330" title="Permanent link">&para;</a></h2>
+<p>The <code>-list_annotated</code> and <code>-list_not_annotated</code> arguments to the
+<code>report_annotated_delay</code> and <code>report_annotated_check</code> commands have been renamed to
+<code>-report_annotated</code> and <code>-report_unannotated</code>.</p>
+<p>The Tcl <code>source</code> command is no longer redefined to support <code>-echo</code> and
+<code>-verbose</code> arguments and redirection. Use the <code>include</code> command instead.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">include</span><span class="w"> </span><span class="k">[</span><span class="nv">-echo</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-verbose</span><span class="k">]</span><span class="w"> </span>filename<span class="w"> </span><span class="k">[</span><span class="o">&gt;</span><span class="w"> </span><span class="nv">filename</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nv">filename</span><span class="k">]</span>
+</code></pre></div>
+<ul>
+<li><code>-echo</code> echos commands as they are read</li>
+<li><code>-verbose</code> prints command results as they are evaluated</li>
+</ul>
+<p>Unlike the Tcl <code>source</code> command, <code>include</code> expands filenames with tilde <code>~</code>
+and respects <code>sta_continue_on_error</code>.</p>
+<h2 id="release-260-20240722">Release 2.6.0 2024/07/22<a class="headerlink" href="#release-260-20240722" title="Permanent link">&para;</a></h2>
+<p>The version of C++ used by OpenSTA is now 17.
+The Cudd BDD package is now required.</p>
+<p>The <code>USE_TCL_READLINE</code> option defaults to ON.</p>
+<p>The variable <code>link_make_black_boxes</code> has been removed.
+Use the <code>-no_black_boxes</code> option to the <code>link_design</code> command.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">link_design</span><span class="w"> </span><span class="k">[</span><span class="nv">-no_black_blocks</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">top_cell_name</span><span class="k">]</span>
+</code></pre></div>
+<p>The <code>all_inputs</code> command now supports <code>-no_clocks</code> to remove clocks
+inputs from the returned list.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">all_inputs</span><span class="w"> </span><span class="k">[</span><span class="nv">-no_clocks</span><span class="k">]</span>
+</code></pre></div>
+<p>The <code>read_power_activities</code> command has been deprecated. Use <code>read_vcd</code> instead.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_vcd</span><span class="w"> </span><span class="k">[</span><span class="nv">-scope</span><span class="w"> </span>scope<span class="k">]</span><span class="w"> </span>filename
+</code></pre></div>
+<p>The Switching Activity Interchange Format (SAIF) for reading power activities
+is now supported by the <code>read_saif</code> command.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_saif</span><span class="w"> </span><span class="k">[</span><span class="nv">-scope</span><span class="w"> </span>scope<span class="k">]</span><span class="w"> </span>filename
+</code></pre></div>
+<p>The <code>report_checks</code> <code>-group_count</code> option has been renamed to <code>-group_path_count</code>.
+The <code>report_checks</code> <code>-endpoint_count</code> option has been renamed to <code>-endpoint_path_count</code>.</p>
+<p>The <code>report_checks</code> <code>-field hierarchical_pins</code> field reports hierarchical pins between
+a driver and a load in the path report.</p>
+<p>The <code>suppress_msg</code> and <code>unsuppress_msg</code> commands allow suppression/unsuppression of
+warnings/errors by ID. Message IDs can be found in <a href="../messages/">messages</a>.</p>
+<h2 id="release-250-20240117">Release 2.5.0 2024/01/17<a class="headerlink" href="#release-250-20240117" title="Permanent link">&para;</a></h2>
+<p>The <code>report_net</code> <code>-connections</code>, <code>-verbose</code> and <code>-hier_pins</code> flags are deprecated.
+The <code>report_instance</code> <code>-connections</code> and <code>-verbose</code> flags are deprecated.
+The options are now enabled in all cases.</p>
+<p>The <code>read_spef</code> parasitic reduction arguments have changed. The
+<code>-reduce_to</code> and <code>-delete_after_reduce</code> arguments are deprecated and
+replaced with the <code>-reduce</code> flag. With the <code>-reduce</code> flag, the current
+delay calculator reduces the parasitic network to the appropriate type
+and deletes the parasitic network.</p>
+<p>The <code>report_clock_skew</code> and <code>report_clock_latency</code> commands now support
+the <code>-include_internal_latency</code> flag to control inclusion of macro
+internal clock delays from the cell liberty <code>min_clock_tree_path</code> /
+<code>max_clock_tree_path</code> timing groups.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_clock_skew</span><span class="w"> </span><span class="o">-</span>include_internal_latency
+<span class="nv">report_clock_latency</span><span class="w"> </span><span class="o">-</span>include_internal_latency
+</code></pre></div>
+<p>The <code>report_clock_skew</code> requires a <code>-scene</code> argument if multiple scenes are defined.</p>
+<p>The <code>all_inputs</code> command now supports the <code>-no_clocks</code> argument to exclude
+clocks from the list.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">all_inputs</span><span class="w"> </span><span class="k">[</span><span class="nv">-no_clocks</span><span class="k">]</span>
+</code></pre></div>
+<p>The <code>report_activity_annotation</code> command reports power activity annotation
+from vcd, saif or the <code>set_input_activity</code> command.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_activity_annotation</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_unannotated</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_annotated</span><span class="k">]</span>
+</code></pre></div>
+<h2 id="release-240-20230119">Release 2.4.0 2023/01/19<a class="headerlink" href="#release-240-20230119" title="Permanent link">&para;</a></h2>
+<p>The <code>report_parasitics_annotation</code> command reports SPEF annotation completeness.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_parasitics_annotation</span><span class="w"> </span><span class="k">[</span><span class="nv">-report_unannotated</span><span class="k">]</span>
+</code></pre></div>
+<p>The <code>read_power_activities</code> command reads a verilog vcd file and extracts
+pin activities for power analysis.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">read_power_activities</span><span class="w"> </span><span class="o">-</span>vcd<span class="w"> </span>filename
+</code></pre></div>
+<p>The <code>report_cell</code> command has been removed; use <code>report_instance</code>.</p>
+<p>The <code>read_liberty</code> command latch inference (see the command documentation) is now disabled by default.
+The <code>-no_latch_infer</code> flag is deprecated.
+To enable latch inference, use the <code>-infer_latches</code> flag.</p>
+<p>The report fanout and capacitance fields are now shown on output pin lines rather
+than net lines.</p>
+<h2 id="release-233-20220924">Release 2.3.3 2022/09/24<a class="headerlink" href="#release-233-20220924" title="Permanent link">&para;</a></h2>
+<p>Tcl readline support added. See the repository <code>README.md</code> for build instructions.</p>
+<h2 id="release-232-20220703">Release 2.3.2 2022/07/03<a class="headerlink" href="#release-232-20220703" title="Permanent link">&para;</a></h2>
+<p>The liberty <code>default_wire_load</code> is now ignored. You must explicitly set the wire load
+model with the <code>set_wire_load_model</code> command to apply wire load model based parasitics.</p>
+<h2 id="release-231-20201108">Release 2.3.1 2020/11/08<a class="headerlink" href="#release-231-20201108" title="Permanent link">&para;</a></h2>
+<p>The <code>read_sdf</code> command no longer supports the <code>-analysis_type</code>, <code>-type</code>, <code>-min_type</code>,
+and <code>-max_type</code> arguments. Use the <code>set_operating_conditions -analysis_type</code>
+command to set the analysis type before <code>read_sdf</code>.</p>
+<h2 id="release-220-20200718">Release 2.2.0 2020/07/18<a class="headerlink" href="#release-220-20200718" title="Permanent link">&para;</a></h2>
+<p>The <code>report_units</code> command reports the current units used by commands.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_units</span>
+</code></pre></div>
+<p>The <code>report_check_types</code> command now supports <code>-min_fanout</code>, <code>-max_fanout</code>,
+<code>-max_capacitance</code>, and <code>-min_capacitance</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_check_types</span><span class="w"> </span><span class="k">[</span><span class="nv">-min_fanout</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-max_fanout</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-max_capacitance</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-min_capacitance</span><span class="k">]</span>
+</code></pre></div>
+<p>The <code>insert_buffer</code> command is no longer supported.</p>
+<h2 id="release-200-20180928">Release 2.0.0 2018/09/28<a class="headerlink" href="#release-200-20180928" title="Permanent link">&para;</a></h2>
+<p>The command line options have changed to the following:</p>
+<div class="highlight"><pre><span></span><code>-help              show help and exit
+-version           show version and exit
+-no_init           do not read .sta init file
+-threads count|max use count threads
+-no_splash         do not show the license splash at startup
+-exit              exit after reading cmd_file
+cmd_file           source cmd_file
+</code></pre></div>
+<p>Builds using Autotools/configure are no longer supported.
+Use CMake as documented in <code>README.md</code>.</p>
+<p>The <code>check_timing</code> command <code>-no_output_delay</code> checks output ports for
+<code>set_output_delay</code>.</p>
+<p>The <code>report_power</code> command reports the power consumption of the design
+or a specific instance.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_power</span><span class="w"> </span><span class="k">[</span><span class="nv">-instances</span><span class="w"> </span>inst<span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="nv">-digits</span><span class="w"> </span>digits<span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="o">&gt;</span><span class="w"> </span><span class="nv">filename</span><span class="k">]</span><span class="w"> </span><span class="k">[</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nv">filename</span><span class="k">]</span>
+</code></pre></div>
+<p>The internal, switching, leakage and total power are reported. Design
+power is reported separately for combinational, sequential, macro and
+pad groups.</p>
+<p>Use <code>-instances</code> to report power for a specific instance.</p>
+<p>Use the <code>set_power_activity</code> command to specify activity/duty
+globally using <code>-global</code>, the input port default using <code>-input</code>,
+or for input ports using <code>-input_ports</code>, or pins using <code>-pins</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_power_activity</span><span class="w"> </span><span class="k">[</span><span class="nv">-global</span><span class="k">]</span>
+<span class="w">                   </span><span class="k">[</span><span class="nv">-input</span><span class="k">]</span>
+<span class="w">                   </span><span class="k">[</span><span class="nv">-input_ports</span><span class="w"> </span>ports<span class="k">]</span>
+<span class="w">                   </span><span class="k">[</span><span class="nv">-pins</span><span class="w"> </span>pins<span class="k">]</span>
+<span class="w">                   </span><span class="k">[</span><span class="nv">-activity</span><span class="w"> </span>activity<span class="k">]</span>
+<span class="w">                   </span><span class="k">[</span><span class="nv">-duty</span><span class="w"> </span>duty<span class="k">]</span>
+</code></pre></div>
+<p>The <code>write_path_spice</code> command writes a spice netlist for a timing path.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">write_path_spice</span><span class="w"> </span><span class="o">-</span>path_args<span class="w"> </span>path_args
+<span class="w">  </span><span class="nv">-spice_directory</span><span class="w"> </span>spice_directory
+<span class="w">  </span><span class="nv">-subckt_file</span><span class="w"> </span>subckt_file
+<span class="w">  </span><span class="nv">-lib_subckt_file</span><span class="w"> </span>lib_subckts_file
+<span class="w">  </span><span class="nv">-model_file</span><span class="w"> </span>model_file
+<span class="w">  </span><span class="nv">-power</span><span class="w"> </span>power
+<span class="w">  </span><span class="nv">-ground</span><span class="w"> </span>ground
+</code></pre></div>
+<p>Use <code>path_args</code> to specify <code>-from</code>/<code>-through</code>/<code>-to</code> as arguments to the
+<code>find_timing_paths</code> command. For each path, a spice netlist and the
+subckts referenced by the path are written in <code>spice_directory</code>. The
+spice netlist is written in <code>path_&lt;id&gt;.sp</code> and the subckt file is
+<code>path_&lt;id&gt;.subckt</code>.</p>
+<p>Spice netlists for liberty library cells are read from
+<code>lib_subckts_file</code>. The spice netlists used by the path are written to
+<code>subckt_file</code>, which <code>spice_file</code> includes. The device models used by the
+spice subckt netlists in <code>model_file</code> are included in <code>spice_file</code>. Power
+and ground names are specified with the <code>-power</code> and <code>-ground</code> arguments.
+The spice netlist includes a piecewise linear voltage source at the
+input and <code>.measure</code> statement for each gate delay and pin slew.</p>
+<p>The <code>report_checks</code> and <code>report_check_types</code> commands now support an
+<code>-unconstrained</code> flag.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>unconstrained
+<span class="nv">report_check_types</span><span class="w"> </span><span class="o">-</span>unconstrained
+</code></pre></div>
+<p>The <code>sta_report_unconstrained_paths</code> variable will be supported for
+compatibility in the current release.</p>
+<p>The <code>transition_time</code> path reporting field has been renamed to <code>slew</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>fields<span class="w"> </span><span class="k">{</span><span class="nv">slew</span><span class="k">}</span>
+<span class="nv">report_check_types</span><span class="w"> </span><span class="o">-</span>fields<span class="w"> </span><span class="k">{</span><span class="nv">slew</span><span class="k">}</span>
+</code></pre></div>
+<p>The <code>read_parasitics</code> command has been renamed <code>read_spef</code> and no longer
+supports the SPF format.</p>
+<p>The <code>make_instance</code> command now takes a single instance name argument
+and returns the instance.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">make_instance</span><span class="w"> </span>instance_name
+</code></pre></div>
+<p>The <code>make_net</code> command now takes a single net name argument and returns
+the net.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">make_net</span><span class="w"> </span>net_name
+</code></pre></div>
+<p>The <code>delete_instance</code> command deletes a single instance instead of a list
+of instances.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">delete_instance</span><span class="w"> </span>instance
+</code></pre></div>
+<p>The <code>delete_net</code> command deletes a single net instead of a list
+of nets.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">delete_net</span><span class="w"> </span>net
+</code></pre></div>
+<p>The <code>disconnect_pins</code> command is renamed <code>disconnect_pin</code> and disconnects a
+single pin.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">disconnect_pin</span><span class="w"> </span>net<span class="w"> </span>pin
+</code></pre></div>
+<p>The <code>report_tns</code> and <code>report_wns</code> commands print the value returned by
+<code>total_negative_slack</code> and <code>worst_negative_slack</code> respectively.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">report_tns</span>
+<span class="nv">report_wns</span>
+<span class="nv">report_worst_slack</span>
+</code></pre></div>
+<p>The <code>set_clock_sense</code> command was deprecated by SDC 2.1.
+Use <code>set_sense -type clock</code> instead.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
