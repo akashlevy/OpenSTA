@@ -17,39 +17,39 @@
          <lastmod>2026-08-15</lastmod>
     </url>
     <url>
+         <loc>https://opensta.readthedocs.io/CommandLine/</loc>
+         <lastmod>2026-08-15</lastmod>
+    </url>
+    <url>
+         <loc>https://opensta.readthedocs.io/Commands/</loc>
+         <lastmod>2026-08-15</lastmod>
+    </url>
+    <url>
+         <loc>https://opensta.readthedocs.io/Debugging/</loc>
+         <lastmod>2026-08-15</lastmod>
+    </url>
+    <url>
+         <loc>https://opensta.readthedocs.io/Examples/</loc>
+         <lastmod>2026-08-15</lastmod>
+    </url>
+    <url>
+         <loc>https://opensta.readthedocs.io/FilterExpressions/</loc>
+         <lastmod>2026-08-15</lastmod>
+    </url>
+    <url>
+         <loc>https://opensta.readthedocs.io/Messages/</loc>
+         <lastmod>2026-08-15</lastmod>
+    </url>
+    <url>
          <loc>https://opensta.readthedocs.io/StaApi/</loc>
          <lastmod>2026-08-15</lastmod>
     </url>
     <url>
-         <loc>https://opensta.readthedocs.io/command-line/</loc>
+         <loc>https://opensta.readthedocs.io/TclInterpreter/</loc>
          <lastmod>2026-08-15</lastmod>
     </url>
     <url>
-         <loc>https://opensta.readthedocs.io/commands/</loc>
-         <lastmod>2026-08-15</lastmod>
-    </url>
-    <url>
-         <loc>https://opensta.readthedocs.io/debugging/</loc>
-         <lastmod>2026-08-15</lastmod>
-    </url>
-    <url>
-         <loc>https://opensta.readthedocs.io/examples/</loc>
-         <lastmod>2026-08-15</lastmod>
-    </url>
-    <url>
-         <loc>https://opensta.readthedocs.io/filter-expressions/</loc>
-         <lastmod>2026-08-15</lastmod>
-    </url>
-    <url>
-         <loc>https://opensta.readthedocs.io/messages/</loc>
-         <lastmod>2026-08-15</lastmod>
-    </url>
-    <url>
-         <loc>https://opensta.readthedocs.io/tcl-interpreter/</loc>
-         <lastmod>2026-08-15</lastmod>
-    </url>
-    <url>
-         <loc>https://opensta.readthedocs.io/variables/</loc>
+         <loc>https://opensta.readthedocs.io/Variables/</loc>
          <lastmod>2026-08-15</lastmod>
     </url>
 </urlset>

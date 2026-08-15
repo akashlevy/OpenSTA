@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://opensta.readthedocs.io/debugging/">
+        <link rel="canonical" href="https://opensta.readthedocs.io/CommandLine/">
       
       
-        <link rel="prev" href="../tcl-interpreter/">
+        <link rel="prev" href="..">
       
       
-        <link rel="next" href="../commands/">
+        <link rel="next" href="../Examples/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Debugging timing - OpenSTA</title>
+        <title>Command line - OpenSTA</title>
       
     
     
@@ -53,7 +53,7 @@
       
     
     
-      <link rel="stylesheet" href="../extra.css">
+      <link rel="stylesheet" href="../Extra.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#debugging-timing" class="md-skip">
+        <a href="#command-line-arguments" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Debugging timing
+              Command line
             
           </span>
         </div>
@@ -288,10 +288,19 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../command-line/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -307,6 +316,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -318,7 +328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
+      <a href="../Examples/" class="md-nav__link">
         
   
   
@@ -345,7 +355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tcl-interpreter/" class="md-nav__link">
+      <a href="../TclInterpreter/" class="md-nav__link">
         
   
   
@@ -369,37 +379,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Debugging timing
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Debugging/" class="md-nav__link">
         
   
   
@@ -415,48 +398,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#no-paths-found" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No paths found
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#no-path-reported-at-an-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No path reported at an endpoint
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -468,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/" class="md-nav__link">
+      <a href="../Commands/" class="md-nav__link">
         
   
   
@@ -495,7 +436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../filter-expressions/" class="md-nav__link">
+      <a href="../FilterExpressions/" class="md-nav__link">
         
   
   
@@ -522,7 +463,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../variables/" class="md-nav__link">
+      <a href="../Variables/" class="md-nav__link">
         
   
   
@@ -549,7 +490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../messages/" class="md-nav__link">
+      <a href="../Messages/" class="md-nav__link">
         
   
   
@@ -761,36 +702,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#no-paths-found" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No paths found
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#no-path-reported-at-an-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No path reported at an endpoint
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -806,92 +717,25 @@
 
 
 
-<h1 id="debugging-timing">Debugging timing<a class="headerlink" href="#debugging-timing" title="Permanent link">&para;</a></h1>
-<p>Here are some guidelines for debugging your design if static timing
-does not report any paths, or does not report the expected paths.</p>
-<p>Debugging timing problems generally involves using the following
-commands to follow the propagation of arrival times from a known
-arrival downstream to understand why the arrival times are not
-propagating:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">report_edges</span>
-<span class="nv">report_arrival</span>
-<span class="nv">report_net</span>
+<h1 id="command-line-arguments">Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permanent link">&para;</a></h1>
+<p>The command line arguments for <code>sta</code> are shown below.</p>
+<div class="highlight"><pre><span></span><code>Usage: sta [-help] [-version] [-no_init] [-no_splash] [-threads count|max] [-exit] cmd_file
+  -help              show help and exit
+  -version           show version and exit
+  -no_init           do not read .sta init file
+  -threads count|max use count threads
+  -no_splash         do not show the license splash at startup
+  -exit              exit after reading cmd_file
+  cmd_file           source cmd_file
 </code></pre></div>
-<p><code>report_edges -from</code> can be used to walk forward and <code>report_edges -to</code>
-to walk backward in the netlist/timing graph. <code>report_arrival</code> shows
-the min/max rise/fall arrival times with respect to each clock that has
-a path to the pin. <code>report_net</code> shows connections to a net across
-hierarchy levels.</p>
-<h2 id="no-paths-found">No paths found<a class="headerlink" href="#no-paths-found" title="Permanent link">&para;</a></h2>
-<p>The <code>report_checks</code> command only reports paths that are constrained by
-timing checks or SDC commands such as <code>set_output_delay</code>. If the design
-has only combinational logic (no registers or latches), there are no
-timing checks, so no paths are reported. Use the <code>-unconstrained</code>
-option to <code>report_checks</code> to see unconstrained paths.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="w"> </span><span class="nv">report_checks</span><span class="w"> </span><span class="o">-</span>unconstrained
-</code></pre></div>
-<p>If the design is sequential (has registers or latches) and no paths are
-reported, it is likely that there is a problem with the clock
-propagation. Check the timing at a register in the design with the
-<code>report_arrival</code> command.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="w"> </span><span class="nv">report_arrival</span><span class="w"> </span>r1<span class="o">/</span>CP
-<span class="w"> </span><span class="k">(</span><span class="nv">clk</span><span class="w"> </span><span class="o">^</span><span class="k">)</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span><span class="w"> </span>f<span class="w"> </span>INF:-INF
-<span class="w"> </span><span class="k">(</span><span class="nv">clk</span><span class="w"> </span>v<span class="k">)</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span>INF:-INF<span class="w"> </span>f<span class="w"> </span><span class="mf">5.00</span><span class="o">:</span><span class="mf">5.00</span>
-</code></pre></div>
-<p>In this example the rising edge of the clock <code>clk</code> causes the rising
-arrival min:max time at 0.00, and the falling edge arrives at 5.00.
-Since the rising edge of the clock causes the rising edge of the
-register clock pin, the clock path is positive unate.</p>
-<p>The clock path should be positive or negative unate. Something is
-probably wrong with the clock network if it is non-unate. A non-unate
-clock path will report arrivals similar to the following:</p>
-<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="w"> </span><span class="nv">report_arrival</span><span class="w"> </span>r1<span class="o">/</span>CP
-<span class="w"> </span><span class="k">(</span><span class="nv">clk</span><span class="w"> </span><span class="o">^</span><span class="k">)</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span><span class="w"> </span>f<span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span>
-<span class="w"> </span><span class="k">(</span><span class="nv">clk</span><span class="w"> </span>v<span class="k">)</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="mf">5.00</span><span class="o">:</span><span class="mf">5.00</span><span class="w"> </span>f<span class="w"> </span><span class="mf">5.00</span><span class="o">:</span><span class="mf">5.00</span>
-</code></pre></div>
-<p>Notice that each clock edge causes both rise and fall arrivals at the
-register clock pin.</p>
-<p>If there are no paths to the register clock pin, nothing is printed.
-Use the <code>report_edges -to</code> command to find the gate driving the clock
-pin.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="w"> </span><span class="nv">report_edges</span><span class="w"> </span><span class="o">-</span>to<span class="w"> </span>r1<span class="o">/</span>CP
-<span class="nv">i1</span><span class="o">/</span>ZN<span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span>CP<span class="w"> </span>wire
-<span class="w">  </span><span class="o">^</span><span class="w"> </span><span class="nv">-</span><span class="o">&gt;</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span>
-<span class="w">  </span><span class="nv">v</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span>v<span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span>
-</code></pre></div>
-<p>This shows that the gate/pin <code>i1/ZN</code> is driving the clock pin. The
-<code>report_edges -to</code> command can be used to walk backward or forward
-through the netlist one gate/net at a time. By checking the arrivals
-with the <code>report_arrival</code> command you can determine where the path is
-broken.</p>
-<h2 id="no-path-reported-at-an-endpoint">No path reported at an endpoint<a class="headerlink" href="#no-path-reported-at-an-endpoint" title="Permanent link">&para;</a></h2>
-<p>In order for a timing check to be reported, there must be an arrival
-time at the data pin (the constrained pin) as well as the timing check
-clock pin. If <code>report_checks -to</code> a register input does not report any
-paths, check that the input is constrained by a timing check with
-<code>report_edges -to</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="w"> </span><span class="nv">report_edges</span><span class="w"> </span><span class="o">-</span>to<span class="w"> </span>r1<span class="o">/</span>D
-<span class="nv">CP</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span>D<span class="w"> </span>hold
-<span class="w">  </span><span class="o">^</span><span class="w"> </span><span class="nv">-</span><span class="o">&gt;</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="o">-</span><span class="mf">0.04</span><span class="o">:-</span><span class="mf">0.04</span>
-<span class="w">  </span><span class="o">^</span><span class="w"> </span><span class="nv">-</span><span class="o">&gt;</span><span class="w"> </span>v<span class="w"> </span><span class="o">-</span><span class="mf">0.03</span><span class="o">:-</span><span class="mf">0.03</span>
-<span class="nv">CP</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span>D<span class="w"> </span>setup
-<span class="w">  </span><span class="o">^</span><span class="w"> </span><span class="nv">-</span><span class="o">&gt;</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mf">0.09</span><span class="o">:</span><span class="mf">0.09</span>
-<span class="w">  </span><span class="o">^</span><span class="w"> </span><span class="nv">-</span><span class="o">&gt;</span><span class="w"> </span>v<span class="w"> </span><span class="mf">0.08</span><span class="o">:</span><span class="mf">0.08</span>
-<span class="nv">in1</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span>D<span class="w"> </span>wire
-<span class="w">  </span><span class="o">^</span><span class="w"> </span><span class="nv">-</span><span class="o">&gt;</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span>
-<span class="w">  </span><span class="nv">v</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span>v<span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span>
-</code></pre></div>
-<p>This reports the setup and hold checks for the D pin of <code>r1</code>.</p>
-<p>Next, check the arrival times at the D and CP pins of the register with
-<code>report_arrival</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="w"> </span><span class="nv">report_arrival</span><span class="w"> </span>r1<span class="o">/</span>D
-<span class="w"> </span><span class="k">(</span><span class="nv">clk1</span><span class="w"> </span><span class="o">^</span><span class="k">)</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="mf">1.00</span><span class="o">:</span><span class="mf">1.00</span><span class="w"> </span>f<span class="w"> </span><span class="mf">1.00</span><span class="o">:</span><span class="mf">1.00</span>
-<span class="o">%</span><span class="w"> </span><span class="nv">report_arrival</span><span class="w"> </span>r1<span class="o">/</span>CP
-<span class="w"> </span><span class="k">(</span><span class="nv">clk1</span><span class="w"> </span><span class="o">^</span><span class="k">)</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="mf">0.00</span><span class="o">:</span><span class="mf">0.00</span><span class="w"> </span>f<span class="w"> </span>INF:-INF
-<span class="w"> </span><span class="k">(</span><span class="nv">clk1</span><span class="w"> </span>v<span class="k">)</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span>INF:-INF<span class="w"> </span>f<span class="w"> </span><span class="mf">5.00</span><span class="o">:</span><span class="mf">5.00</span>
-</code></pre></div>
-<p>If there are no arrivals on an input port of the design, use the
-<code>set_input_delay</code> command to specify the arrival times on the port.</p>
+<p>When OpenSTA starts up, commands are first read from the user
+initialization file <code>~/.sta</code> if it exists. If a Tcl command file
+<code>cmd_file</code> is specified on the command line, commands are read from
+the file and executed before entering an interactive Tcl command
+interpreter. If <code>-exit</code> is specified the application exits after
+reading <code>cmd_file</code>. Use the Tcl <code>exit</code> command to exit the
+application. The <code>-threads</code> option specifies how many parallel
+threads to use. Use <code>-threads max</code> to use one thread per processor.</p>
 
 
 
