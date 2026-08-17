@@ -46,8 +46,11 @@ nav:
   - Filter expressions: FilterExpressions.md
   - Variables: Variables.md
   - Messages: Messages.md
+  - SDC 2.1 compliance: SDCCompliance.md
+  - Liberty 2017.06 compliance: LibertyCompliance.md
   - ChangeLog: ChangeLog.md
   - Developer:
       - STA API: StaApi.md
       - Coding guidelines: CodingGuidelines.md
       - API changes: ApiChanges.md
+      - Liberty compliance: LibertyCompliance.md
